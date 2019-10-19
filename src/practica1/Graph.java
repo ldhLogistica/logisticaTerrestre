@@ -5,7 +5,11 @@ import java.io.*;
 
 /**
  * 
- * @author samuel
+ * @author Samuel Fumero Hernández
+ * 
+ * Universidad de La Laguna - ETSII - Grado en Ingeniería Informática
+ * Inteligencia Artificial
+ * 
  * Clase que crea el grafo y almacena los valores de cada nodo
  *
  */
@@ -161,8 +165,6 @@ final public class Graph {
 		}
 		br.close();
 	}
-	
-
 }
 
 
