@@ -34,7 +34,9 @@ public class AStar {
 		Double aux1;
 		while(it_distances.hasNext()) {
 			aux1 = it_distances.next();
-			if(this.graph_ != 0.0 && it_distances.next())
+			if(aux1 != 0.0 && aux1 != 1.0) {
+				
+			}
 		}
 	}
 	
