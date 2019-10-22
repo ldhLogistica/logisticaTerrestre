@@ -1,5 +1,7 @@
 package practica1;
 
+import java.util.ArrayList;
+
 /**
  * 
  * @author samue
@@ -18,6 +20,7 @@ final public class Node{
 	boolean analized = false;
 	boolean objetive_ = false;
 	boolean origin_ = false;
+	
 	
 	/**
 	 * 
@@ -64,6 +67,10 @@ final public class Node{
 	public double getValue() {
 		
 		return this.f_;
+	}
+	
+	protected boolean isObjetive() {
+		return this.objetive_;
 	}
 	
 	public void setValue() {
