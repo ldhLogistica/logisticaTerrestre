@@ -73,6 +73,10 @@ final public class Node{
 		return this.objetive_;
 	}
 	
+	protected boolean isOrigin() {
+		return this.origin_;
+	}
+	
 	public void setValue() {
 		this.f_ = getHeuristic() + getDistance();
 	}
