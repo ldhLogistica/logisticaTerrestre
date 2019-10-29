@@ -29,6 +29,7 @@ final public class Node{
 	 */
 	Node(int nodeID){
 		this.nodeID_ = nodeID;
+		this.g_ = 0.0;
 		
 	}
 	
@@ -106,6 +107,11 @@ final public class Node{
 	
 	protected void setOrigin() {
 		this.origin_ = true;
+	}
+	
+	public String toString() {
+		String cad = "";
+		return cad + this.getNodeID();
 	}
 	
 	

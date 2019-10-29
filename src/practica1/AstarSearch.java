@@ -19,7 +19,8 @@ public class AstarSearch {
 				Graph graph = new Graph(distances_filename,heuristics_filename,origin);
 				//System.out.println(graph.toString());
 				AStar Astar = new AStar(graph);
-				System.out.println(Astar.toString());
+				
+				//System.out.println(Astar.toString());
 				System.out.println("FIN");
 			} catch (NumberFormatException e) {
 				// TODO Auto-generated catch block

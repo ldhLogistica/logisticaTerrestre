@@ -1,16 +1,16 @@
 package practica1;
 
-import java.util.ArrayList;
 import java.util.*;
 import java.io.*;
 
 public class AStar {
 	
 	private Graph graph_;
-	private ArrayList<Node> minimun_walk = new ArrayList<Node>();
+	private ArrayList<Node> minimun_road = new ArrayList<Node>();
 	private ArrayList<Node> not_visited_nodes = new ArrayList<Node>();
-	private ArrayList<ArrayList<Node>> walks_list = new ArrayList<ArrayList<Node>>();
-	private Iterator<ArrayList<Node>> walks_list_it = walks_list.iterator();
+	private LinkedHashMap<Double,ArrayList<Node>> roads_list = new LinkedHashMap<Double, ArrayList<Node>>();
+	/*private ArrayList<ArrayList<Node>> walks_list = new ArrayList<ArrayList<Node>>();
+	private Iterator<ArrayList<Node>> walks_list_it = walks_list.iterator();*/
 	
 	
 	AStar(Graph graph){
@@ -24,10 +24,11 @@ public class AStar {
 				found = true;
 			}
 		}
-		calculateMinimunWalk(aux);
+		//calculateMinimunRoad(aux);
+		generateSons(aux);
 	}
 	
-	private void run(Node node) {
+	/*private void run(Node node) {
 		ArrayList<Node> sonsList = new ArrayList<Node>();
 		if(this.not_visited_nodes.isEmpty()) {
 			sonsList = generateSons(node);
@@ -35,37 +36,49 @@ public class AStar {
 			double min;
 			
 		}
-	}
+	}*/
 	
-	private ArrayList<Node> generateSons(Node node) {
+	public void generateSons(Node node) {
 		ArrayList<Node> sonsList = new ArrayList<Node>(); //Lista con los nodos vecinos que tienen distancias asignadas
 		if(node.isObjetive()) {
-			return sonsList;
+			//return sonsList;
 		}else {
 			Iterator<Double> it_neighbours = this.graph_.getNodeList().get(node).iterator(); //Recorrerá las distancias del nodo pasado por parametro
-			int n=0; //Tendrá las posiciones en la tabla hash de los nodos vecinos al pasado por parametro
+			Iterator<Node> it_nodes = this.graph_.getNodeList().keySet().iterator(); //Recorrerá los nodos de la tabla hash
 			double g;
+			int i=1;
+			Node aux = null;
 			while(it_neighbours.hasNext()) { //Mientras existan vecinos...
 				g = it_neighbours.next();
+				
+				
 				if(g>0.0) { // Si se cumple esta condicion significa que es un vecino válido
-					Iterator<Node> it_nodes = this.graph_.getNodeList().keySet().iterator(); //Recorrerá los nodos de la tabla hash
-					Node aux = null;
-					for(int i=0 ; i<n ; i++) { //Recorro la tabla buscando la posicion donde está el nodo vecino 
-						it_nodes.next();
-					}
+					aux = null;
 					aux = it_nodes.next();
+					
+					System.out.println("Distancia nodo actual: " + node.getDistance());
+					System.out.println("Distancia en g: " + g);
 					aux.setDistance(node.getDistance()+g);
+					System.out.println("Vecino distancia: "+aux.getDistance());
 					aux.setValue();
 					sonsList.add(aux); //Añado el nodo vecino válido
+				}else {
+					it_nodes.next();
 				}
-				n++;
 			}
-			return sonsList; //Devuelvo la lista de nodos vecinos
+			Iterator<Node> it = sonsList.iterator();
+			String cad = "";
+			
+			while(it.hasNext()) {
+				
+				System.out.println(it.next().getDistance() + ", ");
+			}
+			
+			//return sonsList; //Devuelvo la lista de nodos vecinos
 		}
-		
 	}
 	
-	public void calculateMinimunWalk(Node node) {
+	/*public ArrayList<Node> calculateMinimunRoad(Node node) {
 		
 		// AÑADIR A LA LISTA DE NODOS NO VISITADOS, LOS NODOS HIJOS QUE SE ACABAN DE GENERAR
 		ArrayList<Node> sons = generateSons(node);
@@ -100,9 +113,14 @@ public class AStar {
 			}
 			i++;
 		}
-		
-		calculateMinimunWalk(nodo_min);		
-	}
+		if(!this.roads_list.isEmpty()) {
+			calculateMinimunRoad(nodo_min);	
+		}
+		return this.minimun_road;
+			
+	}*/
+	
+	
 	
 	
 	
