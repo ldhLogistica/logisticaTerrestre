@@ -17,6 +17,8 @@ final public class Node{
 	private double g_; //Representa el camino recorrido desde el nodo inicial hasta el actual
 	private double h_; //Representa el valor heurístico
 	private double f_; //Representa la suma de h + g
+	private ArrayList<Node> sons_nodes = new ArrayList<Node>();
+	private Node father_node;
 	boolean analized = false;
 	boolean objetive_ = false;
 	boolean origin_ = false;
@@ -112,6 +114,29 @@ final public class Node{
 	public String toString() {
 		String cad = "";
 		return cad + this.getNodeID();
+	}
+	
+	public Node clone() {
+		Node node = new Node(this.nodeID_);
+		node.analized = this.analized;
+		node.f_ = this.f_;
+		node.g_ = this.g_;
+		node.h_ = this.h_;
+		node.objetive_ = this.objetive_;
+		node.origin_ = this.origin_;
+		return node;
+	}
+	
+	public void setFather(Node node) {
+		this.father_node = node;
+	}
+	
+	public Node getFather() {
+		return this.father_node;
+	}
+	
+	public void addSon(Node node) {
+		this.sons_nodes.add(node);
 	}
 	
 	

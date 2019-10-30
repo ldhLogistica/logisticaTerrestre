@@ -8,9 +8,8 @@ public class AStar {
 	private Graph graph_;
 	private ArrayList<Node> minimun_road = new ArrayList<Node>();
 	private ArrayList<Node> not_visited_nodes = new ArrayList<Node>();
-	private LinkedHashMap<Double,ArrayList<Node>> roads_list = new LinkedHashMap<Double, ArrayList<Node>>();
-	/*private ArrayList<ArrayList<Node>> walks_list = new ArrayList<ArrayList<Node>>();
-	private Iterator<ArrayList<Node>> walks_list_it = walks_list.iterator();*/
+	private ArrayList<LinkedHashMap<Node, ArrayList<Node>>> roads_list = new ArrayList<LinkedHashMap<Node, ArrayList<Node>>>(); 	
+	//private Iterator<ArrayList<Node>> walks_list_it = walks_list.iterator();
 	
 	
 	AStar(Graph graph){
@@ -24,24 +23,14 @@ public class AStar {
 				found = true;
 			}
 		}
-		//calculateMinimunRoad(aux);
-		generateSons(aux);
+		calculateMinimunRoad(aux);
+		
 	}
 	
-	/*private void run(Node node) {
-		ArrayList<Node> sonsList = new ArrayList<Node>();
-		if(this.not_visited_nodes.isEmpty()) {
-			sonsList = generateSons(node);
-		}else {
-			double min;
-			
-		}
-	}*/
-	
-	public void generateSons(Node node) {
+	public ArrayList<Node> generateSons(Node node) {
 		ArrayList<Node> sonsList = new ArrayList<Node>(); //Lista con los nodos vecinos que tienen distancias asignadas
 		if(node.isObjetive()) {
-			//return sonsList;
+			return sonsList;
 		}else {
 			Iterator<Double> it_neighbours = this.graph_.getNodeList().get(node).iterator(); //Recorrerá las distancias del nodo pasado por parametro
 			Iterator<Node> it_nodes = this.graph_.getNodeList().keySet().iterator(); //Recorrerá los nodos de la tabla hash
@@ -74,11 +63,11 @@ public class AStar {
 				System.out.println(it.next().getDistance() + ", ");
 			}
 			
-			//return sonsList; //Devuelvo la lista de nodos vecinos
+			return sonsList; //Devuelvo la lista de nodos vecinos
 		}
 	}
 	
-	/*public ArrayList<Node> calculateMinimunRoad(Node node) {
+	public ArrayList<Node> calculateMinimunRoad(Node node) {
 		
 		// AÑADIR A LA LISTA DE NODOS NO VISITADOS, LOS NODOS HIJOS QUE SE ACABAN DE GENERAR
 		ArrayList<Node> sons = generateSons(node);
@@ -106,7 +95,7 @@ public class AStar {
 		boolean found = false;
 		int i = 0;
 		while(it_aux1.hasNext() && !found) {
-			aux1 = it_aux1.next();
+			aux1 = it_aux1.next().clone();
 			if(min == aux1.getValue()) {
 				found = true;
 				this.not_visited_nodes.remove(i);
@@ -118,7 +107,7 @@ public class AStar {
 		}
 		return this.minimun_road;
 			
-	}*/
+	}
 	
 	
 	
