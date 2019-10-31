@@ -8,7 +8,9 @@ public class AStar {
 	private Graph graph_;
 	private ArrayList<Node> minimun_road = new ArrayList<Node>();
 	private ArrayList<Node> not_visited_nodes = new ArrayList<Node>();
-	private ArrayList<LinkedHashMap<Node, ArrayList<Node>>> roads_list = new ArrayList<LinkedHashMap<Node, ArrayList<Node>>>(); 	
+	private ArrayList<Node> objetives_nodes = new ArrayList<Node>();
+	//private ArrayList<ArrayList<Node>> roads_list = new ArrayList<ArrayList<Node>>();
+	//private ArrayList<LinkedHashMap<Node, ArrayList<Node>>> roads_list = new ArrayList<LinkedHashMap<Node, ArrayList<Node>>>(); 	
 	//private Iterator<ArrayList<Node>> walks_list_it = walks_list.iterator();
 	
 	
@@ -29,6 +31,9 @@ public class AStar {
 	
 	public ArrayList<Node> generateSons(Node node) {
 		ArrayList<Node> sonsList = new ArrayList<Node>(); //Lista con los nodos vecinos que tienen distancias asignadas
+		if(isViableRoad(node)) {
+			return sonsList;
+		}
 		if(node.isObjetive()) {
 			return sonsList;
 		}else {
@@ -43,8 +48,8 @@ public class AStar {
 				
 				if(g>0.0) { // Si se cumple esta condicion significa que es un vecino válido
 					aux = null;
-					aux = it_nodes.next();
-					
+					aux = it_nodes.next().clone();
+					aux.setFather(node);
 					System.out.println("Distancia nodo actual: " + node.getDistance());
 					System.out.println("Distancia en g: " + g);
 					aux.setDistance(node.getDistance()+g);
@@ -67,7 +72,7 @@ public class AStar {
 		}
 	}
 	
-	public ArrayList<Node> calculateMinimunRoad(Node node) {
+	public void calculateMinimunRoad(Node node) {
 		
 		// AÑADIR A LA LISTA DE NODOS NO VISITADOS, LOS NODOS HIJOS QUE SE ACABAN DE GENERAR
 		ArrayList<Node> sons = generateSons(node);
@@ -76,18 +81,9 @@ public class AStar {
 			this.not_visited_nodes.add(it_aux.next());
 		}
 		
-		// LOCALIZAR EL NODO CUYO VALOR F() SEA EL MINIMO
-		double min = Double.MAX_VALUE;
-		Iterator<Node> it = this.not_visited_nodes.iterator();
-		Node aux = null;
-		Node nodo_min = null;
-		while(it.hasNext()) {
-			aux = it.next();
-			if(min>aux.getValue()) {
-				min = aux.getValue();
-				nodo_min = aux;
-			}
-		}
+		
+		Node nodo_min = getMinimunFNode();
+		
 		
 		// SACAR EL NODO MINIMO DE LA LISTA DE NO VISITADOS
 		Iterator<Node> it_aux1 = this.not_visited_nodes.iterator();
@@ -95,28 +91,87 @@ public class AStar {
 		boolean found = false;
 		int i = 0;
 		while(it_aux1.hasNext() && !found) {
-			aux1 = it_aux1.next().clone();
-			if(min == aux1.getValue()) {
+			aux1 = it_aux1.next();
+			if(nodo_min.getValue() == aux1.getValue()) {
 				found = true;
 				this.not_visited_nodes.remove(i);
 			}
 			i++;
 		}
-		if(!this.roads_list.isEmpty()) {
-			calculateMinimunRoad(nodo_min);	
+		
+		if(nodo_min.isObjetive()) {
+			this.objetives_nodes.add(nodo_min);
+			if(!this.not_visited_nodes.isEmpty()) {
+				calculateMinimunRoad(getMinimunFNode());
+			}
+		}else if (!this.not_visited_nodes.isEmpty()) {
+			calculateMinimunRoad(getMinimunFNode());
+		}else {
+			setMinimunRoad();
 		}
-		return this.minimun_road;
 			
 	}
 	
+	private Node getMinimunFNode() {
+		// LOCALIZAR EL NODO CUYO VALOR F() SEA EL MINIMO
+				double min = Double.MAX_VALUE;
+				Iterator<Node> it = this.not_visited_nodes.iterator();
+				Node aux = null;
+				Node nodo_min = null;
+				while(it.hasNext()) {
+					aux = it.next();
+					if(min>aux.getValue()) {
+						min = aux.getValue();
+						nodo_min = aux;
+					}
+				}
+				return nodo_min;
+	}
 	
+	//VERIFICAR SI ES VIABLE SEGUIR CON UN CAMINO
+	private boolean isViableRoad(Node node) {
+		Iterator<Node> it = this.objetives_nodes.iterator();
+		boolean viable = true;
+		while(it.hasNext() && viable) {
+			if(it.next().getValue() <= node.getValue()) {
+				viable = false;
+			}
+		}
+		
+		return viable;
+	}
 	
-	
-	
-	
+	private void setMinimunRoad(){
+		Iterator<Node> it = this.objetives_nodes.iterator();
+		Node optimal_node = null;
+		Node aux = null;
+		double minimunF = Double.MAX_VALUE;
+		while(it.hasNext()) {
+			aux = it.next();
+			if(minimunF > aux.getValue()) {
+				minimunF = aux.getValue();
+				optimal_node = aux;
+			}
+		}
+		Node node_it = optimal_node;
+		while(!node_it.isOrigin()) {
+			this.minimun_road.add(0, node_it);
+			node_it = node_it.getFather();
+		}	
+	}
+
 	public String toString() {
 		
-		return this.graph_.toString();
+		String res = "";
+		Iterator<Node> it = this.minimun_road.iterator();
+		while(it.hasNext()) {
+			res+=it.next().getNodeID();
+			if(it.hasNext())
+				res +="->";
+		}
+		
+		return res;
 	}
+	
 
 }
