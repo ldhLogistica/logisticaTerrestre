@@ -30,8 +30,9 @@ public class AStar {
 	}
 	
 	public ArrayList<Node> generateSons(Node node) {
+		System.out.println("Vamos a calcular los hijos de: " + node.getNodeID());
 		ArrayList<Node> sonsList = new ArrayList<Node>(); //Lista con los nodos vecinos que tienen distancias asignadas
-		if(isViableRoad(node)) {
+		if(!isViableRoad(node)) {
 			return sonsList;
 		}
 		if(node.isObjetive()) {
@@ -90,15 +91,17 @@ public class AStar {
 		Node aux1 = null;
 		boolean found = false;
 		int i = 0;
+		Node nodo = null;
 		while(it_aux1.hasNext() && !found) {
 			aux1 = it_aux1.next();
 			if(nodo_min.getValue() == aux1.getValue()) {
+				nodo = aux1.clone();
 				found = true;
 				this.not_visited_nodes.remove(i);
 			}
 			i++;
 		}
-		
+		System.out.println(nodo_min.getNodeID());
 		if(nodo_min.isObjetive()) {
 			this.objetives_nodes.add(nodo_min);
 			if(!this.not_visited_nodes.isEmpty()) {
@@ -114,18 +117,18 @@ public class AStar {
 	
 	private Node getMinimunFNode() {
 		// LOCALIZAR EL NODO CUYO VALOR F() SEA EL MINIMO
-				double min = Double.MAX_VALUE;
-				Iterator<Node> it = this.not_visited_nodes.iterator();
-				Node aux = null;
-				Node nodo_min = null;
-				while(it.hasNext()) {
-					aux = it.next();
-					if(min>aux.getValue()) {
-						min = aux.getValue();
-						nodo_min = aux;
-					}
-				}
-				return nodo_min;
+		double min = Double.MAX_VALUE;
+		Iterator<Node> it = this.not_visited_nodes.iterator();
+		Node aux = null;
+		Node nodo_min = null;
+		while(it.hasNext()) {
+			aux = it.next();
+			if(min>aux.getValue()) {
+				min = aux.getValue();
+				nodo_min = aux;
+			}
+		}
+		return nodo_min;
 	}
 	
 	//VERIFICAR SI ES VIABLE SEGUIR CON UN CAMINO
@@ -172,6 +175,4 @@ public class AStar {
 		
 		return res;
 	}
-	
-
 }
