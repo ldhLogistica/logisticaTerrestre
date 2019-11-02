@@ -17,7 +17,7 @@ public class AstarSearch {
 			
 			try {
 				Graph graph = new Graph(distances_filename,heuristics_filename,origin);
-				//System.out.println(graph.toString());
+				System.out.println(graph.toString());
 				AStar aStar = new AStar(graph);
 				System.out.println(aStar.toString());
 				

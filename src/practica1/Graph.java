@@ -118,7 +118,6 @@ final public class Graph {
 					distances_matrix[i][j] = Double.parseDouble(br.readLine());
 				}
 				
-				System.out.print(distances_matrix[i][j] + " ");
 					
 			}
 			System.out.println();
@@ -136,9 +135,15 @@ final public class Graph {
 		Node aux = null;
 		int i=0;
 		while(it.hasNext()) {
+			
 			aux = it.next();
+			
 			for(int j=0 ; j<getNNodes() ; j++) {
-					this.node_list_.get(aux).add(distances_matrix[i][j]);
+				if(aux.getNodeID()==3) {
+					System.out.println("Insertando nodo " + j + " con distancia " + distances_matrix[i][j]);
+				}
+				
+				this.node_list_.get(aux).add(distances_matrix[i][j]);
 			}
 			i++;
 		}
