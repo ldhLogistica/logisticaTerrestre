@@ -1,6 +1,7 @@
 package practica1;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 /**
  * 
@@ -124,6 +125,7 @@ final public class Node{
 		node.h_ = this.h_;
 		node.objetive_ = this.objetive_;
 		node.origin_ = this.origin_;
+		node.sons_nodes = this.sons_nodes;
 		return node;
 	}
 	
@@ -135,8 +137,13 @@ final public class Node{
 		return this.father_node;
 	}
 	
-	public void addSon(Node node) {
+	public void addSon(Node node, double distance) {
 		this.sons_nodes.add(node);
+		this.setDistance(distance);
+	}
+	
+	public ArrayList<Node> getSonsList(){
+		return this.sons_nodes;
 	}
 	
 	

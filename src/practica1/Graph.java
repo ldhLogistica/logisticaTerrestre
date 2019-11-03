@@ -5,9 +5,7 @@ import java.io.*;
 
 /**
  * 
- * @author Samuel Fumero Hernández
- * 
- * Universidad de La Laguna - ETSII - Grado en Ingeniería Informática
+ * Universidad de La Laguna - ETSII - Grado en IngenierÃ­a InformÃ¡tica
  * Inteligencia Artificial
  * 
  * Clase que crea el grafo y almacena los valores de cada nodo
@@ -15,13 +13,13 @@ import java.io.*;
  */
 final public class Graph {
 	
-	private LinkedHashMap<Node,ArrayList<Double>> node_list_ = new LinkedHashMap<Node,ArrayList<Double>>(); 
+	private ArrayList<Node> node_list_ = new ArrayList<Node>(); 
 	private int n_nodes_; 
 	
 	/**
 	 * 
 	 * @param distances_file fichero de distancias proporcionado en la linea de comandos
-	 * @param heuristics_file fichero de heurísticas proporcionado en la linea de comandos
+	 * @param heuristics_file fichero de heurï¿½sticas proporcionado en la linea de comandos
 	 * @param origin_node nodo de origen proporcionado en la linea de comandos
 	 * @throws NumberFormatException se asegura que se esta leyendo en el formato correcto
 	 * @throws IOException se asegura que no hay ningun error a la hora de leer los ficheros
@@ -38,22 +36,22 @@ final public class Graph {
 	 */
 	public String toString() {
 		String res = "";
-		Iterator<Node> it = this.node_list_.keySet().iterator();
-		Iterator<Double> it_a = new ArrayList<Double>().iterator();
+		Iterator<Node> it_node = this.node_list_.iterator();
 		
 		Node aux = null;
-		while(it.hasNext()) {
-			aux = it.next();
+		while(it_node.hasNext()) {
+			aux = it_node.next();
 			res += "H = " + aux.getHeuristic() + "\n";
 			res += "NodoID: " + aux.getNodeID() + "\n";
-			//System.out.println(res);
-			it_a = this.node_list_.get(aux).iterator();
-			//System.out.println(this.node_list_.get(aux).size());
-			while(it_a.hasNext()) {
-				//System.out.println("Die Die Die!!");
-				res += it_a.next() + "\n";
+			res += "Vecinos: ";
+			Iterator<Node> it_neighbours = aux.getSonsList().iterator();
+			Node aux1 = null;
+			while(it_neighbours.hasNext()) {
+				aux1 = it_neighbours.next();
+				res += aux1.getNodeID() + ": " + aux1.getDistance() + ", ";
 			}
-			res += "\n--------------------------\n";
+			res+="\n\n";
+			
 		}
 		return res;
 		
@@ -71,7 +69,7 @@ final public class Graph {
 	 * 
 	 * @return devuelve una tabla Hash cuyas claves son los nodos y los valores las distancias a los vecinos
 	 */
-	protected LinkedHashMap<Node,ArrayList<Double>> getNodeList(){
+	protected ArrayList<Node> getNodeList(){
 		return this.node_list_;
 	}
 	
@@ -91,7 +89,7 @@ final public class Graph {
 			Node node = new Node(index);
 			if(index==origin_node)
 				node.setOrigin();
-			this.node_list_.put(node, new ArrayList<Double>());	
+			this.node_list_.add(node);	
 		}
 		double[][] distances_matrix = buildDistancesMatrix(b);
 		insertDistances(distances_matrix);
@@ -117,8 +115,7 @@ final public class Graph {
 				}else {
 					distances_matrix[i][j] = Double.parseDouble(br.readLine());
 				}
-				
-					
+				System.out.print(distances_matrix[i][j] + " ");
 			}
 			System.out.println();
 		}
@@ -131,19 +128,24 @@ final public class Graph {
 	 * @param distances_matrix matriz de distancias
 	 */
 	private void insertDistances(double[][] distances_matrix) {
-		Iterator<Node> it = this.node_list_.keySet().iterator();
+		Iterator<Node> it_nodes = this.node_list_.iterator();
 		Node aux = null;
-		int i=0;
-		while(it.hasNext()) {
-			
-			aux = it.next();
-			
-			for(int j=0 ; j<getNNodes() ; j++) {
-				if(aux.getNodeID()==3) {
-					System.out.println("Insertando nodo " + j + " con distancia " + distances_matrix[i][j]);
+		Node aux1 = null;
+		
+		while(it_nodes.hasNext()) {
+			aux = it_nodes.next();
+			System.out.println("Metiendo hijos de: " + aux.getNodeID());
+			int i = aux.getNodeID()-1;
+			Iterator<Node> it_nodes_aux = this.node_list_.iterator();
+			while(it_nodes_aux.hasNext()) {
+				aux1 = it_nodes_aux.next();
+				int j= aux1.getNodeID()-1;
+				if(distances_matrix[i][j] > 0.0) {
+					
+					aux.addSon(aux1,distances_matrix[i][j]);
+					System.out.println("Metiendo nodo " + aux1.getNodeID() + " cuya distancia es " + distances_matrix[i][j]);
 				}
-				
-				this.node_list_.get(aux).add(distances_matrix[i][j]);
+				j++;
 			}
 			i++;
 		}
@@ -160,16 +162,15 @@ final public class Graph {
 		BufferedReader br = new BufferedReader(fr);
 		int n_nodos = Integer.parseInt(br.readLine());
 		
-		Iterator<Node> it_node_list = this.node_list_.keySet().iterator();
-		Node aux1 = null;
-		while(it_node_list.hasNext()) {
-			aux1 = it_node_list.next();
-			aux1.setHeuristic(Double.parseDouble(br.readLine()));
-			if(aux1.getHeuristic()==0.0)
-				aux1.setObjetive();
+		Iterator<Node> it_node = this.node_list_.iterator();
+		Node aux = null;
+		while(it_node.hasNext()) {
+			aux = it_node.next();
+			aux.setHeuristic(Double.parseDouble(br.readLine()));
+			if(aux.getHeuristic()==0.0)
+				aux.setObjetive();
 		}
 		br.close();
 	}
 }
-
 

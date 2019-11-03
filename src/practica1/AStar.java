@@ -18,21 +18,23 @@ public class AStar {
 	AStar(Graph graph){
 		this.cont = 0;
 		this.graph_ = graph;
-		Iterator<Node> it = this.graph_.getNodeList().keySet().iterator();
+		Iterator<Node> it_node = this.graph_.getNodeList().iterator();
 		Node aux = null;
 		boolean found = false;
-		while(it.hasNext() && !found) {
-			aux = it.next();
+		while(it_node.hasNext() && !found) {
+			aux = it_node.next();
 			if(aux.isOrigin()) {
 				found = true;
 			}
 		}
+		aux.setDistance(0.0);
 		calculateMinimunRoad(aux);
 		
 	}
 	
 	public ArrayList<Node> generateSons(Node node) {
-		System.out.println("Vamos a calcular los hijos de: " + node.getNodeID());
+		System.out.println("Vamos a calcular los hijos de: " + node.getNodeID() + 
+				" cuya distancia actual es: " + node.getDistance());
 		ArrayList<Node> sonsList = new ArrayList<Node>(); //Lista con los nodos vecinos que tienen distancias asignadas
 		if(!isViableRoad(node)) {
 			return sonsList;
@@ -41,62 +43,43 @@ public class AStar {
 		if(node.isObjetive()) {
 			return sonsList;
 		}else {
-			System.out.println("Este nodo no es un nodo objetivo");
-			Iterator<Double> it_neighbours = this.graph_.getNodeList().get(node).iterator(); //Recorrerá las distancias del nodo pasado por parametro
-			System.out.println("Numero de vecinos: " + it_neighbours);
-			Iterator<Node> it_nodes = this.graph_.getNodeList().keySet().iterator(); //Recorrerá los nodos de la tabla hash
-			double g;
 			Node aux = null;
-			while(it_neighbours.hasNext()) { //Mientras existan vecinos...
-				g = it_neighbours.next();
-				//System.out.println("Distancia con nodo vecino: " + g);
-				if(g>0.0) { // Si se cumple esta condicion significa que es un vecino válido
-					aux = it_nodes.next();
-					System.out.println("El nodo " + aux.getNodeID() + " es vecino de " + node.getNodeID());
-					aux.setFather(node);
-					//System.out.println("Distancia nodo actual: " + node.getDistance());
-					//System.out.println("Distancia en g: " + g);
-					aux.setDistance(node.getDistance()+g);
-					//System.out.println("Vecino distancia: "+aux.getDistance());
-					aux.setValue();
-					sonsList.add(aux); //Añado el nodo vecino válido
-				}
-				if(it_nodes.hasNext()) {
-					it_nodes.next();
-				}
+			Iterator<Node> it_neighbours = node.getSonsList().iterator();
+			while(it_neighbours.hasNext()) {
+				aux = it_neighbours.next();
+				aux.setDistance(node.getDistance()+aux.getDistance());
+				aux.setValue();
+				System.out.println("El nodo " + aux.getNodeID() + " es un nuevo hijo y tiene valor " + aux.getValue()
+						+ ". Tiene distancia " + aux.getDistance() + " y una heuristica de " + aux.getHeuristic());
+				sonsList.add(aux);
 				
 			}
-			Iterator<Node> it = sonsList.iterator();
-			String cad = "";
 			
-			/*while(it.hasNext()) {
-				
-				//System.out.println(it.next().getDistance() + ", ");
-			}*/
-			Iterator<Node> it_sons = sonsList.iterator();
-			while(it_sons.hasNext()) {
-				System.out.println("ID vecino: " + it_sons.next().getNodeID());
-			}
-			return sonsList; //Devuelvo la lista de nodos vecinos
+			return sonsList;
 		}
 	}
 	
 	public void calculateMinimunRoad(Node node) {
-		System.out.println("\n-----------------------------------------------------------------------------\n");
+		
 		cont++;
 		System.out.println("Veces ejecutado: " + cont);
 		
-		// AÑADIR A LA LISTA DE NODOS NO VISITADOS, LOS NODOS HIJOS QUE SE ACABAN DE GENERAR
+		// Aï¿½ADIR A LA LISTA DE NODOS NO VISITADOS, LOS NODOS HIJOS QUE SE ACABAN DE GENERAR
 		ArrayList<Node> sons = generateSons(node);
 		Iterator<Node> it_sons = sons.iterator();
 		System.out.println("Hijos de " + node.getNodeID());
+		Node aux = null;
 		while(it_sons.hasNext()) {
-			System.out.print(it_sons.next() +  ", ");
+			aux = it_sons.next();
+			System.out.print(aux.getNodeID() +  ": " + aux.getDistance() + ", ");
 		}
 		Iterator<Node> it_aux = sons.iterator();
 		while(it_aux.hasNext()) {
 			this.not_visited_nodes.add(it_aux.next());
 		}
+		
+		System.out.println("\n-----------------------------------------------------------------------------\n");
+		
 		
 		
 		Node nodo_min = getMinimunFNode();
@@ -119,13 +102,14 @@ public class AStar {
 			//System.out.println("Tamanio: " + this.not_visited_nodes.size());
 			i++;
 		}
+		System.out.println("Lista de nodos no visitados despues de coger el minimo: " + this.not_visited_nodes);
 		
 		if(nodo_min.isObjetive()) {
 			
 			this.objetives_nodes.add(nodo_min);
 			System.out.println("El nodo " + nodo_min + " es objetivo");
 			if(!this.not_visited_nodes.isEmpty()) {
-				System.out.println("La lista está vacía");
+				System.out.println("La lista estï¿½ vacï¿½a");
 				calculateMinimunRoad(getMinimunFNode());
 			}
 		}else if (!this.not_visited_nodes.isEmpty()) {
@@ -140,9 +124,9 @@ public class AStar {
 	private Node getMinimunFNode() {
 		// LOCALIZAR EL NODO CUYO VALOR F() SEA EL MINIMO
 		//System.out.println("Se ha llamado a la funcion getMinimunNode " + cont + " veces");
-		cont++;
 		double min = Double.MAX_VALUE;
 		Iterator<Node> it = this.not_visited_nodes.iterator();
+		System.out.println("Lista de no visitados entes de coger el minimo: " + not_visited_nodes);
 		Node aux = null;
 		Node nodo_min = null;
 		while(it.hasNext()) {
@@ -153,6 +137,7 @@ public class AStar {
 				//System.out.println("Condicion pasada");
 				min = aux.getValue();
 				nodo_min = aux;	
+				System.out.println("Nodo minimo actual: " + nodo_min.getNodeID());
 				/*System.out.println("Valor F del nodo minimo actual: " + nodo_min.getValue());
 				System.out.println("----------------------\n");*/
 			}
