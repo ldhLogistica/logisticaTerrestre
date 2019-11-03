@@ -52,6 +52,7 @@ public class AStar {
 				System.out.println("El nodo " + aux.getNodeID() + " es un nuevo hijo y tiene valor " + aux.getValue()
 						+ ". Tiene distancia " + aux.getDistance() + " y una heuristica de " + aux.getHeuristic());
 				sonsList.add(aux);
+				sonsList.get(sonsList.size()-1).setFather(node);
 				
 			}
 			
@@ -176,6 +177,7 @@ public class AStar {
 			this.minimun_road.add(0, node_it);
 			node_it = node_it.getFather();
 		}	
+		this.minimun_road.add(0, node_it);
 	}
 
 	public String toString() {
