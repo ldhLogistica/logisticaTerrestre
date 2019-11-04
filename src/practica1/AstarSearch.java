@@ -16,13 +16,19 @@ public class AstarSearch {
 			int origin = Integer.parseInt(args[2]);
 			
 			try {
+				 
 				Graph graph = new Graph(distances_filename,heuristics_filename,origin);
-				System.out.println(graph.toString());
+				//System.out.println(graph.toString());
+				double TInicio, TFin, tiempo;
+				 TInicio = System.currentTimeMillis();
 				AStar aStar = new AStar(graph);
+				TFin = System.currentTimeMillis();
+				tiempo = (TFin-TInicio)/1000;
 				System.out.println(aStar.toString());
+				System.out.println("Tiempo ejecucion: " + tiempo + " segundos\n");
 				
 				//System.out.println(Astar.toString());
-				System.out.println("FIN");
+				//System.out.println("FIN");
 			} catch (NumberFormatException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

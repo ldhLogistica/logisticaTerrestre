@@ -19,10 +19,12 @@ final public class Node{
 	private double h_; //Representa el valor heurístico
 	private double f_; //Representa la suma de h + g
 	private ArrayList<Node> sons_nodes = new ArrayList<Node>();
+	private ArrayList<Double> sons_distances = new ArrayList<Double>();
 	private Node father_node;
 	boolean analized = false;
 	boolean objetive_ = false;
 	boolean origin_ = false;
+	static protected int n_nodos = 0;
 	
 	
 	/**
@@ -33,7 +35,8 @@ final public class Node{
 	Node(int nodeID){
 		this.nodeID_ = nodeID;
 		this.g_ = 0.0;
-		
+		n_nodos++;
+		System.out.println(this.nodeID_);
 	}
 	
 	public Node returnNode() {
@@ -126,6 +129,7 @@ final public class Node{
 		node.objetive_ = this.objetive_;
 		node.origin_ = this.origin_;
 		node.sons_nodes = this.sons_nodes;
+		
 		return node;
 	}
 	
@@ -139,11 +143,14 @@ final public class Node{
 	
 	public void addSon(Node node, double distance) {
 		this.sons_nodes.add(node);
-		this.setDistance(distance);
+		this.sons_distances.add(distance);
 	}
 	
 	public ArrayList<Node> getSonsList(){
 		return this.sons_nodes;
+	}
+	public ArrayList<Double> getSonsDistances(){
+		return this.sons_distances;
 	}
 	
 	

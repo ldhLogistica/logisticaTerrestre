@@ -14,7 +14,9 @@ import java.io.*;
 final public class Graph {
 	
 	private ArrayList<Node> node_list_ = new ArrayList<Node>(); 
-	private int n_nodes_; 
+	protected int originNodeID = 0;
+	protected int finalNodeID = 0;
+	protected int n_nodes_; 
 	
 	/**
 	 * 
@@ -25,7 +27,7 @@ final public class Graph {
 	 * @throws IOException se asegura que no hay ningun error a la hora de leer los ficheros
 	 */
 	Graph(String distances_file, String heuristics_file, int origin_node) throws NumberFormatException, IOException{
-		
+		this.originNodeID = origin_node;
 		buildDistances(distances_file, origin_node);
 		buildHeuristics(heuristics_file);
 			
@@ -45,10 +47,11 @@ final public class Graph {
 			res += "NodoID: " + aux.getNodeID() + "\n";
 			res += "Vecinos: ";
 			Iterator<Node> it_neighbours = aux.getSonsList().iterator();
+			Iterator<Double> it_double = aux.getSonsDistances().iterator();
 			Node aux1 = null;
 			while(it_neighbours.hasNext()) {
 				aux1 = it_neighbours.next();
-				res += aux1.getNodeID() + ": " + aux1.getDistance() + ", ";
+				res += aux1.getNodeID() + ": " + it_double.next() + ", ";
 			}
 			res+="\n\n";
 			
@@ -81,6 +84,7 @@ final public class Graph {
 	 * @throws IOException
 	 */
 	private void buildDistances(String distances_file, int origin_node) throws NumberFormatException, IOException {
+		
 		FileReader f = new FileReader(distances_file);
 		BufferedReader b = new BufferedReader(f);
 		this.n_nodes_ = Integer.parseInt(b.readLine());
@@ -115,9 +119,9 @@ final public class Graph {
 				}else {
 					distances_matrix[i][j] = Double.parseDouble(br.readLine());
 				}
-				System.out.print(distances_matrix[i][j] + " ");
+				//////System.out.print(distances_matrix[i][j] + " ");
 			}
-			System.out.println();
+			////System.out.println();
 		}
 		br.close();
 		return distances_matrix;
@@ -134,7 +138,6 @@ final public class Graph {
 		
 		while(it_nodes.hasNext()) {
 			aux = it_nodes.next();
-			System.out.println("Metiendo hijos de: " + aux.getNodeID());
 			int i = aux.getNodeID()-1;
 			Iterator<Node> it_nodes_aux = this.node_list_.iterator();
 			while(it_nodes_aux.hasNext()) {
@@ -143,7 +146,7 @@ final public class Graph {
 				if(distances_matrix[i][j] > 0.0) {
 					
 					aux.addSon(aux1,distances_matrix[i][j]);
-					System.out.println("Metiendo nodo " + aux1.getNodeID() + " cuya distancia es " + distances_matrix[i][j]);
+					
 				}
 				j++;
 			}
@@ -167,10 +170,15 @@ final public class Graph {
 		while(it_node.hasNext()) {
 			aux = it_node.next();
 			aux.setHeuristic(Double.parseDouble(br.readLine()));
-			if(aux.getHeuristic()==0.0)
+			if(aux.getHeuristic()==0.0) {
 				aux.setObjetive();
+				this.finalNodeID = aux.getNodeID();
+			}
+				
 		}
 		br.close();
 	}
+	
+	
 }
 
