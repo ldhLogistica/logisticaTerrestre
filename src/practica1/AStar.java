@@ -12,9 +12,7 @@ public class AStar {
 	private int cont;
 	private int generated_nodes;
 	private double distance;
-	//private ArrayList<ArrayList<Node>> roads_list = new ArrayList<ArrayList<Node>>();
-	//private ArrayList<LinkedHashMap<Node, ArrayList<Node>>> roads_list = new ArrayList<LinkedHashMap<Node, ArrayList<Node>>>(); 	
-	//private Iterator<ArrayList<Node>> walks_list_it = walks_list.iterator();
+
 	
 	
 	AStar(Graph graph){

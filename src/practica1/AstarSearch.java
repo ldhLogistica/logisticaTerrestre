@@ -26,9 +26,7 @@ public class AstarSearch {
 				tiempo = (TFin-TInicio)/1000;
 				System.out.println(aStar.toString());
 				System.out.println("Tiempo ejecucion: " + tiempo + " segundos\n");
-				
-				//System.out.println(Astar.toString());
-				//System.out.println("FIN");
+
 			} catch (NumberFormatException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
