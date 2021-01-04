@@ -3,33 +3,26 @@ package practica1;
 import java.util.*;
 import java.io.*;
 
-/**
- * 
- * Universidad de La Laguna - ETSII - Grado en Ingeniería Informática
- * Inteligencia Artificial
- * 
- * Clase que crea el grafo y almacena los valores de cada nodo
- *
- */
+
 final public class Graph {
 	
 	private ArrayList<Node> node_list_ = new ArrayList<Node>(); 
 	protected int originNodeID = 0;
 	protected int finalNodeID = 0;
-	protected int n_nodes_; 
+	protected int n_nodes_;
+
+	private static final String distancesFile = "C:\\Users\\samuel\\Desktop\\ULL\\4ANO\\LDH\\proyecto\\src\\main\\java\\Grafo1.txt";
+	private static final String heuristicsFile = "C:\\Users\\samuel\\Desktop\\ULL\\4ANO\\LDH\\proyecto\\src\\main\\java\\Grafo1Heuristica1.txt";
 	
 	/**
-	 * 
-	 * @param distances_file fichero de distancias proporcionado en la linea de comandos
-	 * @param heuristics_file fichero de heur�sticas proporcionado en la linea de comandos
 	 * @param origin_node nodo de origen proporcionado en la linea de comandos
 	 * @throws NumberFormatException se asegura que se esta leyendo en el formato correcto
 	 * @throws IOException se asegura que no hay ningun error a la hora de leer los ficheros
 	 */
-	Graph(String distances_file, String heuristics_file, int origin_node) throws NumberFormatException, IOException{
+	public Graph(int origin_node) throws NumberFormatException, IOException{
 		this.originNodeID = origin_node;
-		buildDistances(distances_file, origin_node);
-		buildHeuristics(heuristics_file);
+		buildDistances(distancesFile,origin_node);
+		buildHeuristics(heuristicsFile);
 			
 	}
 	
@@ -84,7 +77,7 @@ final public class Graph {
 	 * @throws IOException
 	 */
 	private void buildDistances(String distances_file, int origin_node) throws NumberFormatException, IOException {
-		
+		System.out.println(distances_file);
 		FileReader f = new FileReader(distances_file);
 		BufferedReader b = new BufferedReader(f);
 		this.n_nodes_ = Integer.parseInt(b.readLine());

@@ -5,17 +5,15 @@ import java.io.*;
 
 public class AStar {
 	
-	private Graph graph_;
-	private ArrayList<Node> minimun_road = new ArrayList<Node>();
+private Graph graph_;
+	public ArrayList<Node> minimun_road = new ArrayList<Node>();
 	private ArrayList<Node> not_visited_nodes = new ArrayList<Node>();
 	private ArrayList<Node> objetives_nodes = new ArrayList<Node>();
 	private int cont;
 	private int generated_nodes;
 	private double distance;
 
-	
-	
-	AStar(Graph graph){
+	public AStar(Graph graph){
 		this.cont = 1;
 		this.graph_ = graph;
 		Iterator<Node> it_node = this.graph_.getNodeList().iterator();
@@ -60,10 +58,8 @@ public class AStar {
 					sonsList.add(aux);
 					aux.setFather(node);
 				}
-				
-				
+
 			}
-			
 			return sonsList;
 		}
 	}

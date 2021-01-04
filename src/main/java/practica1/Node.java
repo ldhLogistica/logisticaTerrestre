@@ -16,7 +16,7 @@ final public class Node{
 	
 	private int nodeID_;
 	private double g_; //Representa el camino recorrido desde el nodo inicial hasta el actual
-	private double h_; //Representa el valor heurístico
+	private double h_; //Representa el valor heurï¿½stico
 	private double f_; //Representa la suma de h + g
 	private ArrayList<Node> sons_nodes = new ArrayList<Node>();
 	private ArrayList<Double> sons_distances = new ArrayList<Double>();
@@ -30,7 +30,6 @@ final public class Node{
 	/**
 	 * 
 	 * @param nodeID identificador de cada nodo
-	 * @param h valor heurístico
 	 */
 	Node(int nodeID){
 		this.nodeID_ = nodeID;
