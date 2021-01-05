@@ -5,7 +5,7 @@ import java.io.*;
 
 public class AStar {
 	
-private Graph graph_;
+	private Graph graph_;
 	public ArrayList<Node> minimun_road = new ArrayList<Node>();
 	private ArrayList<Node> not_visited_nodes = new ArrayList<Node>();
 	private ArrayList<Node> objetives_nodes = new ArrayList<Node>();
@@ -75,20 +75,14 @@ private Graph graph_;
 		Node aux = null;
 		while(it_sons.hasNext()) {
 			aux = it_sons.next();
-			
 		}
 		Iterator<Node> it_aux = sons.iterator();
 		while(it_aux.hasNext()) {
 			this.not_visited_nodes.add(it_aux.next());
 		}
-		
-		
-		
-		
-		
+
 		Node nodo_min = getMinimunFNode();
-		
-		
+
 		// SACAR EL NODO MINIMO DE LA LISTA DE NO VISITADOS
 		Iterator<Node> it_aux1 = this.not_visited_nodes.iterator();
 		Node aux1 = null;
@@ -115,6 +109,7 @@ private Graph graph_;
 		}else { 
 			
 			calculateMinimunRoad(nodo_min);
+
 		}	
 	}
 	
@@ -166,6 +161,7 @@ private Graph graph_;
 		}
 		Node node_it = optimal_node;
 		this.distance = node_it.getDistance();
+		System.out.println(this.distance);
 		while(!node_it.isOrigin()) {
 			this.minimun_road.add(0, node_it);
 			node_it = node_it.getFather();

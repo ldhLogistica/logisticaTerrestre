@@ -6,8 +6,10 @@ import practica1.Node;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
-public class Coche implements IVehiculo{
+public class Coche implements IVehiculo, Runnable{
 
     private int id;
     private int origin;
@@ -63,4 +65,20 @@ public class Coche implements IVehiculo{
     }
 
 
+    @Override
+    public void run() {
+        HashMap<Integer,ArrayList<Double>> distances = this.map.getDistances();
+        this.position = minimunRoad.get(0).getNodeID();
+
+        for(int i=0 ; i<minimunRoad.size()-1 ; i++){
+            try {
+                Thread.sleep((int)Math.round(distances.get(this.minimunRoad.get(i).getNodeID()).get(this.minimunRoad.get(i+1).getNodeID()-1)*1000));
+                this.position = minimunRoad.get(i+1).getNodeID();
+                System.out.println("Posicion -> " + this.position);
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

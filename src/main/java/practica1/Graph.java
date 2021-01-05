@@ -10,6 +10,7 @@ final public class Graph {
 	protected int originNodeID = 0;
 	protected int finalNodeID = 0;
 	protected int n_nodes_;
+	private HashMap<Integer,ArrayList<Double>> distances = new HashMap<>();
 
 	private static final String distancesFile = "C:\\Users\\samuel\\Desktop\\ULL\\4ANO\\LDH\\proyecto\\src\\main\\java\\Grafo1.txt";
 	private static final String heuristicsFile = "C:\\Users\\samuel\\Desktop\\ULL\\4ANO\\LDH\\proyecto\\src\\main\\java\\Grafo1Heuristica1.txt";
@@ -77,7 +78,7 @@ final public class Graph {
 	 * @throws IOException
 	 */
 	private void buildDistances(String distances_file, int origin_node) throws NumberFormatException, IOException {
-		System.out.println(distances_file);
+		//System.out.println(distances_file);
 		FileReader f = new FileReader(distances_file);
 		BufferedReader b = new BufferedReader(f);
 		this.n_nodes_ = Integer.parseInt(b.readLine());
@@ -117,6 +118,31 @@ final public class Graph {
 			////System.out.println();
 		}
 		br.close();
+		for(int i=0 ; i<getNNodes() ; i++){
+			for(int j=0 ; j<getNNodes() ; j++){
+				System.out.print(distances_matrix[i][j] + " ");
+			}
+			System.out.println();
+		}
+
+		System.out.println();
+		System.out.println();
+		ArrayList<Double> distancesAux = new ArrayList<>();
+		for(int i=0 ; i<getNNodes() ; i++){
+			distancesAux.clear();
+			//System.out.println(distancesAux);
+			for(int j=0 ; j<getNNodes() ; j++){
+				distancesAux.add(distances_matrix[i][j]);
+				//distances.put(i+1,distances_matrix[i][j]);
+			}
+			//System.out.println(distancesAux);
+			this.distances.put(i+1,new ArrayList<>(distancesAux));
+			//System.out.println(i + " -> " + distances);
+
+		}
+
+		System.out.println(distances);
+
 		return distances_matrix;
 	}
 	
@@ -137,9 +163,7 @@ final public class Graph {
 				aux1 = it_nodes_aux.next();
 				int j= aux1.getNodeID()-1;
 				if(distances_matrix[i][j] > 0.0) {
-					
 					aux.addSon(aux1,distances_matrix[i][j]);
-					
 				}
 				j++;
 			}
@@ -170,6 +194,10 @@ final public class Graph {
 				
 		}
 		br.close();
+	}
+
+	public HashMap<Integer,ArrayList<Double>> getDistances(){
+		return this.distances;
 	}
 	
 	

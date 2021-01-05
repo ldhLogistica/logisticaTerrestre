@@ -13,16 +13,8 @@ public class AstarSearch {
 
 		Coche coche1 = new Coche(1, origin);
 		ArrayList<Node> camino = coche1.getMinimunRoad();
-		System.out.println(camino);
-			/*Graph graph = new Graph(origin);
-			//System.out.println(graph.toString());
-			double TInicio, TFin, tiempo;
-			 TInicio = System.currentTimeMillis();
-			AStar aStar = new AStar(graph);
-			TFin = System.currentTimeMillis();
-			tiempo = (TFin-TInicio)/1000;
-			System.out.println(aStar.toString());
-			System.out.println("Tiempo ejecucion: " + tiempo + " segundos\n");*/
+		Thread hiloCoche1 = new Thread(coche1);
+		hiloCoche1.start();
 
 	}
 }

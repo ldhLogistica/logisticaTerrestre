@@ -35,7 +35,7 @@ final public class Node{
 		this.nodeID_ = nodeID;
 		this.g_ = 0.0;
 		n_nodos++;
-		System.out.println(this.nodeID_);
+		//System.out.println(this.nodeID_);
 	}
 	
 	public Node returnNode() {
