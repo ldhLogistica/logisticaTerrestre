@@ -94,6 +94,7 @@ public class Coche implements IVehiculo, Runnable{
                 newData[2] = this.position;
                 LogisticaGUI.getModel().setValueAt(newData[2],0,2);
                 System.out.println("Posicion -> " + this.position);
+                System.out.println("hola");
 
 
             } catch (InterruptedException e) {
