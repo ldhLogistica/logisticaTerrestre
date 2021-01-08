@@ -7,6 +7,8 @@ public interface IVehiculo {
     void setOrigin(int origin);
     void setGoal(int goal);
     int getPosition();
+    int getId();
+    int getOrigin();
 
 
 }

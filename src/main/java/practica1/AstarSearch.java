@@ -9,12 +9,13 @@ public class AstarSearch {
 
 	public static void main(String[] args) {
 
-		int origin = Integer.parseInt(args[0]);
+		/*int origin = Integer.parseInt(args[0]);
 
 		Coche coche1 = new Coche(1, origin);
-		ArrayList<Node> camino = coche1.getMinimunRoad();
 		Thread hiloCoche1 = new Thread(coche1);
-		hiloCoche1.start();
+		hiloCoche1.start();*/
+
+		new LogisticaGUIFrame();
 
 	}
 }

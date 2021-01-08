@@ -6,7 +6,7 @@ import java.io.*;
 
 final public class Graph {
 	
-	private ArrayList<Node> node_list_ = new ArrayList<Node>(); 
+	private static ArrayList<Node> node_list_ = new ArrayList<Node>();
 	protected int originNodeID = 0;
 	protected int finalNodeID = 0;
 	protected int n_nodes_;
@@ -21,6 +21,7 @@ final public class Graph {
 	 * @throws IOException se asegura que no hay ningun error a la hora de leer los ficheros
 	 */
 	public Graph(int origin_node) throws NumberFormatException, IOException{
+		System.out.println("Origen: " + origin_node);
 		this.originNodeID = origin_node;
 		buildDistances(distancesFile,origin_node);
 		buildHeuristics(heuristicsFile);
@@ -181,19 +182,23 @@ final public class Graph {
 		FileReader fr = new FileReader(heuristics_file);
 		BufferedReader br = new BufferedReader(fr);
 		int n_nodos = Integer.parseInt(br.readLine());
-		
 		Iterator<Node> it_node = this.node_list_.iterator();
 		Node aux = null;
 		while(it_node.hasNext()) {
 			aux = it_node.next();
+			System.out.println(aux);
 			aux.setHeuristic(Double.parseDouble(br.readLine()));
 			if(aux.getHeuristic()==0.0) {
 				aux.setObjetive();
 				this.finalNodeID = aux.getNodeID();
 			}
-				
 		}
+
 		br.close();
+	}
+
+	public static ArrayList<Node> getNode_list(){
+		return node_list_;
 	}
 
 	public HashMap<Integer,ArrayList<Double>> getDistances(){

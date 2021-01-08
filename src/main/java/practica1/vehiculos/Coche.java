@@ -2,6 +2,7 @@ package practica1.vehiculos;
 
 import practica1.AStar;
 import practica1.Graph;
+import practica1.LogisticaGUI;
 import practica1.Node;
 
 import java.io.IOException;
@@ -23,8 +24,8 @@ public class Coche implements IVehiculo, Runnable{
     public Coche(int id, int origin){
         this.id = id;
         this.origin = origin;
-        create(this.id);
-        setOrigin(this.origin);
+        //create(this.id);
+        //setOrigin(this.origin);
         try {
             this.map = new Graph(this.origin);
             this.tree = new AStar(map);
@@ -60,6 +61,19 @@ public class Coche implements IVehiculo, Runnable{
         return this.position;
     }
 
+    @Override
+    public int getId() {
+        return this.id;
+    }
+
+    @Override
+    public int getOrigin() {
+        return this.origin;
+    }
+
+
+
+
     public ArrayList<Node> getMinimunRoad(){
         return this.minimunRoad;
     }
@@ -74,7 +88,13 @@ public class Coche implements IVehiculo, Runnable{
             try {
                 Thread.sleep((int)Math.round(distances.get(this.minimunRoad.get(i).getNodeID()).get(this.minimunRoad.get(i+1).getNodeID()-1)*1000));
                 this.position = minimunRoad.get(i+1).getNodeID();
+                Object[] newData = new Object[3];
+                newData[0] = this.getId();
+                newData[1] = "coche";
+                newData[2] = this.position;
+                LogisticaGUI.getModel().setValueAt(newData[2],0,2);
                 System.out.println("Posicion -> " + this.position);
+
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
