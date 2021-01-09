@@ -1,0 +1,37 @@
+# Virtual Machine Configuration
+os: linux
+dist: xenial
+
+sudo: false
+
+branches:
+  only:
+    - master
+
+# Project JDK
+language: java
+install: true
+jdk:
+  - openjdk11
+
+addons:
+  sonarcloud:
+    organization: "ldhLogistica"
+    
+  apt:
+    packages:
+      - doxygen
+
+script:
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
+  - mvn test
+  - doxygen Doxyfile
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  local_dir: target
+  github_token: $GH_REPO_TOKEN
+  on:
+    branch: master
