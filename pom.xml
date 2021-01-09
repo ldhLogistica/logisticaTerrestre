@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>ldh</groupId>
+    <groupId>com.manning.junitbook</groupId>
     <artifactId>logisticaTerrestre</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <name>logisticaTerrestre</name>
+
     <properties>
-
-
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <sonar.projectKey>ldhLogistica_logisticaTerrestre</sonar.projectKey>
         <sonar.organization>ldhlogistica</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-
-
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <sonar.java.binaries>target/classes</sonar.java.binaries>
+        <sonar.junit.reportPaths>target/surefire-reports</sonar.junit.reportPaths>
         <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
-
 
     <build>
         <plugins>
@@ -66,5 +65,4 @@
         </dependency>
     </dependencies>
 
-    
 </project>
