@@ -16,7 +16,7 @@ jdk:
 
 addons:
   sonarcloud:
-    organization: "ldhLogistica"
+    organization: "ldhlogistica"
     
   apt:
     packages:
