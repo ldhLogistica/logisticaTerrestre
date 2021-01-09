@@ -18,8 +18,10 @@ public class LogisticaGUI extends JPanel{
 
     private static ArrayList<Coche> listaCoches = new ArrayList<>();
     private static DefaultTableModel model = new DefaultTableModel();
+    public static int contID;
 
     LogisticaGUI(){
+        contID = 0;
         setHeaders();
         botonAgregarVehículo.addActionListener(new ActionListener() {
             @Override
@@ -44,9 +46,14 @@ public class LogisticaGUI extends JPanel{
         return model;
     }
 
+    public static int getContId(){
+        return contID;
+    }
+
     public JPanel getPanelLogisticaTerrestre(){
         return this.panelLogisticaTerrestre;
     }
+
 }
 
 class LogisticaGUIFrame extends JFrame{

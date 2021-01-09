@@ -23,29 +23,20 @@ public class AgregarCocheGUI extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean idAceptado = true;
-                int cocheId = Integer.parseInt(textField1.getText());
 
-                for(Coche c : LogisticaGUI.getListaCoches()){
-                    if(cocheId == c.getId()){
-                        idAceptado = false;
-                        break;
-                    }
-                }
-                if(!idAceptado){
-                    JOptionPane.showMessageDialog(null,"Identificador del coche repetido");
-                }else{
-                    Graph.getNode_list().clear();
-                    Coche coche = new Coche(cocheId,Integer.parseInt(comboBox2.getSelectedItem().toString()));
+                Graph.getNode_list().clear();
+                Coche coche = new Coche(LogisticaGUI.contID+1,Integer.parseInt(comboBox2.getSelectedItem().toString()));
+                LogisticaGUI.contID += 1;
 
-                    Object[] datosNuevoVehiculo = new Object[3];
-                    datosNuevoVehiculo[0] = coche.getId();
-                    datosNuevoVehiculo[1] = comboBox1.getSelectedItem().toString();
-                    datosNuevoVehiculo[2] = coche.getOrigin();
-                    LogisticaGUI.getListaCoches().add(coche);
-                    LogisticaGUI.getModel().addRow(datosNuevoVehiculo);
-                    Thread hiloCoche = new Thread(coche);
-                    hiloCoche.start();
-                }
+                Object[] datosNuevoVehiculo = new Object[3];
+                datosNuevoVehiculo[0] = coche.getId();
+                datosNuevoVehiculo[1] = comboBox1.getSelectedItem().toString();
+                datosNuevoVehiculo[2] = coche.getOrigin();
+                LogisticaGUI.getListaCoches().add(coche);
+                LogisticaGUI.getModel().addRow(datosNuevoVehiculo);
+                Thread hiloCoche = new Thread(coche);
+                hiloCoche.start();
+
             }
         });
     }
