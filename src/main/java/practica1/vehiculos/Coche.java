@@ -1,8 +1,8 @@
 package practica1.vehiculos;
 
-import practica1.AStar;
+/*import practica1.AStar;
 import practica1.Graph;
-import practica1.LogisticaGUI;
+import practica1.LogisticaGUI;*/
 import practica1.Node;
 
 import java.io.IOException;
@@ -10,15 +10,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-public class Coche implements IVehiculo, Runnable{
+public class Coche implements IVehiculo{
 
     private int id;
     private int origin;
     private int goal;
     private int position;
 
-    private AStar tree;
-    private Graph map;
+    //private AStar tree;
+    //private Graph map;
     private ArrayList<Node> minimunRoad = new ArrayList<>();
 
     public Coche(int id, int origin){
@@ -26,7 +26,7 @@ public class Coche implements IVehiculo, Runnable{
         this.origin = origin;
         //create(this.id);
         //setOrigin(this.origin);
-        try {
+       /* try {
             this.map = new Graph(this.origin);
             this.tree = new AStar(map);
             this.minimunRoad = tree.minimun_road;
@@ -34,7 +34,7 @@ public class Coche implements IVehiculo, Runnable{
 
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     @Override
@@ -80,7 +80,7 @@ public class Coche implements IVehiculo, Runnable{
     }
 
 
-    @Override
+   /* @Override
     public void run() {
         HashMap<Integer,ArrayList<Double>> distances = this.map.getDistances();
         this.position = minimunRoad.get(0).getNodeID();
@@ -108,5 +108,5 @@ public class Coche implements IVehiculo, Runnable{
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 }

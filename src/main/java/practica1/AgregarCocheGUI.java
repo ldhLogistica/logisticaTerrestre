@@ -1,4 +1,4 @@
-package practica1;
+/*package practica1;
 
 import practica1.vehiculos.Coche;
 
@@ -89,4 +89,4 @@ class AgregarCocheGUIFrame extends JFrame{
         setVisible(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
-}
+}*/

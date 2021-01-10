@@ -1,4 +1,4 @@
-package practica1;
+/*package practica1;
 
 import practica1.vehiculos.Coche;
 
@@ -65,4 +65,4 @@ class LogisticaGUIFrame extends JFrame{
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
     }
-}
+}*/
