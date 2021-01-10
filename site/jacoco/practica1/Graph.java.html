@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Graph.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">logisticaTerrestre</a> &gt; <a href="index.source.html" class="el_package">practica1</a> &gt; <span class="el_source">Graph.java</span></div><h1>Graph.java</h1><pre class="source lang-java linenums">package practica1;
+
+import java.util.*;
+import java.io.*;
+
+
+final public class Graph {
+	
+<span class="nc" id="L9">	private static ArrayList&lt;Node&gt; node_list_ = new ArrayList&lt;Node&gt;();</span>
+<span class="nc" id="L10">	protected int originNodeID = 0;</span>
+<span class="nc" id="L11">	protected int finalNodeID = 0;</span>
+	protected int n_nodes_;
+<span class="nc" id="L13">	private HashMap&lt;Integer,ArrayList&lt;Double&gt;&gt; distances = new HashMap&lt;&gt;();</span>
+
+	private static final String distancesFile = &quot;C:\\Users\\samuel\\Desktop\\ULL\\4ANO\\LDH\\proyecto\\src\\main\\java\\Grafo1.txt&quot;;
+	private static final String heuristicsFile = &quot;C:\\Users\\samuel\\Desktop\\ULL\\4ANO\\LDH\\proyecto\\src\\main\\java\\Grafo1Heuristica1.txt&quot;;
+	
+	/**
+	 * @param origin_node nodo de origen proporcionado en la linea de comandos
+	 * @throws NumberFormatException se asegura que se esta leyendo en el formato correcto
+	 * @throws IOException se asegura que no hay ningun error a la hora de leer los ficheros
+	 */
+<span class="nc" id="L23">	public Graph(int origin_node) throws NumberFormatException, IOException{</span>
+<span class="nc" id="L24">		System.out.println(&quot;Origen: &quot; + origin_node);</span>
+<span class="nc" id="L25">		this.originNodeID = origin_node;</span>
+<span class="nc" id="L26">		buildDistances(distancesFile,origin_node);</span>
+<span class="nc" id="L27">		buildHeuristics(heuristicsFile);</span>
+			
+<span class="nc" id="L29">	}</span>
+	
+	/**
+	 * Imprimir el grafo por pantalla (metodo para hacer pruebas, lo mas probable es que se acabe eliminando)
+	 */
+	public String toString() {
+<span class="nc" id="L35">		String res = &quot;&quot;;</span>
+<span class="nc" id="L36">		Iterator&lt;Node&gt; it_node = this.node_list_.iterator();</span>
+		
+<span class="nc" id="L38">		Node aux = null;</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">		while(it_node.hasNext()) {</span>
+<span class="nc" id="L40">			aux = it_node.next();</span>
+<span class="nc" id="L41">			res += &quot;H = &quot; + aux.getHeuristic() + &quot;\n&quot;;</span>
+<span class="nc" id="L42">			res += &quot;NodoID: &quot; + aux.getNodeID() + &quot;\n&quot;;</span>
+<span class="nc" id="L43">			res += &quot;Vecinos: &quot;;</span>
+<span class="nc" id="L44">			Iterator&lt;Node&gt; it_neighbours = aux.getSonsList().iterator();</span>
+<span class="nc" id="L45">			Iterator&lt;Double&gt; it_double = aux.getSonsDistances().iterator();</span>
+<span class="nc" id="L46">			Node aux1 = null;</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">			while(it_neighbours.hasNext()) {</span>
+<span class="nc" id="L48">				aux1 = it_neighbours.next();</span>
+<span class="nc" id="L49">				res += aux1.getNodeID() + &quot;: &quot; + it_double.next() + &quot;, &quot;;</span>
+			}
+<span class="nc" id="L51">			res+=&quot;\n\n&quot;;</span>
+			
+<span class="nc" id="L53">		}</span>
+<span class="nc" id="L54">		return res;</span>
+		
+	}
+	
+	/**
+	 * 
+	 * @return numero de nodos del grafo
+	 */
+	protected int getNNodes() {
+<span class="nc" id="L63">		return this.n_nodes_;</span>
+	}
+
+	/**
+	 * 
+	 * @return devuelve una tabla Hash cuyas claves son los nodos y los valores las distancias a los vecinos
+	 */
+	protected ArrayList&lt;Node&gt; getNodeList(){
+<span class="nc" id="L71">		return this.node_list_;</span>
+	}
+	
+	/**
+	 * Almacena las distancias de cada nodo con sus vecinos
+	 * @param distances_file fichero que recogio el constructor por la linea de comandos
+	 * @param origin_node entero que recogio el constructor desde la linea de comandos
+	 * @throws NumberFormatException
+	 * @throws IOException
+	 */
+	private void buildDistances(String distances_file, int origin_node) throws NumberFormatException, IOException {
+		//System.out.println(distances_file);
+<span class="nc" id="L83">		FileReader f = new FileReader(distances_file);</span>
+<span class="nc" id="L84">		BufferedReader b = new BufferedReader(f);</span>
+<span class="nc" id="L85">		this.n_nodes_ = Integer.parseInt(b.readLine());</span>
+		int index;
+<span class="nc bnc" id="L87" title="All 2 branches missed.">		for(index = 1 ; index &lt;=this.n_nodes_ ; index ++) {</span>
+<span class="nc" id="L88">			Node node = new Node(index);</span>
+<span class="nc bnc" id="L89" title="All 2 branches missed.">			if(index==origin_node)</span>
+<span class="nc" id="L90">				node.setOrigin();</span>
+<span class="nc" id="L91">			this.node_list_.add(node);	</span>
+		}
+<span class="nc" id="L93">		double[][] distances_matrix = buildDistancesMatrix(b);</span>
+<span class="nc" id="L94">		insertDistances(distances_matrix);</span>
+		
+<span class="nc" id="L96">	}</span>
+	
+	/**
+	 * 
+	 * @param br bufer que se comunica con el fichero de distancias
+	 * @return matriz de distancias
+	 * @throws NumberFormatException
+	 * @throws IOException
+	 */
+	private double[][] buildDistancesMatrix(BufferedReader br) throws NumberFormatException, IOException{
+<span class="nc" id="L106">		double[][] distances_matrix = new double[getNNodes()][getNNodes()];</span>
+		
+<span class="nc bnc" id="L108" title="All 2 branches missed.">		for(int i=0 ; i&lt;getNNodes() ; i++) {</span>
+<span class="nc bnc" id="L109" title="All 2 branches missed.">			for(int j=0 ; j&lt;getNNodes() ; j++) {</span>
+<span class="nc bnc" id="L110" title="All 2 branches missed.">				if(i==j) {</span>
+<span class="nc" id="L111">					distances_matrix[i][j] = 0.0;</span>
+<span class="nc bnc" id="L112" title="All 2 branches missed.">				}else if(i&gt;j) {</span>
+<span class="nc" id="L113">					distances_matrix[i][j] = distances_matrix[j][i];</span>
+				}else {
+<span class="nc" id="L115">					distances_matrix[i][j] = Double.parseDouble(br.readLine());</span>
+				}
+				//////System.out.print(distances_matrix[i][j] + &quot; &quot;);
+			}
+			////System.out.println();
+		}
+<span class="nc" id="L121">		br.close();</span>
+<span class="nc bnc" id="L122" title="All 2 branches missed.">		for(int i=0 ; i&lt;getNNodes() ; i++){</span>
+<span class="nc bnc" id="L123" title="All 2 branches missed.">			for(int j=0 ; j&lt;getNNodes() ; j++){</span>
+<span class="nc" id="L124">				System.out.print(distances_matrix[i][j] + &quot; &quot;);</span>
+			}
+<span class="nc" id="L126">			System.out.println();</span>
+		}
+
+<span class="nc" id="L129">		System.out.println();</span>
+<span class="nc" id="L130">		System.out.println();</span>
+<span class="nc" id="L131">		ArrayList&lt;Double&gt; distancesAux = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L132" title="All 2 branches missed.">		for(int i=0 ; i&lt;getNNodes() ; i++){</span>
+<span class="nc" id="L133">			distancesAux.clear();</span>
+			//System.out.println(distancesAux);
+<span class="nc bnc" id="L135" title="All 2 branches missed.">			for(int j=0 ; j&lt;getNNodes() ; j++){</span>
+<span class="nc" id="L136">				distancesAux.add(distances_matrix[i][j]);</span>
+				//distances.put(i+1,distances_matrix[i][j]);
+			}
+			//System.out.println(distancesAux);
+<span class="nc" id="L140">			this.distances.put(i+1,new ArrayList&lt;&gt;(distancesAux));</span>
+			//System.out.println(i + &quot; -&gt; &quot; + distances);
+
+		}
+
+<span class="nc" id="L145">		System.out.println(distances);</span>
+
+<span class="nc" id="L147">		return distances_matrix;</span>
+	}
+	
+	/**
+	 * Lee la matriz de distancias para almacenarlas en los nodos correspondientes
+	 * @param distances_matrix matriz de distancias
+	 */
+	private void insertDistances(double[][] distances_matrix) {
+<span class="nc" id="L155">		Iterator&lt;Node&gt; it_nodes = this.node_list_.iterator();</span>
+<span class="nc" id="L156">		Node aux = null;</span>
+<span class="nc" id="L157">		Node aux1 = null;</span>
+		
+<span class="nc bnc" id="L159" title="All 2 branches missed.">		while(it_nodes.hasNext()) {</span>
+<span class="nc" id="L160">			aux = it_nodes.next();</span>
+<span class="nc" id="L161">			int i = aux.getNodeID()-1;</span>
+<span class="nc" id="L162">			Iterator&lt;Node&gt; it_nodes_aux = this.node_list_.iterator();</span>
+<span class="nc bnc" id="L163" title="All 2 branches missed.">			while(it_nodes_aux.hasNext()) {</span>
+<span class="nc" id="L164">				aux1 = it_nodes_aux.next();</span>
+<span class="nc" id="L165">				int j= aux1.getNodeID()-1;</span>
+<span class="nc bnc" id="L166" title="All 2 branches missed.">				if(distances_matrix[i][j] &gt; 0.0) {</span>
+<span class="nc" id="L167">					aux.addSon(aux1,distances_matrix[i][j]);</span>
+				}
+<span class="nc" id="L169">				j++;</span>
+<span class="nc" id="L170">			}</span>
+<span class="nc" id="L171">			i++;</span>
+<span class="nc" id="L172">		}</span>
+<span class="nc" id="L173">	}</span>
+	
+	/**
+	 * Inserta a cada nodo su valor heuristico
+	 * @param heuristics_file fichero que recogio el constructor desde la linea de comandos
+	 * @throws NumberFormatException
+	 * @throws IOException
+	 */
+	private void buildHeuristics(String heuristics_file) throws NumberFormatException, IOException {
+<span class="nc" id="L182">		FileReader fr = new FileReader(heuristics_file);</span>
+<span class="nc" id="L183">		BufferedReader br = new BufferedReader(fr);</span>
+<span class="nc" id="L184">		int n_nodos = Integer.parseInt(br.readLine());</span>
+<span class="nc" id="L185">		Iterator&lt;Node&gt; it_node = this.node_list_.iterator();</span>
+<span class="nc" id="L186">		Node aux = null;</span>
+<span class="nc bnc" id="L187" title="All 2 branches missed.">		while(it_node.hasNext()) {</span>
+<span class="nc" id="L188">			aux = it_node.next();</span>
+<span class="nc" id="L189">			System.out.println(aux);</span>
+<span class="nc" id="L190">			aux.setHeuristic(Double.parseDouble(br.readLine()));</span>
+<span class="nc bnc" id="L191" title="All 2 branches missed.">			if(aux.getHeuristic()==0.0) {</span>
+<span class="nc" id="L192">				aux.setObjetive();</span>
+<span class="nc" id="L193">				this.finalNodeID = aux.getNodeID();</span>
+			}
+		}
+
+<span class="nc" id="L197">		br.close();</span>
+<span class="nc" id="L198">	}</span>
+
+	public static ArrayList&lt;Node&gt; getNode_list(){
+<span class="nc" id="L201">		return node_list_;</span>
+	}
+
+	public HashMap&lt;Integer,ArrayList&lt;Double&gt;&gt; getDistances(){
+<span class="nc" id="L205">		return this.distances;</span>
+	}
+	
+	
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
