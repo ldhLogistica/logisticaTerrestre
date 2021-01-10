@@ -32,6 +32,6 @@ deploy:
   provider: pages
   skip_cleanup: true
   local_dir: target
-  github_token: $SONAR_TOKEN
+  github_token: $GH_TOKEN
   on:
     branch: master
