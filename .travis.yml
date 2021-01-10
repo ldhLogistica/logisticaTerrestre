@@ -1,37 +1,67 @@
 # Virtual Machine Configuration
-os: linux
-dist: xenial
-
-sudo: false
-
-branches:
-  only:
-    - master
+os:
+  - linux
+  - osx
 
 # Project JDK
 language: java
-install: true
 jdk:
   - openjdk11
+  - oraclejdk11
 
-addons:
-  sonarcloud:
-    organization: "ldhlogistica"
+# Package will be tested in every OS
+script: mvn clean verify
+
+# Using Build Stages to avoid generation documentation and deployment multiple times
+stages:
+  - sonar
+  - deploy
+
+jobs:
+  include:
+    # Executing sonar analysis only once
+    - stage: sonar
+      os: linux
+      jdk: openjdk11
+      # Sonar Plugin
+      addons:
+        sonarcloud:
+          organization: "ldhLogistica"
+      # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+      script: mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
+
+    # Deploying documentation only once
+    - stage: deploy
+      os: linaux
+      jkd: openjdk11
+      # Doxygen Packages
+      #addons:
+       # apt:
+        #  packages:
+         #   - doxygen
+          #  - doxygen-doc
+           # - doxygen-latex
+            #- doxygen-gui
+            #- graphviz
+      # generate documentation using Doxyfile config
+      #script: doxygen Doxyfile
+      # GitHub Pages Deployment
+      deploy:
+        provider: pages
+        strategy: git
+        skip_cleanup: true
+        github_token: $GITHUB_TOKEN
+        keep_history: true
+        #local_dir: docs/html
+        on:
+          branch: master
     
-  #apt:
-   # packages:
-    #  - doxygen
+    
+    
+    
+    
+    
+    
+   
+   
 
-script:
-  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-  # mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
-  - mvn test
-  #- doxygen Doxyfile
-
-deploy:
-  provider: pages
-  skip_cleanup: true
-  local_dir: target
-  github_token: $GITHUB_TOKEN
-  on:
-    branch: master
