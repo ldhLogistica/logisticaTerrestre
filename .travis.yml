@@ -17,6 +17,7 @@ notifications:
   email:
     recipients:
       - samuelfumerohdez@gmail.com
+      - alu0101061320@ull.edu.es
       
 install:
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
