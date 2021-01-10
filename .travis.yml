@@ -32,6 +32,6 @@ deploy:
   provider: pages
   skip_cleanup: true
   local_dir: target
-  github_token: $travis
+  github_token: $GITHUB_TOKEN
   on:
     branch: master
