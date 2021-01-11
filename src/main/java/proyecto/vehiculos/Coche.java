@@ -113,7 +113,8 @@ public class Coche implements IVehiculo, Runnable{
                 updateData(newData);
 
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                // Restore interrupted state...
+                Thread.currentThread().interrupt();
             }
         }
 
