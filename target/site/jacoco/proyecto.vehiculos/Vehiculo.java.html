@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Vehiculo.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">logisticaTerrestre</a> &gt; <a href="index.source.html" class="el_package">proyecto.vehiculos</a> &gt; <span class="el_source">Vehiculo.java</span></div><h1>Vehiculo.java</h1><pre class="source lang-java linenums">package proyecto.vehiculos;
+
+import proyecto.AStar;
+import proyecto.Graph;
+import proyecto.LogisticaGUI;
+import proyecto.Node;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Vehiculo {
+
+    protected int id;
+    protected int origin;
+    protected int goal;
+    protected int position;
+
+    protected AStar tree;
+    protected Graph map;
+<span class="fc" id="L21">    protected ArrayList&lt;Node&gt; minimunRoad = new ArrayList&lt;&gt;();</span>
+
+<span class="fc" id="L23">    public Vehiculo (int id, int origin) {</span>
+<span class="fc" id="L24">        this.id = id;</span>
+<span class="fc" id="L25">        this.origin = origin;</span>
+<span class="fc" id="L26">        create(this.id);</span>
+<span class="fc" id="L27">        setOrigin(this.origin);</span>
+        try {
+<span class="fc" id="L29">            this.map = new Graph(this.origin);</span>
+<span class="fc" id="L30">            this.tree = new AStar(map);</span>
+<span class="fc" id="L31">            this.minimunRoad = tree.minimun_road;</span>
+<span class="fc" id="L32">            System.out.println(&quot;Vehiculo creado&quot;);</span>
+
+<span class="nc" id="L34">        } catch (IOException e) {</span>
+
+<span class="fc" id="L36">        }</span>
+<span class="fc" id="L37">    }</span>
+
+    public void create(int id) {
+<span class="fc" id="L40">        this.id = id;</span>
+<span class="fc" id="L41">    }</span>
+
+    public void delete(int id) {
+        //Borrar del array delcarado en AStar
+<span class="nc" id="L45">    }</span>
+
+    public void setOrigin(int origin) {
+<span class="fc" id="L48">        this.origin = origin;</span>
+<span class="fc" id="L49">    }</span>
+
+    public void setGoal(int goal) {
+<span class="nc" id="L52">        this.goal = goal;</span>
+<span class="nc" id="L53">    }</span>
+
+    public int getPosition() {
+<span class="nc" id="L56">        return this.position;</span>
+    }
+
+    public int getId() {
+<span class="fc" id="L60">        return this.id;</span>
+    }
+
+    public int getOrigin() {
+<span class="fc" id="L64">        return this.origin;</span>
+    }
+
+    public ArrayList&lt;Node&gt; getMinimunRoad(){
+<span class="nc" id="L68">        return this.minimunRoad;</span>
+    }
+
+    public void updateData(Object[] newPosition){
+<span class="nc bnc" id="L72" title="All 2 branches missed.">        for(int fila = 0; fila&lt; LogisticaGUI.getModel().getRowCount() ; fila++){</span>
+
+<span class="nc bnc" id="L74" title="All 2 branches missed.">            if((int)LogisticaGUI.getModel().getValueAt(fila,0)==this.getId()){</span>
+<span class="nc" id="L75">                LogisticaGUI.getModel().setValueAt(newPosition[0],fila,2);</span>
+<span class="nc" id="L76">                LogisticaGUI.getModel().setValueAt(newPosition[1],fila,3);</span>
+<span class="nc" id="L77">                LogisticaGUI.getModel().setValueAt(newPosition[2],fila,4);</span>
+<span class="nc" id="L78">                break;</span>
+            }
+        }
+<span class="nc" id="L81">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

@@ -10,115 +10,41 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Coche implements IVehiculo, Runnable {
+public class Coche extends Vehiculo implements Runnable {
 
-    private int id;
-    private int origin;
-    private int goal;
-    private int position;
-
-    private AStar tree;
-    private Graph map;
-<span class="fc" id="L22">    private ArrayList&lt;Node&gt; minimunRoad = new ArrayList&lt;&gt;();</span>
-
-<span class="fc" id="L24">    public Coche(int id, int origin){</span>
-<span class="fc" id="L25">        this.id = id;</span>
-<span class="fc" id="L26">        this.origin = origin;</span>
-<span class="fc" id="L27">        create(this.id);</span>
-<span class="fc" id="L28">        setOrigin(this.origin);</span>
-        try {
-<span class="fc" id="L30">            this.map = new Graph(this.origin);</span>
-<span class="fc" id="L31">            this.tree = new AStar(map);</span>
-<span class="fc" id="L32">            this.minimunRoad = tree.minimun_road;</span>
-<span class="fc" id="L33">            System.out.println(&quot;Cochde creado&quot;);</span>
-
-<span class="nc" id="L35">        } catch (IOException e) {</span>
-            
-<span class="fc" id="L37">        }</span>
-<span class="fc" id="L38">    }</span>
-
-    @Override
-    public void create(int id) {
-<span class="fc" id="L42">        this.id = id;</span>
-<span class="fc" id="L43">    }</span>
-
-    @Override
-    public void delete(int id) {
-        //Borrar del array delcarado en AStar
-<span class="nc" id="L48">    }</span>
-
-    @Override
-    public void setOrigin(int origin) {
-<span class="fc" id="L52">        this.origin = origin;</span>
-<span class="fc" id="L53">    }</span>
-
-    @Override
-    public void setGoal(int goal) {
-<span class="nc" id="L57">        this.goal = goal;</span>
-<span class="nc" id="L58">    }</span>
-
-    @Override
-    public int getPosition() {
-<span class="nc" id="L62">        return this.position;</span>
-    }
-
-    @Override
-    public int getId() {
-<span class="fc" id="L67">        return this.id;</span>
-    }
-
-    @Override
-    public int getOrigin() {
-<span class="fc" id="L72">        return this.origin;</span>
-    }
-
-    public ArrayList&lt;Node&gt; getMinimunRoad(){
-<span class="nc" id="L76">        return this.minimunRoad;</span>
-    }
-
-    public void updateData(Object[] newPosition){
-<span class="nc bnc" id="L80" title="All 2 branches missed.">        for(int fila=0 ; fila&lt;LogisticaGUI.getModel().getRowCount() ; fila++){</span>
-
-<span class="nc bnc" id="L82" title="All 2 branches missed.">            if((int)LogisticaGUI.getModel().getValueAt(fila,0)==this.getId()){</span>
-<span class="nc" id="L83">                LogisticaGUI.getModel().setValueAt(newPosition[0],fila,2);</span>
-<span class="nc" id="L84">                LogisticaGUI.getModel().setValueAt(newPosition[1],fila,3);</span>
-<span class="nc" id="L85">                LogisticaGUI.getModel().setValueAt(newPosition[2],fila,4);</span>
-<span class="nc" id="L86">                break;</span>
-            }
-        }
-<span class="nc" id="L89">    }</span>
-
+    public Coche(int id, int origin) {
+<span class="fc" id="L16">        super(id, origin);</span>
+<span class="fc" id="L17">    }</span>
 
     @Override
     public void run() {
-<span class="nc" id="L94">        HashMap&lt;Integer,ArrayList&lt;Double&gt;&gt; distances = this.map.getDistances();</span>
-<span class="nc" id="L95">        this.position = minimunRoad.get(0).getNodeID();</span>
+<span class="nc" id="L21">        HashMap&lt;Integer,ArrayList&lt;Double&gt;&gt; distances = this.map.getDistances();</span>
+<span class="nc" id="L22">        this.position = minimunRoad.get(0).getNodeID();</span>
 
-<span class="nc bnc" id="L97" title="All 2 branches missed.">        for(int i=0 ; i&lt;minimunRoad.size()-1 ; i++){</span>
+<span class="nc bnc" id="L24" title="All 2 branches missed.">        for(int i=0 ; i&lt;minimunRoad.size()-1 ; i++){</span>
             try {
-<span class="nc" id="L99">                Thread.sleep((int)Math.round(distances.get(this.minimunRoad.get(i).getNodeID()).get(this.minimunRoad.get(i+1).getNodeID()-1)*1000*2));</span>
+<span class="nc" id="L26">                Thread.sleep((int)Math.round(distances.get(this.minimunRoad.get(i).getNodeID()).get(this.minimunRoad.get(i+1).getNodeID()-1)*1000*2));</span>
 
-<span class="nc" id="L101">                double straightLineDistance = minimunRoad.get(i+1).getHeuristic();</span>
-<span class="nc" id="L102">                double roadDistance = this.tree.getDistance() - minimunRoad.get(i+1).getDistance();</span>
-<span class="nc" id="L103">                this.position = minimunRoad.get(i+1).getNodeID();</span>
+<span class="nc" id="L28">                double straightLineDistance = minimunRoad.get(i+1).getHeuristic();</span>
+<span class="nc" id="L29">                double roadDistance = this.tree.getDistance() - minimunRoad.get(i+1).getDistance();</span>
+<span class="nc" id="L30">                this.position = minimunRoad.get(i+1).getNodeID();</span>
 
-<span class="nc" id="L105">                Object[] newData = new Object[3];</span>
-<span class="nc" id="L106">                newData[0] = straightLineDistance;</span>
-<span class="nc" id="L107">                newData[1] = roadDistance;</span>
-<span class="nc bnc" id="L108" title="All 2 branches missed.">                if(!minimunRoad.get(i+1).isObjetive()){</span>
-<span class="nc" id="L109">                    newData[2] = this.position;</span>
+<span class="nc" id="L32">                Object[] newData = new Object[3];</span>
+<span class="nc" id="L33">                newData[0] = straightLineDistance;</span>
+<span class="nc" id="L34">                newData[1] = roadDistance;</span>
+<span class="nc bnc" id="L35" title="All 2 branches missed.">                if(!minimunRoad.get(i+1).isObjetive()){</span>
+<span class="nc" id="L36">                    newData[2] = this.position;</span>
                 }else{
-<span class="nc" id="L111">                    newData[2] = &quot;FINALIZADO&quot;;</span>
+<span class="nc" id="L38">                    newData[2] = &quot;FINALIZADO&quot;;</span>
                 }
 
-<span class="nc" id="L114">                updateData(newData);</span>
+<span class="nc" id="L41">                updateData(newData);</span>
 
-<span class="nc" id="L116">            } catch (InterruptedException e) {</span>
+<span class="nc" id="L43">            } catch (InterruptedException e) {</span>
                 // Restore interrupted state...
-<span class="nc" id="L118">                Thread.currentThread().interrupt();</span>
-<span class="nc" id="L119">            }</span>
+<span class="nc" id="L45">                Thread.currentThread().interrupt();</span>
+<span class="nc" id="L46">            }</span>
         }
-
-<span class="nc" id="L122">    }</span>
+<span class="nc" id="L48">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

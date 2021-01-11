@@ -1,4 +1,8 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+logisticaTerrestre,proyecto.vehiculos,Vehiculo,52,59,4,0,13,18,7,5,5,5
+logisticaTerrestre,proyecto.vehiculos,Camion,132,0,4,0,20,0,4,0,2,0
+logisticaTerrestre,proyecto.vehiculos,Moto,130,0,4,0,20,0,4,0,2,0
+logisticaTerrestre,proyecto.vehiculos,Coche,127,5,4,0,18,2,3,1,1,1
 logisticaTerrestre,proyecto,LogisticaGUIFrame,24,0,0,0,7,0,1,0,1,0
 logisticaTerrestre,proyecto,AstarSearch,8,0,0,0,3,0,2,0,2,0
 logisticaTerrestre,proyecto,AgregarVehiculoGUI,117,0,12,0,30,0,12,0,6,0
@@ -8,7 +12,4 @@ logisticaTerrestre,proyecto,AStar,133,320,14,34,18,92,12,20,2,6
 logisticaTerrestre,proyecto,Node,5,150,0,0,2,46,2,20,2,20
 logisticaTerrestre,proyecto,Graph,105,315,4,26,19,75,5,21,3,8
 logisticaTerrestre,proyecto,AgregarVehiculoGUIFrame,24,0,0,0,7,0,1,0,1,0
-logisticaTerrestre,proyecto,AgregarVehiculoGUI.new ActionListener() {...},210,0,4,0,43,0,4,0,2,0
-logisticaTerrestre,proyecto.vehiculos,Camion,237,0,8,0,48,0,15,0,11,0
-logisticaTerrestre,proyecto.vehiculos,Moto,235,0,8,0,48,0,15,0,11,0
-logisticaTerrestre,proyecto.vehiculos,Coche,179,59,8,0,31,18,10,5,6,5
+logisticaTerrestre,proyecto,AgregarVehiculoGUI.new ActionListener() {...},196,0,4,0,39,0,4,0,2,0
