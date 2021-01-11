@@ -1,4 +1,4 @@
-package practica1.vehiculos;
+package proyecto.vehiculos;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
