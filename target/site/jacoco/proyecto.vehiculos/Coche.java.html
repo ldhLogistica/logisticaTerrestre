@@ -77,47 +77,48 @@ public class Coche implements IVehiculo, Runnable {
     }
 
     public void updateData(Object[] newPosition){
-<span class="nc bnc" id="L80" title="All 2 branches missed.">        for(int i=0 ; i&lt;LogisticaGUI.getModel().getRowCount() ; i++){</span>
+<span class="nc bnc" id="L80" title="All 2 branches missed.">        for(int fila=0 ; fila&lt;LogisticaGUI.getModel().getRowCount() ; fila++){</span>
 
-<span class="nc bnc" id="L82" title="All 2 branches missed.">            if((int)LogisticaGUI.getModel().getValueAt(i,0)==this.getId()){</span>
-<span class="nc" id="L83">                LogisticaGUI.getModel().setValueAt(newPosition[0],i,2);</span>
-<span class="nc" id="L84">                LogisticaGUI.getModel().setValueAt(newPosition[1],i,3);</span>
-<span class="nc" id="L85">                LogisticaGUI.getModel().setValueAt(newPosition[2],i,4);</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">            if((int)LogisticaGUI.getModel().getValueAt(fila,0)==this.getId()){</span>
+<span class="nc" id="L83">                LogisticaGUI.getModel().setValueAt(newPosition[0],fila,2);</span>
+<span class="nc" id="L84">                LogisticaGUI.getModel().setValueAt(newPosition[1],fila,3);</span>
+<span class="nc" id="L85">                LogisticaGUI.getModel().setValueAt(newPosition[2],fila,4);</span>
+<span class="nc" id="L86">                break;</span>
             }
         }
-<span class="nc" id="L88">    }</span>
+<span class="nc" id="L89">    }</span>
 
 
     @Override
     public void run() {
-<span class="nc" id="L93">        HashMap&lt;Integer,ArrayList&lt;Double&gt;&gt; distances = this.map.getDistances();</span>
-<span class="nc" id="L94">        this.position = minimunRoad.get(0).getNodeID();</span>
+<span class="nc" id="L94">        HashMap&lt;Integer,ArrayList&lt;Double&gt;&gt; distances = this.map.getDistances();</span>
+<span class="nc" id="L95">        this.position = minimunRoad.get(0).getNodeID();</span>
 
-<span class="nc bnc" id="L96" title="All 2 branches missed.">        for(int i=0 ; i&lt;minimunRoad.size()-1 ; i++){</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">        for(int i=0 ; i&lt;minimunRoad.size()-1 ; i++){</span>
             try {
-<span class="nc" id="L98">                Thread.sleep((int)Math.round(distances.get(this.minimunRoad.get(i).getNodeID()).get(this.minimunRoad.get(i+1).getNodeID()-1)*1000*2));</span>
+<span class="nc" id="L99">                Thread.sleep((int)Math.round(distances.get(this.minimunRoad.get(i).getNodeID()).get(this.minimunRoad.get(i+1).getNodeID()-1)*1000*2));</span>
 
-<span class="nc" id="L100">                double straightLineDistance = minimunRoad.get(i+1).getHeuristic();</span>
-<span class="nc" id="L101">                double roadDistance = this.tree.getDistance() - minimunRoad.get(i+1).getDistance();</span>
-<span class="nc" id="L102">                this.position = minimunRoad.get(i+1).getNodeID();</span>
+<span class="nc" id="L101">                double straightLineDistance = minimunRoad.get(i+1).getHeuristic();</span>
+<span class="nc" id="L102">                double roadDistance = this.tree.getDistance() - minimunRoad.get(i+1).getDistance();</span>
+<span class="nc" id="L103">                this.position = minimunRoad.get(i+1).getNodeID();</span>
 
-<span class="nc" id="L104">                Object[] newData = new Object[3];</span>
-<span class="nc" id="L105">                newData[0] = straightLineDistance;</span>
-<span class="nc" id="L106">                newData[1] = roadDistance;</span>
-<span class="nc bnc" id="L107" title="All 2 branches missed.">                if(!minimunRoad.get(i+1).isObjetive()){</span>
-<span class="nc" id="L108">                    newData[2] = this.position;</span>
+<span class="nc" id="L105">                Object[] newData = new Object[3];</span>
+<span class="nc" id="L106">                newData[0] = straightLineDistance;</span>
+<span class="nc" id="L107">                newData[1] = roadDistance;</span>
+<span class="nc bnc" id="L108" title="All 2 branches missed.">                if(!minimunRoad.get(i+1).isObjetive()){</span>
+<span class="nc" id="L109">                    newData[2] = this.position;</span>
                 }else{
-<span class="nc" id="L110">                    newData[2] = &quot;FINALIZADO&quot;;</span>
+<span class="nc" id="L111">                    newData[2] = &quot;FINALIZADO&quot;;</span>
                 }
 
-<span class="nc" id="L113">                updateData(newData);</span>
+<span class="nc" id="L114">                updateData(newData);</span>
 
-<span class="nc" id="L115">            } catch (InterruptedException e) {</span>
+<span class="nc" id="L116">            } catch (InterruptedException e) {</span>
                 // Restore interrupted state...
-<span class="nc" id="L117">                Thread.currentThread().interrupt();</span>
-<span class="nc" id="L118">            }</span>
+<span class="nc" id="L118">                Thread.currentThread().interrupt();</span>
+<span class="nc" id="L119">            }</span>
         }
 
-<span class="nc" id="L121">    }</span>
+<span class="nc" id="L122">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

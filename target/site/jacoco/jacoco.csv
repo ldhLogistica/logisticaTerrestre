@@ -11,4 +11,4 @@ logisticaTerrestre,proyecto,AgregarVehiculoGUIFrame,24,0,0,0,7,0,1,0,1,0
 logisticaTerrestre,proyecto,AgregarVehiculoGUI.new ActionListener() {...},210,0,4,0,43,0,4,0,2,0
 logisticaTerrestre,proyecto.vehiculos,Camion,237,0,8,0,48,0,15,0,11,0
 logisticaTerrestre,proyecto.vehiculos,Moto,235,0,8,0,48,0,15,0,11,0
-logisticaTerrestre,proyecto.vehiculos,Coche,178,59,8,0,30,18,10,5,6,5
+logisticaTerrestre,proyecto.vehiculos,Coche,179,59,8,0,31,18,10,5,6,5

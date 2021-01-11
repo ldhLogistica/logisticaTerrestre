@@ -77,12 +77,13 @@ public class Coche implements IVehiculo, Runnable {
     }
 
     public void updateData(Object[] newPosition){
-        for(int i=0 ; i<LogisticaGUI.getModel().getRowCount() ; i++){
+        for(int fila=0 ; fila<LogisticaGUI.getModel().getRowCount() ; fila++){
 
-            if((int)LogisticaGUI.getModel().getValueAt(i,0)==this.getId()){
-                LogisticaGUI.getModel().setValueAt(newPosition[0],i,2);
-                LogisticaGUI.getModel().setValueAt(newPosition[1],i,3);
-                LogisticaGUI.getModel().setValueAt(newPosition[2],i,4);
+            if((int)LogisticaGUI.getModel().getValueAt(fila,0)==this.getId()){
+                LogisticaGUI.getModel().setValueAt(newPosition[0],fila,2);
+                LogisticaGUI.getModel().setValueAt(newPosition[1],fila,3);
+                LogisticaGUI.getModel().setValueAt(newPosition[2],fila,4);
+                break;
             }
         }
     }
