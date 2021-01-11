@@ -13,7 +13,5 @@ public class AstarSearch {
 		hiloCoche1.start();*/
 
 		new LogisticaGUIFrame();
-
-
 	}
 }

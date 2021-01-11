@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Coche implements IVehiculo, Runnable{
+public class Coche implements IVehiculo, Runnable {
 
     private int id;
     private int origin;
@@ -95,7 +95,7 @@ public class Coche implements IVehiculo, Runnable{
 
 <span class="nc bnc" id="L96" title="All 2 branches missed.">        for(int i=0 ; i&lt;minimunRoad.size()-1 ; i++){</span>
             try {
-<span class="nc" id="L98">                Thread.sleep((int)Math.round(distances.get(this.minimunRoad.get(i).getNodeID()).get(this.minimunRoad.get(i+1).getNodeID()-1)*1000));</span>
+<span class="nc" id="L98">                Thread.sleep((int)Math.round(distances.get(this.minimunRoad.get(i).getNodeID()).get(this.minimunRoad.get(i+1).getNodeID()-1)*1000*2));</span>
 
 <span class="nc" id="L100">                double straightLineDistance = minimunRoad.get(i+1).getHeuristic();</span>
 <span class="nc" id="L101">                double roadDistance = this.tree.getDistance() - minimunRoad.get(i+1).getDistance();</span>

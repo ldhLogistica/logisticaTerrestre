@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Camion.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">logisticaTerrestre</a> &gt; <a href="index.source.html" class="el_package">proyecto.vehiculos</a> &gt; <span class="el_source">Camion.java</span></div><h1>Camion.java</h1><pre class="source lang-java linenums">package proyecto.vehiculos;
+
+import proyecto.AStar;
+import proyecto.Graph;
+import proyecto.LogisticaGUI;
+import proyecto.Node;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Camion implements IVehiculo, Runnable {
+
+    private int id;
+    private int origin;
+    private int goal;
+    private int position;
+
+    private AStar tree;
+    private Graph map;
+<span class="nc" id="L21">    private ArrayList&lt;Node&gt; minimunRoad = new ArrayList&lt;&gt;();</span>
+
+<span class="nc" id="L23">    public Camion(int id, int origin){</span>
+<span class="nc" id="L24">        this.id = id;</span>
+<span class="nc" id="L25">        this.origin = origin;</span>
+<span class="nc" id="L26">        create(this.id);</span>
+<span class="nc" id="L27">        setOrigin(this.origin);</span>
+        try {
+<span class="nc" id="L29">            this.map = new Graph(this.origin);</span>
+<span class="nc" id="L30">            this.tree = new AStar(map);</span>
+<span class="nc" id="L31">            this.minimunRoad = tree.minimun_road;</span>
+<span class="nc" id="L32">            System.out.println(&quot;Camión creado&quot;);</span>
+
+<span class="nc" id="L34">        } catch (IOException e) {</span>
+
+<span class="nc" id="L36">        }</span>
+<span class="nc" id="L37">    }</span>
+
+    @Override
+    public void create(int id) {
+<span class="nc" id="L41">        this.id = id;</span>
+<span class="nc" id="L42">    }</span>
+
+    @Override
+    public void delete(int id) {
+        //Borrar del array delcarado en AStar
+<span class="nc" id="L47">    }</span>
+
+    @Override
+    public void setOrigin(int origin) {
+<span class="nc" id="L51">        this.origin = origin;</span>
+<span class="nc" id="L52">    }</span>
+
+    @Override
+    public void setGoal(int goal) {
+<span class="nc" id="L56">        this.goal = goal;</span>
+<span class="nc" id="L57">    }</span>
+
+    @Override
+    public int getPosition() {
+<span class="nc" id="L61">        return this.position;</span>
+    }
+
+    @Override
+    public int getId() {
+<span class="nc" id="L66">        return this.id;</span>
+    }
+
+    @Override
+    public int getOrigin() {
+<span class="nc" id="L71">        return this.origin;</span>
+    }
+
+    public ArrayList&lt;Node&gt; getMinimunRoad(){
+<span class="nc" id="L75">        return this.minimunRoad;</span>
+    }
+
+    public void updateData(Object[] newPosition){
+<span class="nc bnc" id="L79" title="All 2 branches missed.">        for(int i = 0; i&lt; LogisticaGUI.getModel().getRowCount() ; i++){</span>
+
+<span class="nc bnc" id="L81" title="All 2 branches missed.">            if((int)LogisticaGUI.getModel().getValueAt(i,0)==this.getId()){</span>
+<span class="nc" id="L82">                LogisticaGUI.getModel().setValueAt(newPosition[0],i,2);</span>
+<span class="nc" id="L83">                LogisticaGUI.getModel().setValueAt(newPosition[1],i,3);</span>
+<span class="nc" id="L84">                LogisticaGUI.getModel().setValueAt(newPosition[2],i,4);</span>
+            }
+        }
+<span class="nc" id="L87">    }</span>
+
+
+    @Override
+    public void run() {
+<span class="nc" id="L92">        HashMap&lt;Integer,ArrayList&lt;Double&gt;&gt; distances = this.map.getDistances();</span>
+<span class="nc" id="L93">        this.position = minimunRoad.get(0).getNodeID();</span>
+
+<span class="nc bnc" id="L95" title="All 2 branches missed.">        for(int i=0 ; i&lt;minimunRoad.size()-1 ; i++){</span>
+            try {
+<span class="nc" id="L97">                Thread.sleep((int)Math.round(distances.get(this.minimunRoad.get(i).getNodeID()).get(this.minimunRoad.get(i+1).getNodeID()-1)*1000)*3);</span>
+
+<span class="nc" id="L99">                double straightLineDistance = minimunRoad.get(i+1).getHeuristic();</span>
+<span class="nc" id="L100">                double roadDistance = this.tree.getDistance() - minimunRoad.get(i+1).getDistance();</span>
+<span class="nc" id="L101">                this.position = minimunRoad.get(i+1).getNodeID();</span>
+
+<span class="nc" id="L103">                Object[] newData = new Object[3];</span>
+<span class="nc" id="L104">                newData[0] = straightLineDistance;</span>
+<span class="nc" id="L105">                newData[1] = roadDistance;</span>
+<span class="nc bnc" id="L106" title="All 2 branches missed.">                if(!minimunRoad.get(i+1).isObjetive()){</span>
+<span class="nc" id="L107">                    newData[2] = this.position;</span>
+                }else{
+<span class="nc" id="L109">                    newData[2] = &quot;FINALIZADO&quot;;</span>
+                }
+
+<span class="nc" id="L112">                updateData(newData);</span>
+
+<span class="nc" id="L114">            } catch (InterruptedException e) {</span>
+                // Restore interrupted state...
+<span class="nc" id="L116">                Thread.currentThread().interrupt();</span>
+<span class="nc" id="L117">            }</span>
+        }
+
+<span class="nc" id="L120">    }</span>
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

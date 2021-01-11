@@ -1,8 +1,10 @@
 /home/travis/build/ldhLogistica/logisticaTerrestre/src/main/java/proyecto/LogisticaGUI.java
+/home/travis/build/ldhLogistica/logisticaTerrestre/src/main/java/proyecto/AgregarVehiculoGUI.java
 /home/travis/build/ldhLogistica/logisticaTerrestre/src/main/java/proyecto/AstarSearch.java
+/home/travis/build/ldhLogistica/logisticaTerrestre/src/main/java/proyecto/vehiculos/Camion.java
 /home/travis/build/ldhLogistica/logisticaTerrestre/src/main/java/proyecto/vehiculos/Coche.java
+/home/travis/build/ldhLogistica/logisticaTerrestre/src/main/java/proyecto/vehiculos/Moto.java
 /home/travis/build/ldhLogistica/logisticaTerrestre/src/main/java/proyecto/Node.java
 /home/travis/build/ldhLogistica/logisticaTerrestre/src/main/java/proyecto/AStar.java
 /home/travis/build/ldhLogistica/logisticaTerrestre/src/main/java/proyecto/Graph.java
 /home/travis/build/ldhLogistica/logisticaTerrestre/src/main/java/proyecto/vehiculos/IVehiculo.java
-/home/travis/build/ldhLogistica/logisticaTerrestre/src/main/java/proyecto/AgregarCocheGUI.java
