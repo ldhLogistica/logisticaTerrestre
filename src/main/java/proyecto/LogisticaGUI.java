@@ -1,6 +1,7 @@
 package proyecto;
 
 import proyecto.vehiculos.Coche;
+import proyecto.vehiculos.IVehiculo;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -15,7 +16,7 @@ public class LogisticaGUI extends JPanel{
     private JLabel logisticaTerrestreTxt;
     private JScrollPane scrollTablaVehículos;
 
-    private static ArrayList<Coche> listaCoches = new ArrayList<>();
+    private static ArrayList<IVehiculo> listaVehiculos = new ArrayList<>();
     private static DefaultTableModel model = new DefaultTableModel();
     public static int contID;
 
@@ -25,7 +26,7 @@ public class LogisticaGUI extends JPanel{
         botonAgregarVehículo.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new AgregarCocheGUIFrame();
+                new AgregarVehiculoGUIFrame();
             }
         });
     }
@@ -40,8 +41,8 @@ public class LogisticaGUI extends JPanel{
 
     }
 
-    public static ArrayList<Coche> getListaCoches(){
-        return listaCoches;
+    public static ArrayList<IVehiculo> getListaVehiculos(){
+        return listaVehiculos;
     }
 
     public static DefaultTableModel getModel(){
