@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AgregarCocheGUI.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">logisticaTerrestre</a> &gt; <a href="index.source.html" class="el_package">proyecto</a> &gt; <span class="el_source">AgregarCocheGUI.java</span></div><h1>AgregarCocheGUI.java</h1><pre class="source lang-java linenums">package proyecto;
+
+import proyecto.vehiculos.Coche;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+public class AgregarCocheGUI extends JPanel{
+    private JComboBox comboBox1;
+    private JComboBox comboBox2;
+<span class="nc" id="L13">    private static ArrayList&lt;String&gt; optTypesList = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L14">    private static ArrayList&lt;Integer&gt; optOriginsList = new ArrayList&lt;&gt;();</span>
+    private JPanel panelAgregarVehiculo;
+    private JButton agregarVehículoButton;
+    private JLabel tituloTxt;
+    private JLabel tipoTxt;
+    private JLabel origenTxt;
+
+<span class="nc" id="L21">    AgregarCocheGUI(){</span>
+
+<span class="nc" id="L23">        fillComboBoxes();</span>
+<span class="nc" id="L24">        agregarVehículoButton.addActionListener(new ActionListener() {</span>
+            @Override
+            public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L27">                boolean idAceptado = true;</span>
+
+<span class="nc" id="L29">                Graph.getNode_list().clear();</span>
+<span class="nc" id="L30">                Coche coche = new Coche(LogisticaGUI.contID+1,Integer.parseInt(comboBox2.getSelectedItem().toString()));</span>
+<span class="nc" id="L31">                LogisticaGUI.contID += 1;</span>
+
+<span class="nc" id="L33">                Object[] datosNuevoVehiculo = new Object[5];</span>
+<span class="nc" id="L34">                datosNuevoVehiculo[0] = coche.getId();</span>
+<span class="nc" id="L35">                datosNuevoVehiculo[1] = comboBox1.getSelectedItem().toString();</span>
+<span class="nc" id="L36">                datosNuevoVehiculo[2] = &quot;&quot;;</span>
+<span class="nc" id="L37">                datosNuevoVehiculo[3] = &quot;&quot;;</span>
+<span class="nc" id="L38">                datosNuevoVehiculo[4] = coche.getOrigin();</span>
+<span class="nc" id="L39">                LogisticaGUI.getListaCoches().add(coche);</span>
+<span class="nc" id="L40">                LogisticaGUI.getModel().addRow(datosNuevoVehiculo);</span>
+<span class="nc" id="L41">                Thread hiloCoche = new Thread(coche);</span>
+<span class="nc" id="L42">                hiloCoche.start();</span>
+
+<span class="nc" id="L44">            }</span>
+        });
+<span class="nc" id="L46">    }</span>
+
+    private void fillComboBoxes(){
+
+<span class="nc" id="L50">        fillOptTypeList();</span>
+<span class="nc" id="L51">        fillOptOriginsList();</span>
+<span class="nc" id="L52">        System.out.println(optOriginsList);</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">        for(String type : optTypesList){</span>
+<span class="nc" id="L54">            comboBox1.addItem(type);</span>
+<span class="nc" id="L55">        }</span>
+
+<span class="nc bnc" id="L57" title="All 2 branches missed.">        for(int id : optOriginsList){</span>
+<span class="nc" id="L58">            comboBox2.addItem(id);</span>
+<span class="nc" id="L59">        }</span>
+
+<span class="nc" id="L61">    }</span>
+
+    private void fillOptTypeList(){
+<span class="nc" id="L64">        optTypesList.clear();</span>
+<span class="nc" id="L65">        optTypesList.add(&quot;Coche&quot;);</span>
+<span class="nc" id="L66">        optTypesList.add(&quot;Camión&quot;);</span>
+<span class="nc" id="L67">        optTypesList.add(&quot;Moto&quot;);</span>
+<span class="nc" id="L68">    }</span>
+
+    private void fillOptOriginsList(){
+<span class="nc" id="L71">        optOriginsList.clear();</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">        if(Graph.getNode_list().size()==0){</span>
+<span class="nc bnc" id="L73" title="All 2 branches missed.">            for (int i=1 ; i&lt;=15 ; i++){</span>
+<span class="nc" id="L74">                optOriginsList.add(i);</span>
+            }
+        }
+<span class="nc bnc" id="L77" title="All 2 branches missed.">        for(int i=0 ; i&lt; Graph.getNode_list().size() ; i++){</span>
+<span class="nc" id="L78">            optOriginsList.add(Graph.getNode_list().get(i).getNodeID());</span>
+        }
+<span class="nc" id="L80">    }</span>
+
+    public JPanel getPanelAgregarVehiculo(){
+<span class="nc" id="L83">        return this.panelAgregarVehiculo;</span>
+    }
+}
+
+class AgregarCocheGUIFrame extends JFrame{
+<span class="nc" id="L88">    AgregarCocheGUI agregarCocheGUI = new AgregarCocheGUI();</span>
+    AgregarCocheGUIFrame(){
+<span class="nc" id="L90">        super(&quot;Agregar Vehículo&quot;);</span>
+<span class="nc" id="L91">        setContentPane(agregarCocheGUI.getPanelAgregarVehiculo());</span>
+<span class="nc" id="L92">        setSize(600,400);</span>
+<span class="nc" id="L93">        setVisible(true);</span>
+<span class="nc" id="L94">        setDefaultCloseOperation(DISPOSE_ON_CLOSE);</span>
+<span class="nc" id="L95">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

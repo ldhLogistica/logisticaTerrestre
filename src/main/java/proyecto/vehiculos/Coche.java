@@ -3,11 +3,14 @@ package proyecto.vehiculos;
 import proyecto.AStar;
 import proyecto.Graph;
 import proyecto.Node;
+import proyecto.LogisticaGUI;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
-public class Coche implements IVehiculo{
+public class Coche implements IVehiculo, Runnable{
 
     private int id;
     private int origin;
@@ -69,15 +72,23 @@ public class Coche implements IVehiculo{
         return this.origin;
     }
 
-
-
-
     public ArrayList<Node> getMinimunRoad(){
         return this.minimunRoad;
     }
 
+    public void updateData(Object[] newPosition){
+        for(int i=0 ; i<LogisticaGUI.getModel().getRowCount() ; i++){
 
-   /* @Override
+            if((int)LogisticaGUI.getModel().getValueAt(i,0)==this.getId()){
+                LogisticaGUI.getModel().setValueAt(newPosition[0],i,2);
+                LogisticaGUI.getModel().setValueAt(newPosition[1],i,3);
+                LogisticaGUI.getModel().setValueAt(newPosition[2],i,4);
+            }
+        }
+    }
+
+
+    @Override
     public void run() {
         HashMap<Integer,ArrayList<Double>> distances = this.map.getDistances();
         this.position = minimunRoad.get(0).getNodeID();
@@ -85,25 +96,26 @@ public class Coche implements IVehiculo{
         for(int i=0 ; i<minimunRoad.size()-1 ; i++){
             try {
                 Thread.sleep((int)Math.round(distances.get(this.minimunRoad.get(i).getNodeID()).get(this.minimunRoad.get(i+1).getNodeID()-1)*1000));
+
+                double straightLineDistance = minimunRoad.get(i+1).getHeuristic();
+                double roadDistance = this.tree.getDistance() - minimunRoad.get(i+1).getDistance();
                 this.position = minimunRoad.get(i+1).getNodeID();
+
                 Object[] newData = new Object[3];
-                newData[0] = this.getId();
-                newData[1] = "coche";
-                newData[2] = this.position;
-                //LogisticaGUI.getModel().setValueAt(newData[2],0,2);
-                for(int j=0 ; j<LogisticaGUI.getModel().getRowCount() ; j++){
-
-                    if((int)LogisticaGUI.getModel().getValueAt(j,0)==this.getId()){
-                        LogisticaGUI.getModel().setValueAt(newData[2],j,2);
-                    }
+                newData[0] = straightLineDistance;
+                newData[1] = roadDistance;
+                if(!minimunRoad.get(i+1).isObjetive()){
+                    newData[2] = this.position;
+                }else{
+                    newData[2] = "FINALIZADO";
                 }
-                System.out.println("Posicion -> " + this.position);
-                System.out.println("hola");
 
+                updateData(newData);
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-    }*/
+
+    }
 }

@@ -74,7 +74,7 @@ final public class Node{
 		return this.f_;
 	}
 	
-	protected boolean isObjetive() {
+	public boolean isObjetive() {
 		return this.objetive_;
 	}
 	
@@ -150,6 +150,8 @@ final public class Node{
 	public ArrayList<Double> getSonsDistances(){
 		return this.sons_distances;
 	}
+
+
 	
 	
 	

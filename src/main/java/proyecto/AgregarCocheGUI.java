@@ -1,6 +1,6 @@
-/*package practica1;
+package proyecto;
 
-import practica1.vehiculos.Coche;
+import proyecto.vehiculos.Coche;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -12,9 +12,11 @@ public class AgregarCocheGUI extends JPanel{
     private JComboBox comboBox2;
     private static ArrayList<String> optTypesList = new ArrayList<>();
     private static ArrayList<Integer> optOriginsList = new ArrayList<>();
-    private JTextField textField1;
     private JPanel panelAgregarVehiculo;
     private JButton agregarVehículoButton;
+    private JLabel tituloTxt;
+    private JLabel tipoTxt;
+    private JLabel origenTxt;
 
     AgregarCocheGUI(){
 
@@ -28,10 +30,12 @@ public class AgregarCocheGUI extends JPanel{
                 Coche coche = new Coche(LogisticaGUI.contID+1,Integer.parseInt(comboBox2.getSelectedItem().toString()));
                 LogisticaGUI.contID += 1;
 
-                Object[] datosNuevoVehiculo = new Object[3];
+                Object[] datosNuevoVehiculo = new Object[5];
                 datosNuevoVehiculo[0] = coche.getId();
                 datosNuevoVehiculo[1] = comboBox1.getSelectedItem().toString();
-                datosNuevoVehiculo[2] = coche.getOrigin();
+                datosNuevoVehiculo[2] = "";
+                datosNuevoVehiculo[3] = "";
+                datosNuevoVehiculo[4] = coche.getOrigin();
                 LogisticaGUI.getListaCoches().add(coche);
                 LogisticaGUI.getModel().addRow(datosNuevoVehiculo);
                 Thread hiloCoche = new Thread(coche);
@@ -45,7 +49,7 @@ public class AgregarCocheGUI extends JPanel{
 
         fillOptTypeList();
         fillOptOriginsList();
-
+        System.out.println(optOriginsList);
         for(String type : optTypesList){
             comboBox1.addItem(type);
         }
@@ -89,4 +93,4 @@ class AgregarCocheGUIFrame extends JFrame{
         setVisible(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
-}*/
+}
