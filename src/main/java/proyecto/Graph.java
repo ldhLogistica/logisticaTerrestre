@@ -12,8 +12,6 @@ final public class Graph {
 	protected int n_nodes_;
 	private HashMap<Integer,ArrayList<Double>> distances = new HashMap<>();
 
-	private ArrayList<Double> distancesList = new ArrayList<>();
-
 	private static final String distancesFile = "./resources/Grafo1.txt";
 	private static final String heuristicsFile = "./resources/Grafo1Heuristica1.txt";
 	
@@ -23,6 +21,7 @@ final public class Graph {
 	 * @throws IOException se asegura que no hay ningun error a la hora de leer los ficheros
 	 */
 	public Graph(int origin_node) throws NumberFormatException, IOException{
+		node_list_.clear();
 		System.out.println("Origen: " + origin_node);
 		this.originNodeID = origin_node;
 		buildDistances(distancesFile,origin_node);
@@ -116,32 +115,19 @@ final public class Graph {
 				}else {
 					distances_matrix[i][j] = Double.parseDouble(br.readLine());
 				}
-				//////System.out.print(distances_matrix[i][j] + " ");
+
 			}
-			////System.out.println();
+
 		}
 		br.close();
-		for(int i=0 ; i<getNNodes() ; i++){
-			for(int j=0 ; j<getNNodes() ; j++){
-				System.out.print(distances_matrix[i][j] + " ");
-			}
-			System.out.println();
-		}
 
-		System.out.println();
-		System.out.println();
 		ArrayList<Double> distancesAux = new ArrayList<>();
 		for(int i=0 ; i<getNNodes() ; i++){
 			distancesAux.clear();
-			//System.out.println(distancesAux);
 			for(int j=0 ; j<getNNodes() ; j++){
 				distancesAux.add(distances_matrix[i][j]);
-				//distances.put(i+1,distances_matrix[i][j]);
 			}
-			//System.out.println(distancesAux);
 			this.distances.put(i+1,new ArrayList<>(distancesAux));
-			//System.out.println(i + " -> " + distances);
-
 		}
 
 		System.out.println(distances);
@@ -189,7 +175,9 @@ final public class Graph {
 		while(it_node.hasNext()) {
 			aux = it_node.next();
 			System.out.println(aux);
-			aux.setHeuristic(Double.parseDouble(br.readLine()));
+			double heuristic = Double.parseDouble(br.readLine());
+			System.out.println(heuristic);
+			aux.setHeuristic(heuristic);
 			if(aux.getHeuristic()==0.0) {
 				aux.setObjetive();
 				this.finalNodeID = aux.getNodeID();
@@ -197,10 +185,6 @@ final public class Graph {
 		}
 
 		br.close();
-	}
-
-	private void setDistancesList(){
-
 	}
 
 	public static ArrayList<Node> getNode_list(){

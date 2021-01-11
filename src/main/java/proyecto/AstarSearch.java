@@ -12,8 +12,8 @@ public class AstarSearch {
 		Thread hiloCoche1 = new Thread(coche1);
 		hiloCoche1.start();*/
 
-		//new LogisticaGUIFrame();
-		new Coche(1,1);
+		new LogisticaGUIFrame();
+
 
 	}
 }

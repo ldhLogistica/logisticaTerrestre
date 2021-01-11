@@ -1,12 +1,11 @@
-/*package practica1;
+package proyecto;
 
-import practica1.vehiculos.Coche;
+import proyecto.vehiculos.Coche;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.AreaAveragingScaleFilter;
 import java.util.ArrayList;
 
 public class LogisticaGUI extends JPanel{
@@ -35,7 +34,10 @@ public class LogisticaGUI extends JPanel{
         scrollTablaVehículos.setViewportView(tablaVehículos);
         model.addColumn("ID");
         model.addColumn("Tipo");
+        model.addColumn("Distancia Línea Recta");
+        model.addColumn("Distancia Carretera");
         model.addColumn("Ubicación");
+
     }
 
     public static ArrayList<Coche> getListaCoches(){
@@ -65,4 +67,4 @@ class LogisticaGUIFrame extends JFrame{
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
     }
-}*/
+}

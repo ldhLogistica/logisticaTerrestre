@@ -19,7 +19,7 @@ public class AStar {
 		Node aux = null;
 		boolean found = false;
 		this.generated_nodes = 0;
-		this.distance = 0.0;
+		distance = 0.0;
 		while(it_node.hasNext() && !found) {
 			aux = it_node.next();
 			if(aux.isOrigin()) {
@@ -160,12 +160,15 @@ public class AStar {
 		}
 		Node node_it = optimal_node;
 		this.distance = node_it.getDistance();
-		System.out.println(this.distance);
 		while(!node_it.isOrigin()) {
 			this.minimun_road.add(0, node_it);
 			node_it = node_it.getFather();
 		}	
 		this.minimun_road.add(0, node_it);
+	}
+
+	public double  getDistance(){
+		return this.distance;
 	}
 
 	public String toString() {

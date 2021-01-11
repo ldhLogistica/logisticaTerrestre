@@ -15,12 +15,12 @@ class CocheTest {
     }
 
     @Test
-    public void testGetId(){
+    void testGetId(){
         assertEquals(1,coche.getId());
     }
 
-    /*@Test
-    public void testGetOrigin(){
+    @Test
+    void testGetOrigin(){
         assertEquals(1,coche.getOrigin());
-    }*/
+    }
 }
