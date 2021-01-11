@@ -2,15 +2,14 @@ package proyecto.vehiculos;
 
 import proyecto.AStar;
 import proyecto.Graph;
-import proyecto.Node;
 import proyecto.LogisticaGUI;
-
+import proyecto.Node;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Coche implements IVehiculo, Runnable {
+public class Camion implements IVehiculo, Runnable {
 
     private int id;
     private int origin;
@@ -21,7 +20,7 @@ public class Coche implements IVehiculo, Runnable {
     private Graph map;
     private ArrayList<Node> minimunRoad = new ArrayList<>();
 
-    public Coche(int id, int origin){
+    public Camion(int id, int origin){
         this.id = id;
         this.origin = origin;
         create(this.id);
@@ -30,10 +29,10 @@ public class Coche implements IVehiculo, Runnable {
             this.map = new Graph(this.origin);
             this.tree = new AStar(map);
             this.minimunRoad = tree.minimun_road;
-            System.out.println("Cochde creado");
+            System.out.println("Camión creado");
 
         } catch (IOException e) {
-            
+
         }
     }
 
@@ -77,13 +76,12 @@ public class Coche implements IVehiculo, Runnable {
     }
 
     public void updateData(Object[] newPosition){
-        for(int fila=0 ; fila<LogisticaGUI.getModel().getRowCount() ; fila++){
+        for(int i = 0; i< LogisticaGUI.getModel().getRowCount() ; i++){
 
-            if((int)LogisticaGUI.getModel().getValueAt(fila,0)==this.getId()){
-                LogisticaGUI.getModel().setValueAt(newPosition[0],fila,2);
-                LogisticaGUI.getModel().setValueAt(newPosition[1],fila,3);
-                LogisticaGUI.getModel().setValueAt(newPosition[2],fila,4);
-                break;
+            if((int)LogisticaGUI.getModel().getValueAt(i,0)==this.getId()){
+                LogisticaGUI.getModel().setValueAt(newPosition[0],i,2);
+                LogisticaGUI.getModel().setValueAt(newPosition[1],i,3);
+                LogisticaGUI.getModel().setValueAt(newPosition[2],i,4);
             }
         }
     }
@@ -96,7 +94,7 @@ public class Coche implements IVehiculo, Runnable {
 
         for(int i=0 ; i<minimunRoad.size()-1 ; i++){
             try {
-                Thread.sleep((int)Math.round(distances.get(this.minimunRoad.get(i).getNodeID()).get(this.minimunRoad.get(i+1).getNodeID()-1)*1000*2));
+                Thread.sleep((int)Math.round(distances.get(this.minimunRoad.get(i).getNodeID()).get(this.minimunRoad.get(i+1).getNodeID()-1)*1000)*3);
 
                 double straightLineDistance = minimunRoad.get(i+1).getHeuristic();
                 double roadDistance = this.tree.getDistance() - minimunRoad.get(i+1).getDistance();
@@ -121,3 +119,4 @@ public class Coche implements IVehiculo, Runnable {
 
     }
 }
+
