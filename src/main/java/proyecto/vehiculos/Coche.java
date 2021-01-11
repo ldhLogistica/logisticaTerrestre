@@ -33,7 +33,7 @@ public class Coche implements IVehiculo, Runnable{
             System.out.println("Cochde creado");
 
         } catch (IOException e) {
-            e.printStackTrace();
+            
         }
     }
 
