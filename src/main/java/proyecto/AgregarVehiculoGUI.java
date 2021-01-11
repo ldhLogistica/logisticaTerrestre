@@ -24,49 +24,45 @@ public class AgregarVehiculoGUI extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean idAceptado = true;
-
                 Graph.getNode_list().clear();
+
+                LogisticaGUI.contID += 1;
+                Object[] datosNuevoVehiculo = new Object[5];
+
                 if(cbType.getSelectedIndex() == 0) {
-                    Coche vehiculo = new Coche(LogisticaGUI.contID+1,Integer.parseInt(cbInicio.getSelectedItem().toString()));
-                    LogisticaGUI.contID += 1;
-                    Object[] datosNuevoVehiculo = new Object[5];
-                    datosNuevoVehiculo[0] = vehiculo.getId();
+                    Coche coche = new Coche(LogisticaGUI.contID+1,Integer.parseInt(cbInicio.getSelectedItem().toString()));
+                    datosNuevoVehiculo[0] = coche.getId();
                     datosNuevoVehiculo[1] = cbType.getSelectedItem().toString();
                     datosNuevoVehiculo[2] = "";
                     datosNuevoVehiculo[3] = "";
-                    datosNuevoVehiculo[4] = vehiculo.getOrigin();
-                    LogisticaGUI.getListaVehiculos().add(vehiculo);
+                    datosNuevoVehiculo[4] = coche.getOrigin();
                     LogisticaGUI.getModel().addRow(datosNuevoVehiculo);
-                    Thread hiloVehiculo = new Thread(vehiculo);
+                    LogisticaGUI.getListaVehiculos().add(coche);
+                    Thread hiloVehiculo = new Thread(coche);
                     hiloVehiculo.start();
                 } else if (cbType.getSelectedIndex() == 1) {
-                    Camion vehiculo = new Camion(LogisticaGUI.contID+1,Integer.parseInt(cbInicio.getSelectedItem().toString()));
-                    LogisticaGUI.contID += 1;
-                    Object[] datosNuevoVehiculo = new Object[5];
-                    datosNuevoVehiculo[0] = vehiculo.getId();
+                    Camion camion = new Camion(LogisticaGUI.contID+1,Integer.parseInt(cbInicio.getSelectedItem().toString()));
+                    datosNuevoVehiculo[0] = camion.getId();
                     datosNuevoVehiculo[1] = cbType.getSelectedItem().toString();
                     datosNuevoVehiculo[2] = "";
                     datosNuevoVehiculo[3] = "";
-                    datosNuevoVehiculo[4] = vehiculo.getOrigin();
-                    LogisticaGUI.getListaVehiculos().add(vehiculo);
+                    datosNuevoVehiculo[4] = camion.getOrigin();
                     LogisticaGUI.getModel().addRow(datosNuevoVehiculo);
-                    Thread hiloVehiculo = new Thread(vehiculo);
+                    LogisticaGUI.getListaVehiculos().add(camion);
+                    Thread hiloVehiculo = new Thread(camion);
                     hiloVehiculo.start();
                 } else {
-                    Moto vehiculo = new Moto(LogisticaGUI.contID+1,Integer.parseInt(cbInicio.getSelectedItem().toString()));
-                    LogisticaGUI.contID += 1;
-                    Object[] datosNuevoVehiculo = new Object[5];
-                    datosNuevoVehiculo[0] = vehiculo.getId();
+                    Moto moto = new Moto(LogisticaGUI.contID+1,Integer.parseInt(cbInicio.getSelectedItem().toString()));
+                    datosNuevoVehiculo[0] = moto.getId();
                     datosNuevoVehiculo[1] = cbType.getSelectedItem().toString();
                     datosNuevoVehiculo[2] = "";
                     datosNuevoVehiculo[3] = "";
-                    datosNuevoVehiculo[4] = vehiculo.getOrigin();
-                    LogisticaGUI.getListaVehiculos().add(vehiculo);
+                    datosNuevoVehiculo[4] = moto.getOrigin();
                     LogisticaGUI.getModel().addRow(datosNuevoVehiculo);
-                    Thread hiloVehiculo = new Thread(vehiculo);
+                    LogisticaGUI.getListaVehiculos().add(moto);
+                    Thread hiloVehiculo = new Thread(moto);
                     hiloVehiculo.start();
                 }
-
             }
         });
     }
