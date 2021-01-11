@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Coche.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">logisticaTerrestre</a> &gt; <a href="index.source.html" class="el_package">proyecto.vehiculos</a> &gt; <span class="el_source">Coche.java</span></div><h1>Coche.java</h1><pre class="source lang-java linenums">package proyecto.vehiculos;
+
+import proyecto.AStar;
+import proyecto.Graph;
+import proyecto.Node;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+public class Coche implements IVehiculo{
+
+    private int id;
+    private int origin;
+    private int goal;
+    private int position;
+
+    private AStar tree;
+    private Graph map;
+<span class="fc" id="L19">    private ArrayList&lt;Node&gt; minimunRoad = new ArrayList&lt;&gt;();</span>
+
+<span class="fc" id="L21">    public Coche(int id, int origin){</span>
+<span class="fc" id="L22">        this.id = id;</span>
+<span class="fc" id="L23">        this.origin = origin;</span>
+<span class="fc" id="L24">        create(this.id);</span>
+<span class="fc" id="L25">        setOrigin(this.origin);</span>
+        try {
+<span class="fc" id="L27">            this.map = new Graph(this.origin);</span>
+<span class="fc" id="L28">            this.tree = new AStar(map);</span>
+<span class="fc" id="L29">            this.minimunRoad = tree.minimun_road;</span>
+<span class="fc" id="L30">            System.out.println(&quot;Cochde creado&quot;);</span>
+
+<span class="nc" id="L32">        } catch (IOException e) {</span>
+<span class="nc" id="L33">            e.printStackTrace();</span>
+<span class="fc" id="L34">        }</span>
+<span class="fc" id="L35">    }</span>
+
+    @Override
+    public void create(int id) {
+<span class="fc" id="L39">        this.id = id;</span>
+<span class="fc" id="L40">    }</span>
+
+    @Override
+    public void delete(int id) {
+        //Borrar del array delcarado en AStar
+<span class="nc" id="L45">    }</span>
+
+    @Override
+    public void setOrigin(int origin) {
+<span class="fc" id="L49">        this.origin = origin;</span>
+<span class="fc" id="L50">    }</span>
+
+    @Override
+    public void setGoal(int goal) {
+<span class="nc" id="L54">        this.goal = goal;</span>
+<span class="nc" id="L55">    }</span>
+
+    @Override
+    public int getPosition() {
+<span class="nc" id="L59">        return this.position;</span>
+    }
+
+    @Override
+    public int getId() {
+<span class="fc" id="L64">        return this.id;</span>
+    }
+
+    @Override
+    public int getOrigin() {
+<span class="nc" id="L69">        return this.origin;</span>
+    }
+
+
+
+
+    public ArrayList&lt;Node&gt; getMinimunRoad(){
+<span class="nc" id="L76">        return this.minimunRoad;</span>
+    }
+
+
+   /* @Override
+    public void run() {
+        HashMap&lt;Integer,ArrayList&lt;Double&gt;&gt; distances = this.map.getDistances();
+        this.position = minimunRoad.get(0).getNodeID();
+
+        for(int i=0 ; i&lt;minimunRoad.size()-1 ; i++){
+            try {
+                Thread.sleep((int)Math.round(distances.get(this.minimunRoad.get(i).getNodeID()).get(this.minimunRoad.get(i+1).getNodeID()-1)*1000));
+                this.position = minimunRoad.get(i+1).getNodeID();
+                Object[] newData = new Object[3];
+                newData[0] = this.getId();
+                newData[1] = &quot;coche&quot;;
+                newData[2] = this.position;
+                //LogisticaGUI.getModel().setValueAt(newData[2],0,2);
+                for(int j=0 ; j&lt;LogisticaGUI.getModel().getRowCount() ; j++){
+
+                    if((int)LogisticaGUI.getModel().getValueAt(j,0)==this.getId()){
+                        LogisticaGUI.getModel().setValueAt(newData[2],j,2);
+                    }
+                }
+                System.out.println(&quot;Posicion -&gt; &quot; + this.position);
+                System.out.println(&quot;hola&quot;);
+
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }*/
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

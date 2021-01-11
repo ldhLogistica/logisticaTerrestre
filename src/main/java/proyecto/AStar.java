@@ -1,7 +1,6 @@
-package practica1;
+package proyecto;
 
 import java.util.*;
-import java.io.*;
 
 public class AStar {
 	

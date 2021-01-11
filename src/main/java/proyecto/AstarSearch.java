@@ -1,9 +1,6 @@
-package practica1;
+package proyecto;
 
-import practica1.vehiculos.Coche;
-
-import java.io.IOException;
-import java.util.*;
+import proyecto.vehiculos.Coche;
 
 public class AstarSearch {
 

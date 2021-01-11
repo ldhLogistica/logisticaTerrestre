@@ -1,7 +1,6 @@
-package practica1;
+package proyecto;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 
 /**
  * 

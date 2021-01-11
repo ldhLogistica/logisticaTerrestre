@@ -1,4 +1,4 @@
-package practica1.vehiculos;
+package proyecto.vehiculos;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,8 +19,8 @@ class CocheTest {
         assertEquals(1,coche.getId());
     }
 
-    @Test
+    /*@Test
     public void testGetOrigin(){
         assertEquals(1,coche.getOrigin());
-    }
+    }*/
 }

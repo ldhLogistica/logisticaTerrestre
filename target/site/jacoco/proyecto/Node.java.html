@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Node.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">logisticaTerrestre</a> &gt; <a href="index.source.html" class="el_package">proyecto</a> &gt; <span class="el_source">Node.java</span></div><h1>Node.java</h1><pre class="source lang-java linenums">package proyecto;
+
+import java.util.ArrayList;
+
+/**
+ * 
+ * @author samue
+ * 
+ * Clase para almacenar un nodo individual con sus
+ * datos y funciones para acceder a ellos
+ *
+ */
+
+final public class Node{
+	
+	private int nodeID_;
+	private double g_; //Representa el camino recorrido desde el nodo inicial hasta el actual
+	private double h_; //Representa el valor heur�stico
+	private double f_; //Representa la suma de h + g
+<span class="fc" id="L20">	private ArrayList&lt;Node&gt; sons_nodes = new ArrayList&lt;Node&gt;();</span>
+<span class="fc" id="L21">	private ArrayList&lt;Double&gt; sons_distances = new ArrayList&lt;Double&gt;();</span>
+	private Node father_node;
+<span class="fc" id="L23">	boolean analized = false;</span>
+<span class="fc" id="L24">	boolean objetive_ = false;</span>
+<span class="fc" id="L25">	boolean origin_ = false;</span>
+<span class="fc" id="L26">	static protected int n_nodos = 0;</span>
+	
+	
+	/**
+	 * 
+	 * @param nodeID identificador de cada nodo
+	 */
+<span class="fc" id="L33">	Node(int nodeID){</span>
+<span class="fc" id="L34">		this.nodeID_ = nodeID;</span>
+<span class="fc" id="L35">		this.g_ = 0.0;</span>
+<span class="fc" id="L36">		n_nodos++;</span>
+		//System.out.println(this.nodeID_);
+<span class="fc" id="L38">	}</span>
+	
+	public Node returnNode() {
+<span class="nc" id="L41">		return this;</span>
+	}
+	
+	/**
+	 * 
+	 * @return identificador del nodo
+	 */
+	public int getNodeID() {
+<span class="fc" id="L49">		return this.nodeID_;</span>
+	}
+	
+	/**
+	 * 
+	 * @return 
+	 */
+	public double getHeuristic() {
+<span class="fc" id="L57">		return this.h_;</span>
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public double getDistance() {
+<span class="fc" id="L65">		return this.g_;</span>
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public double getValue() {
+		
+<span class="fc" id="L74">		return this.f_;</span>
+	}
+	
+	protected boolean isObjetive() {
+<span class="fc" id="L78">		return this.objetive_;</span>
+	}
+	
+	protected boolean isOrigin() {
+<span class="fc" id="L82">		return this.origin_;</span>
+	}
+	
+	public void setValue() {
+<span class="fc" id="L86">		this.f_ = getHeuristic() + getDistance();</span>
+<span class="fc" id="L87">	}</span>
+	
+	/**
+	 * 
+	 * @param distance
+	 */
+	public void setDistance(double distance) {
+<span class="fc" id="L94">		this.g_ = distance;</span>
+<span class="fc" id="L95">	}</span>
+	
+	/**
+	 * 
+	 * @param heuristic
+	 */
+	public void setHeuristic(double heuristic) {
+<span class="fc" id="L102">		this.h_ = heuristic;</span>
+<span class="fc" id="L103">	}</span>
+	
+	protected void setObjetive() {
+<span class="fc" id="L106">		this.objetive_ = true;</span>
+<span class="fc" id="L107">	}</span>
+	protected boolean getObjetive() {
+<span class="nc" id="L109">		return this.objetive_;</span>
+	}
+	
+	protected void setOrigin() {
+<span class="fc" id="L113">		this.origin_ = true;</span>
+<span class="fc" id="L114">	}</span>
+	
+	public String toString() {
+<span class="fc" id="L117">		String cad = &quot;&quot;;</span>
+<span class="fc" id="L118">		return cad + this.getNodeID();</span>
+	}
+	
+	public Node clone() {
+<span class="fc" id="L122">		Node node = new Node(this.nodeID_);</span>
+<span class="fc" id="L123">		node.analized = this.analized;</span>
+<span class="fc" id="L124">		node.f_ = this.f_;</span>
+<span class="fc" id="L125">		node.g_ = this.g_;</span>
+<span class="fc" id="L126">		node.h_ = this.h_;</span>
+<span class="fc" id="L127">		node.objetive_ = this.objetive_;</span>
+<span class="fc" id="L128">		node.origin_ = this.origin_;</span>
+<span class="fc" id="L129">		node.sons_nodes = this.sons_nodes;</span>
+		
+<span class="fc" id="L131">		return node;</span>
+	}
+	
+	public void setFather(Node node) {
+<span class="fc" id="L135">		this.father_node = node;</span>
+<span class="fc" id="L136">	}</span>
+	
+	public Node getFather() {
+<span class="fc" id="L139">		return this.father_node;</span>
+	}
+	
+	public void addSon(Node node, double distance) {
+<span class="fc" id="L143">		this.sons_nodes.add(node);</span>
+<span class="fc" id="L144">		this.sons_distances.add(distance);</span>
+<span class="fc" id="L145">	}</span>
+	
+	public ArrayList&lt;Node&gt; getSonsList(){
+<span class="fc" id="L148">		return this.sons_nodes;</span>
+	}
+	public ArrayList&lt;Double&gt; getSonsDistances(){
+<span class="fc" id="L151">		return this.sons_distances;</span>
+	}
+	
+	
+	
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

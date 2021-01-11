@@ -1,6 +1,6 @@
-practica1/vehiculos/IVehiculo.class
-practica1/AStar.class
-practica1/Graph.class
-practica1/vehiculos/Coche.class
-practica1/Node.class
-practica1/AstarSearch.class
+proyecto/AStar.class
+proyecto/Node.class
+proyecto/vehiculos/Coche.class
+proyecto/Graph.class
+proyecto/vehiculos/IVehiculo.class
+proyecto/AstarSearch.class

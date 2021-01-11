@@ -1,4 +1,4 @@
-package practica1;
+package proyecto;
 
 import java.util.*;
 import java.io.*;
@@ -12,8 +12,10 @@ final public class Graph {
 	protected int n_nodes_;
 	private HashMap<Integer,ArrayList<Double>> distances = new HashMap<>();
 
-	private static final String distancesFile = "C:\\Users\\samuel\\Desktop\\ULL\\4ANO\\LDH\\proyecto\\src\\main\\java\\Grafo1.txt";
-	private static final String heuristicsFile = "C:\\Users\\samuel\\Desktop\\ULL\\4ANO\\LDH\\proyecto\\src\\main\\java\\Grafo1Heuristica1.txt";
+	private ArrayList<Double> distancesList = new ArrayList<>();
+
+	private static final String distancesFile = "./resources/Grafo1.txt";
+	private static final String heuristicsFile = "./resources/Grafo1Heuristica1.txt";
 	
 	/**
 	 * @param origin_node nodo de origen proporcionado en la linea de comandos
@@ -195,6 +197,10 @@ final public class Graph {
 		}
 
 		br.close();
+	}
+
+	private void setDistancesList(){
+
 	}
 
 	public static ArrayList<Node> getNode_list(){
