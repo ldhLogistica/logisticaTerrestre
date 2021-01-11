@@ -113,10 +113,11 @@ public class Coche implements IVehiculo, Runnable{
 <span class="nc" id="L113">                updateData(newData);</span>
 
 <span class="nc" id="L115">            } catch (InterruptedException e) {</span>
-<span class="nc" id="L116">                e.printStackTrace();</span>
-<span class="nc" id="L117">            }</span>
+                // Restore interrupted state...
+<span class="nc" id="L117">                Thread.currentThread().interrupt();</span>
+<span class="nc" id="L118">            }</span>
         }
 
-<span class="nc" id="L120">    }</span>
+<span class="nc" id="L121">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
