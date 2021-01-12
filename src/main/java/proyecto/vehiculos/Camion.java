@@ -9,14 +9,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Camion extends Vehiculo implements Runnable {
+public class Camion extends Vehiculo{
 
     public Camion(int id, int origin) {
         super(id, origin);
+        extraTime = 3;
     }
 
-    @Override
-    public void run() {
-        runBuild(3);
-    }
+
 }

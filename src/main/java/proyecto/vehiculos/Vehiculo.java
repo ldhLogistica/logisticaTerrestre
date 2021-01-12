@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Vehiculo {
+public abstract class Vehiculo implements Runnable{
 
     protected int id;
     protected int origin;
@@ -19,6 +19,8 @@ public class Vehiculo {
     protected AStar tree;
     protected Graph map;
     protected ArrayList<Node> minimunRoad = new ArrayList<>();
+
+    protected int extraTime;
 
     public Vehiculo (int id, int origin) {
         this.id = id;
@@ -80,13 +82,14 @@ public class Vehiculo {
         }
     }
 
-    public void runBuild(int vel) {
+    @Override
+    public void run() {
         HashMap<Integer,ArrayList<Double>> distances = this.map.getDistances();
         this.position = minimunRoad.get(0).getNodeID();
 
         for(int i=0 ; i<minimunRoad.size()-1 ; i++){
             try {
-                Thread.sleep((int)Math.round(distances.get(this.minimunRoad.get(i).getNodeID()).get(this.minimunRoad.get(i+1).getNodeID()-1)*1000*vel));
+                Thread.sleep((int)Math.round(distances.get(this.minimunRoad.get(i).getNodeID()).get(this.minimunRoad.get(i+1).getNodeID()-1)*1000*extraTime));
 
                 double straightLineDistance = minimunRoad.get(i+1).getHeuristic();
                 double roadDistance = this.tree.getDistance() - minimunRoad.get(i+1).getDistance();

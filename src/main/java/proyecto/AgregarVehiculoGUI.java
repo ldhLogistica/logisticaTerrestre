@@ -3,6 +3,7 @@ package proyecto;
 import proyecto.vehiculos.Camion;
 import proyecto.vehiculos.Coche;
 import proyecto.vehiculos.Moto;
+import proyecto.vehiculos.Vehiculo;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -30,41 +31,27 @@ public class AgregarVehiculoGUI extends JPanel{
                 Object[] datosNuevoVehiculo = new Object[5];
 
                 if(cbType.getSelectedIndex() == 0) {
-                    Coche coche = new Coche(LogisticaGUI.contID+1,Integer.parseInt(cbInicio.getSelectedItem().toString()));
-                    datosNuevoVehiculo[0] = coche.getId();
-                    datosNuevoVehiculo[1] = cbType.getSelectedItem().toString();
-                    datosNuevoVehiculo[2] = "";
-                    datosNuevoVehiculo[3] = "";
-                    datosNuevoVehiculo[4] = coche.getOrigin();
-                    LogisticaGUI.getModel().addRow(datosNuevoVehiculo);
-                    Thread hiloVehiculo = new Thread(coche);
-                    LogisticaGUI.getListaVehiculos().put(coche,hiloVehiculo);
-                    hiloVehiculo.start();
+                    agregarVehiculo(new Coche(LogisticaGUI.contID+1,Integer.parseInt(cbInicio.getSelectedItem().toString())));
                 } else if (cbType.getSelectedIndex() == 1) {
-                    Camion camion = new Camion(LogisticaGUI.contID+1,Integer.parseInt(cbInicio.getSelectedItem().toString()));
-                    datosNuevoVehiculo[0] = camion.getId();
-                    datosNuevoVehiculo[1] = cbType.getSelectedItem().toString();
-                    datosNuevoVehiculo[2] = "";
-                    datosNuevoVehiculo[3] = "";
-                    datosNuevoVehiculo[4] = camion.getOrigin();
-                    LogisticaGUI.getModel().addRow(datosNuevoVehiculo);
-                    Thread hiloVehiculo = new Thread(camion);
-                    LogisticaGUI.getListaVehiculos().put(camion,hiloVehiculo);
-                    hiloVehiculo.start();
+                    agregarVehiculo(new Camion(LogisticaGUI.contID+1,Integer.parseInt(cbInicio.getSelectedItem().toString())));
                 } else {
-                    Moto moto = new Moto(LogisticaGUI.contID+1,Integer.parseInt(cbInicio.getSelectedItem().toString()));
-                    datosNuevoVehiculo[0] = moto.getId();
-                    datosNuevoVehiculo[1] = cbType.getSelectedItem().toString();
-                    datosNuevoVehiculo[2] = "";
-                    datosNuevoVehiculo[3] = "";
-                    datosNuevoVehiculo[4] = moto.getOrigin();
-                    LogisticaGUI.getModel().addRow(datosNuevoVehiculo);
-                    Thread hiloVehiculo = new Thread(moto);
-                    LogisticaGUI.getListaVehiculos().put(moto,hiloVehiculo);
-                    hiloVehiculo.start();
+                    agregarVehiculo(new Moto(LogisticaGUI.contID+1,Integer.parseInt(cbInicio.getSelectedItem().toString())));
                 }
             }
         });
+    }
+
+    private void agregarVehiculo(Vehiculo v){
+        Object[] datosNuevoVehiculo = new Object[5];
+        datosNuevoVehiculo[0] = v.getId();
+        datosNuevoVehiculo[1] = cbType.getSelectedItem().toString();
+        datosNuevoVehiculo[2] = "";
+        datosNuevoVehiculo[3] = "";
+        datosNuevoVehiculo[4] = v.getOrigin();
+        LogisticaGUI.getModel().addRow(datosNuevoVehiculo);
+        Thread hiloVehiculo = new Thread(v);
+        LogisticaGUI.getListaVehiculos().put(v,hiloVehiculo);
+        hiloVehiculo.start();
     }
 
     private void fillComboBoxes(){
