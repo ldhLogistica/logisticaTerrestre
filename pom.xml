@@ -23,7 +23,7 @@
         <sonar.java.source>11</sonar.java.source>
         <sonar.junit.reportPaths>target/surefire-reports</sonar.junit.reportPaths>
         <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
-        <sonar.coverage.exclusions>src/main/java/proyecto/A*, src/main/java/proyecto/Node.java, src/main/java/proyecto/Graph.java</sonar.coverage.exclusions>
+        <sonar.coverage.exclusions>src/main/java/proyecto/Graph.java</sonar.coverage.exclusions>
     </properties>
 
     <build>
