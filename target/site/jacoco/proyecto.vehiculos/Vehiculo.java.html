@@ -79,5 +79,35 @@ public class Vehiculo {
             }
         }
 <span class="nc" id="L81">    }</span>
+
+    public void runBuild(int vel) {
+<span class="nc" id="L84">        HashMap&lt;Integer,ArrayList&lt;Double&gt;&gt; distances = this.map.getDistances();</span>
+<span class="nc" id="L85">        this.position = minimunRoad.get(0).getNodeID();</span>
+
+<span class="nc bnc" id="L87" title="All 2 branches missed.">        for(int i=0 ; i&lt;minimunRoad.size()-1 ; i++){</span>
+            try {
+<span class="nc" id="L89">                Thread.sleep((int)Math.round(distances.get(this.minimunRoad.get(i).getNodeID()).get(this.minimunRoad.get(i+1).getNodeID()-1)*1000*vel));</span>
+
+<span class="nc" id="L91">                double straightLineDistance = minimunRoad.get(i+1).getHeuristic();</span>
+<span class="nc" id="L92">                double roadDistance = this.tree.getDistance() - minimunRoad.get(i+1).getDistance();</span>
+<span class="nc" id="L93">                this.position = minimunRoad.get(i+1).getNodeID();</span>
+
+<span class="nc" id="L95">                Object[] newData = new Object[3];</span>
+<span class="nc" id="L96">                newData[0] = straightLineDistance;</span>
+<span class="nc" id="L97">                newData[1] = roadDistance;</span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">                if(!minimunRoad.get(i+1).isObjetive()){</span>
+<span class="nc" id="L99">                    newData[2] = this.position;</span>
+                }else{
+<span class="nc" id="L101">                    newData[2] = &quot;FINALIZADO&quot;;</span>
+                }
+
+<span class="nc" id="L104">                updateData(newData);</span>
+
+<span class="nc" id="L106">            } catch (InterruptedException e) {</span>
+                // Restore interrupted state...
+<span class="nc" id="L108">                Thread.currentThread().interrupt();</span>
+<span class="nc" id="L109">            }</span>
+        }
+<span class="nc" id="L111">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

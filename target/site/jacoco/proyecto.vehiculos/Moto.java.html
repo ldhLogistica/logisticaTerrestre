@@ -17,34 +17,8 @@ public class Moto extends Vehiculo implements Runnable {
 
     @Override
     public void run() {
-<span class="nc" id="L20">        HashMap&lt;Integer,ArrayList&lt;Double&gt;&gt; distances = this.map.getDistances();</span>
-<span class="nc" id="L21">        this.position = minimunRoad.get(0).getNodeID();</span>
-
-<span class="nc bnc" id="L23" title="All 2 branches missed.">        for(int i=0 ; i&lt;minimunRoad.size()-1 ; i++){</span>
-            try {
-<span class="nc" id="L25">                Thread.sleep((int)Math.round(distances.get(this.minimunRoad.get(i).getNodeID()).get(this.minimunRoad.get(i+1).getNodeID()-1)*1000));</span>
-
-<span class="nc" id="L27">                double straightLineDistance = minimunRoad.get(i+1).getHeuristic();</span>
-<span class="nc" id="L28">                double roadDistance = this.tree.getDistance() - minimunRoad.get(i+1).getDistance();</span>
-<span class="nc" id="L29">                this.position = minimunRoad.get(i+1).getNodeID();</span>
-
-<span class="nc" id="L31">                Object[] newData = new Object[3];</span>
-<span class="nc" id="L32">                newData[0] = straightLineDistance;</span>
-<span class="nc" id="L33">                newData[1] = roadDistance;</span>
-<span class="nc bnc" id="L34" title="All 2 branches missed.">                if(!minimunRoad.get(i+1).isObjetive()){</span>
-<span class="nc" id="L35">                    newData[2] = this.position;</span>
-                }else{
-<span class="nc" id="L37">                    newData[2] = &quot;FINALIZADO&quot;;</span>
-                }
-
-<span class="nc" id="L40">                updateData(newData);</span>
-
-<span class="nc" id="L42">            } catch (InterruptedException e) {</span>
-                // Restore interrupted state...
-<span class="nc" id="L44">                Thread.currentThread().interrupt();</span>
-<span class="nc" id="L45">            }</span>
-        }
-<span class="nc" id="L47">    }</span>
+<span class="nc" id="L20">        runBuild(1);</span>
+<span class="nc" id="L21">    }</span>
 }
 
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
