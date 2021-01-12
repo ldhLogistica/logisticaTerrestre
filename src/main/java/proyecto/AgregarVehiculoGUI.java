@@ -24,12 +24,8 @@ public class AgregarVehiculoGUI extends JPanel{
         agregarVehículoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                boolean idAceptado = true;
                 Graph.getNode_list().clear();
-
                 LogisticaGUI.contID += 1;
-                Object[] datosNuevoVehiculo = new Object[5];
-
                 if(cbType.getSelectedIndex() == 0) {
                     agregarVehiculo(new Coche(LogisticaGUI.contID+1,Integer.parseInt(cbInicio.getSelectedItem().toString())));
                 } else if (cbType.getSelectedIndex() == 1) {
