@@ -9,8 +9,10 @@ proyecto/LogisticaGUIFrame.class
 proyecto/InfoVehicleGUI.class
 proyecto/vehiculos/Moto.class
 proyecto/AgregarVehiculoGUIFrame.class
+proyecto/InfoVehicleGUI$1.class
 proyecto/AgregarVehiculoGUI$1.class
 proyecto/AstarSearch.class
 proyecto/vehiculos/Camion.class
 proyecto/AStar.class
+proyecto/LogisticaGUI$2.class
 proyecto/Node.class

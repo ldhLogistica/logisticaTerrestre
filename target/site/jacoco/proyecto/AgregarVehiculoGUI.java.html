@@ -37,8 +37,8 @@ public class AgregarVehiculoGUI extends JPanel{
 <span class="nc" id="L37">                    datosNuevoVehiculo[3] = &quot;&quot;;</span>
 <span class="nc" id="L38">                    datosNuevoVehiculo[4] = coche.getOrigin();</span>
 <span class="nc" id="L39">                    LogisticaGUI.getModel().addRow(datosNuevoVehiculo);</span>
-<span class="nc" id="L40">                    LogisticaGUI.getListaVehiculos().add(coche);</span>
-<span class="nc" id="L41">                    Thread hiloVehiculo = new Thread(coche);</span>
+<span class="nc" id="L40">                    Thread hiloVehiculo = new Thread(coche);</span>
+<span class="nc" id="L41">                    LogisticaGUI.getListaVehiculos().put(coche,hiloVehiculo);</span>
 <span class="nc" id="L42">                    hiloVehiculo.start();</span>
 <span class="nc bnc" id="L43" title="All 2 branches missed.">                } else if (cbType.getSelectedIndex() == 1) {</span>
 <span class="nc" id="L44">                    Camion camion = new Camion(LogisticaGUI.contID+1,Integer.parseInt(cbInicio.getSelectedItem().toString()));</span>
@@ -48,8 +48,8 @@ public class AgregarVehiculoGUI extends JPanel{
 <span class="nc" id="L48">                    datosNuevoVehiculo[3] = &quot;&quot;;</span>
 <span class="nc" id="L49">                    datosNuevoVehiculo[4] = camion.getOrigin();</span>
 <span class="nc" id="L50">                    LogisticaGUI.getModel().addRow(datosNuevoVehiculo);</span>
-<span class="nc" id="L51">                    LogisticaGUI.getListaVehiculos().add(camion);</span>
-<span class="nc" id="L52">                    Thread hiloVehiculo = new Thread(camion);</span>
+<span class="nc" id="L51">                    Thread hiloVehiculo = new Thread(camion);</span>
+<span class="nc" id="L52">                    LogisticaGUI.getListaVehiculos().put(camion,hiloVehiculo);</span>
 <span class="nc" id="L53">                    hiloVehiculo.start();</span>
 <span class="nc" id="L54">                } else {</span>
 <span class="nc" id="L55">                    Moto moto = new Moto(LogisticaGUI.contID+1,Integer.parseInt(cbInicio.getSelectedItem().toString()));</span>
@@ -59,8 +59,8 @@ public class AgregarVehiculoGUI extends JPanel{
 <span class="nc" id="L59">                    datosNuevoVehiculo[3] = &quot;&quot;;</span>
 <span class="nc" id="L60">                    datosNuevoVehiculo[4] = moto.getOrigin();</span>
 <span class="nc" id="L61">                    LogisticaGUI.getModel().addRow(datosNuevoVehiculo);</span>
-<span class="nc" id="L62">                    LogisticaGUI.getListaVehiculos().add(moto);</span>
-<span class="nc" id="L63">                    Thread hiloVehiculo = new Thread(moto);</span>
+<span class="nc" id="L62">                    Thread hiloVehiculo = new Thread(moto);</span>
+<span class="nc" id="L63">                    LogisticaGUI.getListaVehiculos().put(moto,hiloVehiculo);</span>
 <span class="nc" id="L64">                    hiloVehiculo.start();</span>
                 }
 <span class="nc" id="L66">            }</span>

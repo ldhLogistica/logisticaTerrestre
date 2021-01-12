@@ -37,8 +37,8 @@ public class AgregarVehiculoGUI extends JPanel{
                     datosNuevoVehiculo[3] = "";
                     datosNuevoVehiculo[4] = coche.getOrigin();
                     LogisticaGUI.getModel().addRow(datosNuevoVehiculo);
-                    LogisticaGUI.getListaVehiculos().add(coche);
                     Thread hiloVehiculo = new Thread(coche);
+                    LogisticaGUI.getListaVehiculos().put(coche,hiloVehiculo);
                     hiloVehiculo.start();
                 } else if (cbType.getSelectedIndex() == 1) {
                     Camion camion = new Camion(LogisticaGUI.contID+1,Integer.parseInt(cbInicio.getSelectedItem().toString()));
@@ -48,8 +48,8 @@ public class AgregarVehiculoGUI extends JPanel{
                     datosNuevoVehiculo[3] = "";
                     datosNuevoVehiculo[4] = camion.getOrigin();
                     LogisticaGUI.getModel().addRow(datosNuevoVehiculo);
-                    LogisticaGUI.getListaVehiculos().add(camion);
                     Thread hiloVehiculo = new Thread(camion);
+                    LogisticaGUI.getListaVehiculos().put(camion,hiloVehiculo);
                     hiloVehiculo.start();
                 } else {
                     Moto moto = new Moto(LogisticaGUI.contID+1,Integer.parseInt(cbInicio.getSelectedItem().toString()));
@@ -59,8 +59,8 @@ public class AgregarVehiculoGUI extends JPanel{
                     datosNuevoVehiculo[3] = "";
                     datosNuevoVehiculo[4] = moto.getOrigin();
                     LogisticaGUI.getModel().addRow(datosNuevoVehiculo);
-                    LogisticaGUI.getListaVehiculos().add(moto);
                     Thread hiloVehiculo = new Thread(moto);
+                    LogisticaGUI.getListaVehiculos().put(moto,hiloVehiculo);
                     hiloVehiculo.start();
                 }
             }
