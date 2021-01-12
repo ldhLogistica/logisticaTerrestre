@@ -6,7 +6,11 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LogisticaGUI extends JPanel{
     private JTable tablaVehículos;
@@ -15,7 +19,7 @@ public class LogisticaGUI extends JPanel{
     private JLabel logisticaTerrestreTxt;
     private JScrollPane scrollTablaVehículos;
 
-    private static ArrayList<Vehiculo> listaVehiculos = new ArrayList<>();
+    private static Map<Vehiculo,Thread> listaVehiculos = new HashMap<>();
     private static DefaultTableModel model = new DefaultTableModel();
     public static int contID;
 
@@ -26,6 +30,23 @@ public class LogisticaGUI extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 new AgregarVehiculoGUIFrame();
+            }
+        });
+        tablaVehículos.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                int rowPoint = tablaVehículos.rowAtPoint(e.getPoint());
+                int columnPoint = 0;
+                if(rowPoint > -1){
+                    int idVehiculo = (int)model.getValueAt(rowPoint,columnPoint);
+                    for(Map.Entry<Vehiculo,Thread> entry : listaVehiculos.entrySet()){
+                        if(entry.getKey().getId()==idVehiculo){
+                            new InfoVehicleFrame(entry.getKey());
+                            break;
+                        }
+                    }
+                }
             }
         });
     }
@@ -40,7 +61,7 @@ public class LogisticaGUI extends JPanel{
 
     }
 
-    public static ArrayList<Vehiculo> getListaVehiculos(){
+    public static Map<Vehiculo,Thread> getListaVehiculos(){
         return listaVehiculos;
     }
 
