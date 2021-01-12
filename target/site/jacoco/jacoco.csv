@@ -13,7 +13,7 @@ logisticaTerrestre,proyecto,Node,5,150,0,0,2,46,2,20,2,20
 logisticaTerrestre,proyecto,Graph,105,315,4,26,19,75,5,21,3,8
 logisticaTerrestre,proyecto,AgregarVehiculoGUIFrame,24,0,0,0,7,0,1,0,1,0
 logisticaTerrestre,proyecto,AgregarVehiculoGUI.new ActionListener() {...},71,0,4,0,9,0,4,0,2,0
-logisticaTerrestre,proyecto.vehiculos,Vehiculo,202,59,8,0,38,18,15,5,11,5
+logisticaTerrestre,proyecto.vehiculos,Vehiculo,199,65,8,0,37,20,14,7,10,7
 logisticaTerrestre,proyecto.vehiculos,Camion,11,0,0,0,4,0,1,0,1,0
 logisticaTerrestre,proyecto.vehiculos,Moto,11,0,0,0,4,0,1,0,1,0
 logisticaTerrestre,proyecto.vehiculos,Coche,0,11,0,0,0,4,0,1,0,1
