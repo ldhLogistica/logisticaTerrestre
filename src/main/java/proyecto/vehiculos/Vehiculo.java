@@ -24,6 +24,7 @@ public abstract class Vehiculo implements Runnable{
     protected ArrayList<Node> minimunRoad = new ArrayList<>();
 
     protected int extraTime;
+    protected String name;
 
    // protected JFrame infoVehicleFrame;
 
@@ -85,6 +86,10 @@ public abstract class Vehiculo implements Runnable{
 
     public double getRoadDistance(){
         return this.roadDistance;
+    }
+
+    public String getName(){
+        return this.name;
     }
 
     /*public JFrame getInfoVehicleFrame(){

@@ -14,6 +14,7 @@ public class Camion extends Vehiculo{
     public Camion(int id, int origin) {
         super(id, origin);
         extraTime = 3;
+        name = "Camion";
     }
 
 

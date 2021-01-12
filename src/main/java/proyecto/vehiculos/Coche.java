@@ -15,6 +15,7 @@ public class Coche extends Vehiculo implements Runnable {
     public Coche(int id, int origin) {
         super(id, origin);
         extraTime = 2;
+        name = "Coche";
     }
 
 }
