@@ -24,8 +24,8 @@
         <sonar.junit.reportPaths>target/surefire-reports</sonar.junit.reportPaths>
         <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
         <sonar.coverage.exclusions>src/main/java/proyecto/Graph.java, src/main/java/proyecto/AgregarVehiculoGUI.java, src/main/java/proyecto/AstarSearch.java,
-            src/main/java/proyecto/LogisticaGUI.java, src/main/java/proyecto/Camion.java, src/main/java/proyecto/Moto.java,
-            src/main/java/proyecto/InfoVehicle.java</sonar.coverage.exclusions>
+            src/main/java/proyecto/LogisticaGUI.java, src/main/java/proyecto/vehiculos/Camion.java, src/main/java/proyecto/vehiculos/Moto.java,
+            src/main/java/proyecto/InfoVehicleGUI.java</sonar.coverage.exclusions>
     </properties>
 
     <build>
