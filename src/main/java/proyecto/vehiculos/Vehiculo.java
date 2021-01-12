@@ -92,6 +92,12 @@ public abstract class Vehiculo implements Runnable{
         return this.name;
     }
 
+    public int getExtraTime(){
+        return this.extraTime;
+    }
+
+
+
     /*public JFrame getInfoVehicleFrame(){
         return this.infoVehicleFrame;
     }*/
