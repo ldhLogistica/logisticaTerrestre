@@ -24,85 +24,81 @@ public class AgregarVehiculoGUI extends JPanel{
 <span class="nc" id="L24">        agregarVehículoButton.addActionListener(new ActionListener() {</span>
             @Override
             public void actionPerformed(ActionEvent e) {
-<span class="nc" id="L27">                boolean idAceptado = true;</span>
-<span class="nc" id="L28">                Graph.getNode_list().clear();</span>
-
-<span class="nc" id="L30">                LogisticaGUI.contID += 1;</span>
-<span class="nc" id="L31">                Object[] datosNuevoVehiculo = new Object[5];</span>
-
-<span class="nc bnc" id="L33" title="All 2 branches missed.">                if(cbType.getSelectedIndex() == 0) {</span>
-<span class="nc" id="L34">                    agregarVehiculo(new Coche(LogisticaGUI.contID+1,Integer.parseInt(cbInicio.getSelectedItem().toString())));</span>
-<span class="nc bnc" id="L35" title="All 2 branches missed.">                } else if (cbType.getSelectedIndex() == 1) {</span>
-<span class="nc" id="L36">                    agregarVehiculo(new Camion(LogisticaGUI.contID+1,Integer.parseInt(cbInicio.getSelectedItem().toString())));</span>
+<span class="nc" id="L27">                Graph.getNode_list().clear();</span>
+<span class="nc" id="L28">                LogisticaGUI.contID += 1;</span>
+<span class="nc bnc" id="L29" title="All 2 branches missed.">                if(cbType.getSelectedIndex() == 0) {</span>
+<span class="nc" id="L30">                    agregarVehiculo(new Coche(LogisticaGUI.contID+1,Integer.parseInt(cbInicio.getSelectedItem().toString())));</span>
+<span class="nc bnc" id="L31" title="All 2 branches missed.">                } else if (cbType.getSelectedIndex() == 1) {</span>
+<span class="nc" id="L32">                    agregarVehiculo(new Camion(LogisticaGUI.contID+1,Integer.parseInt(cbInicio.getSelectedItem().toString())));</span>
                 } else {
-<span class="nc" id="L38">                    agregarVehiculo(new Moto(LogisticaGUI.contID+1,Integer.parseInt(cbInicio.getSelectedItem().toString())));</span>
+<span class="nc" id="L34">                    agregarVehiculo(new Moto(LogisticaGUI.contID+1,Integer.parseInt(cbInicio.getSelectedItem().toString())));</span>
                 }
-<span class="nc" id="L40">            }</span>
+<span class="nc" id="L36">            }</span>
         });
-<span class="nc" id="L42">    }</span>
+<span class="nc" id="L38">    }</span>
 
     private void agregarVehiculo(Vehiculo v){
-<span class="nc" id="L45">        Object[] datosNuevoVehiculo = new Object[5];</span>
-<span class="nc" id="L46">        datosNuevoVehiculo[0] = v.getId();</span>
-<span class="nc" id="L47">        datosNuevoVehiculo[1] = cbType.getSelectedItem().toString();</span>
-<span class="nc" id="L48">        datosNuevoVehiculo[2] = &quot;&quot;;</span>
-<span class="nc" id="L49">        datosNuevoVehiculo[3] = &quot;&quot;;</span>
-<span class="nc" id="L50">        datosNuevoVehiculo[4] = v.getOrigin();</span>
-<span class="nc" id="L51">        LogisticaGUI.getModel().addRow(datosNuevoVehiculo);</span>
-<span class="nc" id="L52">        Thread hiloVehiculo = new Thread(v);</span>
-<span class="nc" id="L53">        LogisticaGUI.getListaVehiculos().put(v,hiloVehiculo);</span>
-<span class="nc" id="L54">        hiloVehiculo.start();</span>
-<span class="nc" id="L55">    }</span>
+<span class="nc" id="L41">        Object[] datosNuevoVehiculo = new Object[5];</span>
+<span class="nc" id="L42">        datosNuevoVehiculo[0] = v.getId();</span>
+<span class="nc" id="L43">        datosNuevoVehiculo[1] = cbType.getSelectedItem().toString();</span>
+<span class="nc" id="L44">        datosNuevoVehiculo[2] = &quot;&quot;;</span>
+<span class="nc" id="L45">        datosNuevoVehiculo[3] = &quot;&quot;;</span>
+<span class="nc" id="L46">        datosNuevoVehiculo[4] = v.getOrigin();</span>
+<span class="nc" id="L47">        LogisticaGUI.getModel().addRow(datosNuevoVehiculo);</span>
+<span class="nc" id="L48">        Thread hiloVehiculo = new Thread(v);</span>
+<span class="nc" id="L49">        LogisticaGUI.getListaVehiculos().put(v,hiloVehiculo);</span>
+<span class="nc" id="L50">        hiloVehiculo.start();</span>
+<span class="nc" id="L51">    }</span>
 
     private void fillComboBoxes(){
 
-<span class="nc" id="L59">        fillOptTypeList();</span>
-<span class="nc" id="L60">        fillOptOriginsList();</span>
-<span class="nc" id="L61">        System.out.println(optOriginsList);</span>
-<span class="nc bnc" id="L62" title="All 2 branches missed.">        for(String type : optTypesList){</span>
-<span class="nc" id="L63">            this.cbType.addItem(type);</span>
+<span class="nc" id="L55">        fillOptTypeList();</span>
+<span class="nc" id="L56">        fillOptOriginsList();</span>
+<span class="nc" id="L57">        System.out.println(optOriginsList);</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">        for(String type : optTypesList){</span>
+<span class="nc" id="L59">            this.cbType.addItem(type);</span>
+<span class="nc" id="L60">        }</span>
+
+<span class="nc bnc" id="L62" title="All 2 branches missed.">        for(int id : optOriginsList){</span>
+<span class="nc" id="L63">            cbInicio.addItem(id);</span>
 <span class="nc" id="L64">        }</span>
 
-<span class="nc bnc" id="L66" title="All 2 branches missed.">        for(int id : optOriginsList){</span>
-<span class="nc" id="L67">            cbInicio.addItem(id);</span>
-<span class="nc" id="L68">        }</span>
-
-<span class="nc" id="L70">    }</span>
+<span class="nc" id="L66">    }</span>
 
     private void fillOptTypeList(){
-<span class="nc" id="L73">        optTypesList.clear();</span>
-<span class="nc" id="L74">        optTypesList.add(&quot;Coche&quot;);</span>
-<span class="nc" id="L75">        optTypesList.add(&quot;Camión&quot;);</span>
-<span class="nc" id="L76">        optTypesList.add(&quot;Moto&quot;);</span>
-<span class="nc" id="L77">    }</span>
+<span class="nc" id="L69">        optTypesList.clear();</span>
+<span class="nc" id="L70">        optTypesList.add(&quot;Coche&quot;);</span>
+<span class="nc" id="L71">        optTypesList.add(&quot;Camión&quot;);</span>
+<span class="nc" id="L72">        optTypesList.add(&quot;Moto&quot;);</span>
+<span class="nc" id="L73">    }</span>
 
     private void fillOptOriginsList(){
-<span class="nc" id="L80">        optOriginsList.clear();</span>
-<span class="nc bnc" id="L81" title="All 2 branches missed.">        if(Graph.getNode_list().size() == 0 ){</span>
-<span class="nc bnc" id="L82" title="All 2 branches missed.">            for (int node = 1 ; node &lt;= 15 ; node++) {</span>
-<span class="nc bnc" id="L83" title="All 2 branches missed.">                if (node != 8) {</span>
-<span class="nc" id="L84">                    optOriginsList.add(node);</span>
+<span class="nc" id="L76">        optOriginsList.clear();</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">        if(Graph.getNode_list().size() == 0 ){</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">            for (int node = 1 ; node &lt;= 15 ; node++) {</span>
+<span class="nc bnc" id="L79" title="All 2 branches missed.">                if (node != 8) {</span>
+<span class="nc" id="L80">                    optOriginsList.add(node);</span>
                 }
             }
         }
-<span class="nc bnc" id="L88" title="All 2 branches missed.">        for(int i=0 ; i&lt; Graph.getNode_list().size() ; i++){</span>
-<span class="nc" id="L89">            optOriginsList.add(Graph.getNode_list().get(i).getNodeID());</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">        for(int i=0 ; i&lt; Graph.getNode_list().size() ; i++){</span>
+<span class="nc" id="L85">            optOriginsList.add(Graph.getNode_list().get(i).getNodeID());</span>
         }
-<span class="nc" id="L91">    }</span>
+<span class="nc" id="L87">    }</span>
 
     public JPanel getPanelAgregarVehiculo(){
-<span class="nc" id="L94">        return this.panelAgregarVehiculo;</span>
+<span class="nc" id="L90">        return this.panelAgregarVehiculo;</span>
     }
 }
 
 class AgregarVehiculoGUIFrame extends JFrame{
-<span class="nc" id="L99">    AgregarVehiculoGUI agregarVehiculoGUI = new AgregarVehiculoGUI();</span>
+<span class="nc" id="L95">    AgregarVehiculoGUI agregarVehiculoGUI = new AgregarVehiculoGUI();</span>
     AgregarVehiculoGUIFrame(){
-<span class="nc" id="L101">        super(&quot;Agregar Vehículo&quot;);</span>
-<span class="nc" id="L102">        setContentPane(agregarVehiculoGUI.getPanelAgregarVehiculo());</span>
-<span class="nc" id="L103">        setSize(450,250);</span>
-<span class="nc" id="L104">        setVisible(true);</span>
-<span class="nc" id="L105">        setDefaultCloseOperation(DISPOSE_ON_CLOSE);</span>
-<span class="nc" id="L106">    }</span>
+<span class="nc" id="L97">        super(&quot;Agregar Vehículo&quot;);</span>
+<span class="nc" id="L98">        setContentPane(agregarVehiculoGUI.getPanelAgregarVehiculo());</span>
+<span class="nc" id="L99">        setSize(450,250);</span>
+<span class="nc" id="L100">        setVisible(true);</span>
+<span class="nc" id="L101">        setDefaultCloseOperation(DISPOSE_ON_CLOSE);</span>
+<span class="nc" id="L102">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
