@@ -5,6 +5,7 @@ import proyecto.Graph;
 import proyecto.LogisticaGUI;
 import proyecto.Node;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,102 +16,126 @@ public abstract class Vehiculo implements Runnable{
     protected int origin;
     protected int goal;
     protected int position;
+    protected double straightLineDistance;
+    protected double roadDistance;
 
     protected AStar tree;
     protected Graph map;
-<span class="fc" id="L21">    protected ArrayList&lt;Node&gt; minimunRoad = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L24">    protected ArrayList&lt;Node&gt; minimunRoad = new ArrayList&lt;&gt;();</span>
 
     protected int extraTime;
 
-<span class="fc" id="L25">    public Vehiculo (int id, int origin) {</span>
-<span class="fc" id="L26">        this.id = id;</span>
-<span class="fc" id="L27">        this.origin = origin;</span>
-<span class="fc" id="L28">        create(this.id);</span>
-<span class="fc" id="L29">        setOrigin(this.origin);</span>
+   // protected JFrame infoVehicleFrame;
+
+<span class="fc" id="L30">    public Vehiculo (int id, int origin) {</span>
+<span class="fc" id="L31">        this.id = id;</span>
+<span class="fc" id="L32">        this.origin = origin;</span>
+<span class="fc" id="L33">        create(this.id);</span>
+<span class="fc" id="L34">        setOrigin(this.origin);</span>
         try {
-<span class="fc" id="L31">            this.map = new Graph(this.origin);</span>
-<span class="fc" id="L32">            this.tree = new AStar(map);</span>
-<span class="fc" id="L33">            this.minimunRoad = tree.minimun_road;</span>
-<span class="fc" id="L34">            System.out.println(&quot;Vehiculo creado&quot;);</span>
+<span class="fc" id="L36">            this.map = new Graph(this.origin);</span>
+<span class="fc" id="L37">            this.tree = new AStar(map);</span>
+<span class="fc" id="L38">            this.minimunRoad = tree.minimun_road;</span>
+<span class="fc" id="L39">            System.out.println(&quot;Vehiculo creado&quot;);</span>
 
-<span class="nc" id="L36">        } catch (IOException e) {</span>
+<span class="nc" id="L41">        } catch (IOException e) {</span>
 
-<span class="fc" id="L38">        }</span>
-<span class="fc" id="L39">    }</span>
+<span class="fc" id="L43">        }</span>
+<span class="fc" id="L44">    }</span>
 
     public void create(int id) {
-<span class="fc" id="L42">        this.id = id;</span>
-<span class="fc" id="L43">    }</span>
+<span class="fc" id="L47">        this.id = id;</span>
+<span class="fc" id="L48">    }</span>
 
     public void delete(int id) {
         //Borrar del array delcarado en AStar
-<span class="nc" id="L47">    }</span>
+<span class="nc" id="L52">    }</span>
 
     public void setOrigin(int origin) {
-<span class="fc" id="L50">        this.origin = origin;</span>
-<span class="fc" id="L51">    }</span>
+<span class="fc" id="L55">        this.origin = origin;</span>
+<span class="fc" id="L56">    }</span>
 
     public void setGoal(int goal) {
-<span class="nc" id="L54">        this.goal = goal;</span>
-<span class="nc" id="L55">    }</span>
+<span class="nc" id="L59">        this.goal = goal;</span>
+<span class="nc" id="L60">    }</span>
 
     public int getPosition() {
-<span class="nc" id="L58">        return this.position;</span>
+<span class="nc" id="L63">        return this.position;</span>
     }
 
     public int getId() {
-<span class="fc" id="L62">        return this.id;</span>
+<span class="fc" id="L67">        return this.id;</span>
     }
 
     public int getOrigin() {
-<span class="fc" id="L66">        return this.origin;</span>
+<span class="fc" id="L71">        return this.origin;</span>
     }
 
+    public void setStraightLineDistance(double sld){
+<span class="nc" id="L75">        this.straightLineDistance = sld;</span>
+<span class="nc" id="L76">    }</span>
+
+    public double getStraightLineDistance(){
+<span class="nc" id="L79">        return this.straightLineDistance;</span>
+    }
+
+    public void setRoadDistance(double rd){
+<span class="nc" id="L83">        this.roadDistance = rd;</span>
+<span class="nc" id="L84">    }</span>
+
+    public double getRoadDistance(){
+<span class="nc" id="L87">        return this.roadDistance;</span>
+    }
+
+    /*public JFrame getInfoVehicleFrame(){
+        return this.infoVehicleFrame;
+    }*/
+
     public ArrayList&lt;Node&gt; getMinimunRoad(){
-<span class="nc" id="L70">        return this.minimunRoad;</span>
+<span class="nc" id="L95">        return this.minimunRoad;</span>
     }
 
     public void updateData(Object[] newPosition){
-<span class="nc bnc" id="L74" title="All 2 branches missed.">        for(int fila = 0; fila&lt; LogisticaGUI.getModel().getRowCount() ; fila++){</span>
+<span class="nc bnc" id="L99" title="All 2 branches missed.">        for(int fila = 0; fila&lt; LogisticaGUI.getModel().getRowCount() ; fila++){</span>
 
-<span class="nc bnc" id="L76" title="All 2 branches missed.">            if((int)LogisticaGUI.getModel().getValueAt(fila,0)==this.getId()){</span>
-<span class="nc" id="L77">                LogisticaGUI.getModel().setValueAt(newPosition[0],fila,2);</span>
-<span class="nc" id="L78">                LogisticaGUI.getModel().setValueAt(newPosition[1],fila,3);</span>
-<span class="nc" id="L79">                LogisticaGUI.getModel().setValueAt(newPosition[2],fila,4);</span>
-<span class="nc" id="L80">                break;</span>
+<span class="nc bnc" id="L101" title="All 2 branches missed.">            if((int)LogisticaGUI.getModel().getValueAt(fila,0)==this.getId()){</span>
+<span class="nc" id="L102">                LogisticaGUI.getModel().setValueAt(newPosition[0],fila,2);</span>
+<span class="nc" id="L103">                LogisticaGUI.getModel().setValueAt(newPosition[1],fila,3);</span>
+<span class="nc" id="L104">                LogisticaGUI.getModel().setValueAt(newPosition[2],fila,4);</span>
+<span class="nc" id="L105">                break;</span>
             }
         }
-<span class="nc" id="L83">    }</span>
+<span class="nc" id="L108">    }</span>
 
     @Override
     public void run() {
-<span class="nc" id="L87">        HashMap&lt;Integer,ArrayList&lt;Double&gt;&gt; distances = this.map.getDistances();</span>
-<span class="nc" id="L88">        this.position = minimunRoad.get(0).getNodeID();</span>
+<span class="nc" id="L112">        HashMap&lt;Integer,ArrayList&lt;Double&gt;&gt; distances = this.map.getDistances();</span>
+<span class="nc" id="L113">        this.position = minimunRoad.get(0).getNodeID();</span>
 
-<span class="nc bnc" id="L90" title="All 2 branches missed.">        for(int i=0 ; i&lt;minimunRoad.size()-1 ; i++){</span>
+<span class="nc bnc" id="L115" title="All 2 branches missed.">        for(int i=0 ; i&lt;minimunRoad.size()-1 ; i++){</span>
             try {
-<span class="nc" id="L92">                Thread.sleep((int)Math.round(distances.get(this.minimunRoad.get(i).getNodeID()).get(this.minimunRoad.get(i+1).getNodeID()-1)*1000*extraTime));</span>
+<span class="nc" id="L117">                Thread.sleep((int)Math.round(distances.get(this.minimunRoad.get(i).getNodeID()).get(this.minimunRoad.get(i+1).getNodeID()-1)*1000*extraTime));</span>
 
-<span class="nc" id="L94">                double straightLineDistance = minimunRoad.get(i+1).getHeuristic();</span>
-<span class="nc" id="L95">                double roadDistance = this.tree.getDistance() - minimunRoad.get(i+1).getDistance();</span>
-<span class="nc" id="L96">                this.position = minimunRoad.get(i+1).getNodeID();</span>
+<span class="nc" id="L119">                setStraightLineDistance(minimunRoad.get(i+1).getHeuristic());</span>
+<span class="nc" id="L120">                setRoadDistance(this.tree.getDistance() - minimunRoad.get(i+1).getDistance());</span>
+<span class="nc" id="L121">                this.position = minimunRoad.get(i+1).getNodeID();</span>
 
-<span class="nc" id="L98">                Object[] newData = new Object[3];</span>
-<span class="nc" id="L99">                newData[0] = straightLineDistance;</span>
-<span class="nc" id="L100">                newData[1] = roadDistance;</span>
-<span class="nc bnc" id="L101" title="All 2 branches missed.">                if(!minimunRoad.get(i+1).isObjetive()){</span>
-<span class="nc" id="L102">                    newData[2] = this.position;</span>
+<span class="nc" id="L123">                Object[] newData = new Object[3];</span>
+<span class="nc" id="L124">                newData[0] = straightLineDistance;</span>
+<span class="nc" id="L125">                newData[1] = roadDistance;</span>
+<span class="nc bnc" id="L126" title="All 2 branches missed.">                if(!minimunRoad.get(i+1).isObjetive()){</span>
+<span class="nc" id="L127">                    newData[2] = this.position;</span>
                 }else{
-<span class="nc" id="L104">                    newData[2] = &quot;FINALIZADO&quot;;</span>
+<span class="nc" id="L129">                    newData[2] = &quot;FINALIZADO&quot;;</span>
                 }
 
-<span class="nc" id="L107">                updateData(newData);</span>
+<span class="nc" id="L132">                updateData(newData);</span>
 
-<span class="nc" id="L109">            } catch (InterruptedException e) {</span>
+<span class="nc" id="L134">            } catch (InterruptedException e) {</span>
                 // Restore interrupted state...
-<span class="nc" id="L111">                Thread.currentThread().interrupt();</span>
-<span class="nc" id="L112">            }</span>
+<span class="nc" id="L136">                Thread.currentThread().interrupt();</span>
+<span class="nc" id="L137">            }</span>
         }
-<span class="nc" id="L114">    }</span>
+<span class="nc" id="L139">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
