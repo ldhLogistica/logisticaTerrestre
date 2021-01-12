@@ -14,6 +14,7 @@ public class Moto extends Vehiculo implements Runnable {
     public Moto(int id, int origin) {
         super(id, origin);
         extraTime = 1;
+        name = "Moto";
     }
 
 }
