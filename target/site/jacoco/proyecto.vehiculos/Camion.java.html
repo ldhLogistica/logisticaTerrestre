@@ -9,15 +9,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Camion extends Vehiculo implements Runnable {
+public class Camion extends Vehiculo{
 
     public Camion(int id, int origin) {
 <span class="nc" id="L15">        super(id, origin);</span>
-<span class="nc" id="L16">    }</span>
+<span class="nc" id="L16">        extraTime = 3;</span>
+<span class="nc" id="L17">    }</span>
 
-    @Override
-    public void run() {
-<span class="nc" id="L20">        runBuild(3);</span>
-<span class="nc" id="L21">    }</span>
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
