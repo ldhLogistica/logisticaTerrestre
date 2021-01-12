@@ -5,6 +5,7 @@ import proyecto.Graph;
 import proyecto.LogisticaGUI;
 import proyecto.Node;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,12 +16,16 @@ public abstract class Vehiculo implements Runnable{
     protected int origin;
     protected int goal;
     protected int position;
+    protected double straightLineDistance;
+    protected double roadDistance;
 
     protected AStar tree;
     protected Graph map;
     protected ArrayList<Node> minimunRoad = new ArrayList<>();
 
     protected int extraTime;
+
+   // protected JFrame infoVehicleFrame;
 
     public Vehiculo (int id, int origin) {
         this.id = id;
@@ -66,6 +71,26 @@ public abstract class Vehiculo implements Runnable{
         return this.origin;
     }
 
+    public void setStraightLineDistance(double sld){
+        this.straightLineDistance = sld;
+    }
+
+    public double getStraightLineDistance(){
+        return this.straightLineDistance;
+    }
+
+    public void setRoadDistance(double rd){
+        this.roadDistance = rd;
+    }
+
+    public double getRoadDistance(){
+        return this.roadDistance;
+    }
+
+    /*public JFrame getInfoVehicleFrame(){
+        return this.infoVehicleFrame;
+    }*/
+
     public ArrayList<Node> getMinimunRoad(){
         return this.minimunRoad;
     }
@@ -91,8 +116,8 @@ public abstract class Vehiculo implements Runnable{
             try {
                 Thread.sleep((int)Math.round(distances.get(this.minimunRoad.get(i).getNodeID()).get(this.minimunRoad.get(i+1).getNodeID()-1)*1000*extraTime));
 
-                double straightLineDistance = minimunRoad.get(i+1).getHeuristic();
-                double roadDistance = this.tree.getDistance() - minimunRoad.get(i+1).getDistance();
+                setStraightLineDistance(minimunRoad.get(i+1).getHeuristic());
+                setRoadDistance(this.tree.getDistance() - minimunRoad.get(i+1).getDistance());
                 this.position = minimunRoad.get(i+1).getNodeID();
 
                 Object[] newData = new Object[3];

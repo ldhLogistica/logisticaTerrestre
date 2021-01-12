@@ -29,6 +29,8 @@ public class InfoVehicleGUI extends JPanel{
         idInfoTxt.setText(String.valueOf(v.getId()));
         typeInfoTxt.setText(v.getClass().getName());
         //Queda imprimir distancias actuales al objetivo
+        straightLineInfoTxt.setText(String.valueOf(v.getStraightLineDistance()));
+        roadInfoTxt.setText(String.valueOf(v.getRoadDistance()));
 
         botonEliminarVehiculo.addActionListener(new ActionListener() {
             @Override
