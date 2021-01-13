@@ -6,7 +6,18 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
+/**
+ * Clase que define la estructura InfoVehicleGUI.
+ * Implementa la funcionalidad del formulario destinado para extaer la información de los vehículos
+ * @class AgregarVehiculoGUI
+ * @author Equipo 1
+ * @see <a href="https://github.com/ldhLogistica/logisticaTerrestre/blob/master/src/main/java/proyecto/InfoVehicleGUI.java"> Repositorio Github - InfoVehiculo</a>
+ */
 public class InfoVehicleGUI extends JPanel{
+    /**
+     * @brief variables de la clase
+     */
     private JButton botonEliminarVehiculo;
     private JPanel panelInfoVehiculo;
     private JLabel infoVehiculoTitle;
@@ -22,7 +33,11 @@ public class InfoVehicleGUI extends JPanel{
     private Vehiculo vehiculo;
     private JFrame frame;
 
-
+    /**
+     * @brief Constructor para generar la información del vehículo
+     * @param v vehículo
+     * @param frame panel
+     */
     InfoVehicleGUI(Vehiculo v, JFrame frame){
         this.frame = frame;
         this.vehiculo = v;
@@ -52,6 +67,9 @@ public class InfoVehicleGUI extends JPanel{
     }
 }
 
+/**
+ * @class Clase que genera la vista del formulario
+ */
 class InfoVehicleFrame extends JFrame{
     private InfoVehicleGUI infoVehicleGUI;
     InfoVehicleFrame(Vehiculo v){

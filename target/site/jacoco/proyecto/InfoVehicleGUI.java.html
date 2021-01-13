@@ -6,7 +6,18 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
+/**
+ * Clase que define la estructura InfoVehicleGUI.
+ * Implementa la funcionalidad del formulario destinado para extaer la información de los vehículos
+ * @class AgregarVehiculoGUI
+ * @author Equipo 1
+ * @see &lt;a href=&quot;https://github.com/ldhLogistica/logisticaTerrestre/blob/master/src/main/java/proyecto/InfoVehicleGUI.java&quot;&gt; Repositorio Github - InfoVehiculo&lt;/a&gt;
+ */
 public class InfoVehicleGUI extends JPanel{
+    /**
+     * @brief variables de la clase
+     */
     private JButton botonEliminarVehiculo;
     private JPanel panelInfoVehiculo;
     private JLabel infoVehiculoTitle;
@@ -22,45 +33,52 @@ public class InfoVehicleGUI extends JPanel{
     private Vehiculo vehiculo;
     private JFrame frame;
 
+    /**
+     * @brief Constructor para generar la información del vehículo
+     * @param v vehículo
+     * @param frame panel
+     */
+<span class="nc" id="L41">    InfoVehicleGUI(Vehiculo v, JFrame frame){</span>
+<span class="nc" id="L42">        this.frame = frame;</span>
+<span class="nc" id="L43">        this.vehiculo = v;</span>
+<span class="nc" id="L44">        idInfoTxt.setText(String.valueOf(v.getId()));</span>
+<span class="nc" id="L45">        typeInfoTxt.setText(v.getName());</span>
+<span class="nc" id="L46">        straightLineInfoTxt.setText(String.valueOf(v.getStraightLineDistance()));</span>
+<span class="nc" id="L47">        roadInfoTxt.setText(String.valueOf(v.getRoadDistance()));</span>
 
-<span class="nc" id="L26">    InfoVehicleGUI(Vehiculo v, JFrame frame){</span>
-<span class="nc" id="L27">        this.frame = frame;</span>
-<span class="nc" id="L28">        this.vehiculo = v;</span>
-<span class="nc" id="L29">        idInfoTxt.setText(String.valueOf(v.getId()));</span>
-<span class="nc" id="L30">        typeInfoTxt.setText(v.getName());</span>
-<span class="nc" id="L31">        straightLineInfoTxt.setText(String.valueOf(v.getStraightLineDistance()));</span>
-<span class="nc" id="L32">        roadInfoTxt.setText(String.valueOf(v.getRoadDistance()));</span>
-
-<span class="nc" id="L34">        botonEliminarVehiculo.addActionListener(new ActionListener() {</span>
+<span class="nc" id="L49">        botonEliminarVehiculo.addActionListener(new ActionListener() {</span>
             @Override
             public void actionPerformed(ActionEvent e) {
-<span class="nc bnc" id="L37" title="All 2 branches missed.">                for(int fila = 0; fila&lt; LogisticaGUI.getModel().getRowCount() ; fila++){</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">                for(int fila = 0; fila&lt; LogisticaGUI.getModel().getRowCount() ; fila++){</span>
 
-<span class="nc bnc" id="L39" title="All 2 branches missed.">                    if((int)LogisticaGUI.getModel().getValueAt(fila,0)== vehiculo.getId()){</span>
-<span class="nc" id="L40">                        LogisticaGUI.getModel().removeRow(fila);</span>
-<span class="nc" id="L41">                        LogisticaGUI.getListaVehiculos().get(vehiculo).stop();</span>
-<span class="nc" id="L42">                        LogisticaGUI.getListaVehiculos().remove(vehiculo);</span>
-<span class="nc" id="L43">                        frame.dispose();</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">                    if((int)LogisticaGUI.getModel().getValueAt(fila,0)== vehiculo.getId()){</span>
+<span class="nc" id="L55">                        LogisticaGUI.getModel().removeRow(fila);</span>
+<span class="nc" id="L56">                        LogisticaGUI.getListaVehiculos().get(vehiculo).stop();</span>
+<span class="nc" id="L57">                        LogisticaGUI.getListaVehiculos().remove(vehiculo);</span>
+<span class="nc" id="L58">                        frame.dispose();</span>
                     }
                 }
-<span class="nc" id="L46">            }</span>
+<span class="nc" id="L61">            }</span>
         });
-<span class="nc" id="L48">    }</span>
+<span class="nc" id="L63">    }</span>
 
     public JPanel getPanelInfoVehiculo(){
-<span class="nc" id="L51">        return this.panelInfoVehiculo;</span>
+<span class="nc" id="L66">        return this.panelInfoVehiculo;</span>
     }
 }
 
+/**
+ * @class Clase que genera la vista del formulario
+ */
 class InfoVehicleFrame extends JFrame{
     private InfoVehicleGUI infoVehicleGUI;
     InfoVehicleFrame(Vehiculo v){
-<span class="nc" id="L58">        super(&quot;Info Vehículo&quot;);</span>
-<span class="nc" id="L59">        infoVehicleGUI = new InfoVehicleGUI(v,this);</span>
-<span class="nc" id="L60">        setContentPane(infoVehicleGUI.getPanelInfoVehiculo());</span>
-<span class="nc" id="L61">        setSize(450,250);</span>
-<span class="nc" id="L62">        setVisible(true);</span>
-<span class="nc" id="L63">        setDefaultCloseOperation(DISPOSE_ON_CLOSE);</span>
-<span class="nc" id="L64">    }</span>
+<span class="nc" id="L76">        super(&quot;Info Vehículo&quot;);</span>
+<span class="nc" id="L77">        infoVehicleGUI = new InfoVehicleGUI(v,this);</span>
+<span class="nc" id="L78">        setContentPane(infoVehicleGUI.getPanelInfoVehiculo());</span>
+<span class="nc" id="L79">        setSize(450,250);</span>
+<span class="nc" id="L80">        setVisible(true);</span>
+<span class="nc" id="L81">        setDefaultCloseOperation(DISPOSE_ON_CLOSE);</span>
+<span class="nc" id="L82">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
