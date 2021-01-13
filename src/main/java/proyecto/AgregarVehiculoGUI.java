@@ -10,7 +10,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ * Clase que define la estructura AgregarVehiculoGUI.
+ * Implementa la funcionalidad del formulario destinado para agregar vehículos
+ * @class AgregarVehiculoGUI
+ * @author Equipo 1
+ * @see <a href="https://github.com/ldhLogistica/logisticaTerrestre/blob/master/src/main/java/proyecto/AgregarVehiculoGUI.java"> Repositorio Github - AgregarVehiculoGUI</a>
+ */
 public class AgregarVehiculoGUI extends JPanel{
+    /**
+     * @brief variables de la clase
+     */
     private JComboBox cbType;
     private JComboBox cbInicio;
     private static ArrayList<String> optTypesList = new ArrayList<>();
@@ -18,6 +28,9 @@ public class AgregarVehiculoGUI extends JPanel{
     private JPanel panelAgregarVehiculo;
     private JButton agregarVehículoButton;
 
+    /**
+     * @brief Constructor para agregar vehículo
+     */
     AgregarVehiculoGUI(){
 
         fillComboBoxes();
@@ -37,6 +50,10 @@ public class AgregarVehiculoGUI extends JPanel{
         });
     }
 
+    /**
+     * @brief método que agrega un vehículo concreto a la rejilla
+     * @param v vehículo
+     */
     private void agregarVehiculo(Vehiculo v){
         Object[] datosNuevoVehiculo = new Object[5];
         datosNuevoVehiculo[0] = v.getId();
@@ -50,6 +67,9 @@ public class AgregarVehiculoGUI extends JPanel{
         hiloVehiculo.start();
     }
 
+    /**
+     * @brief método que rellena los combos con la información de los nodos de la lista
+     */
     private void fillComboBoxes(){
 
         fillOptTypeList();
@@ -65,6 +85,9 @@ public class AgregarVehiculoGUI extends JPanel{
 
     }
 
+    /**
+     * @brief método que rellena los tipos de vehículos a elegir
+     */
     private void fillOptTypeList(){
         optTypesList.clear();
         optTypesList.add("Coche");
@@ -72,6 +95,9 @@ public class AgregarVehiculoGUI extends JPanel{
         optTypesList.add("Moto");
     }
 
+    /**
+     * @brief método que rellena la lista de nodos
+     */
     private void fillOptOriginsList(){
         optOriginsList.clear();
         if(Graph.getNode_list().size() == 0 ){
@@ -91,6 +117,9 @@ public class AgregarVehiculoGUI extends JPanel{
     }
 }
 
+/**
+ * @class Clase que da forma a la vista del formulario
+ */
 class AgregarVehiculoGUIFrame extends JFrame{
     AgregarVehiculoGUI agregarVehiculoGUI = new AgregarVehiculoGUI();
     AgregarVehiculoGUIFrame(){

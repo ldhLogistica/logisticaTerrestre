@@ -3,16 +3,15 @@ package proyecto;
 import java.util.ArrayList;
 
 /**
- * 
- * @author samue
- * 
- * Clase para almacenar un nodo individual con sus
- * datos y funciones para acceder a ellos
- *
+ * @class Clase Node para almacenar un nodo individual con sus datos y funciones para acceder a ellos
+ * @author Equipo 1
+ * @see <a href="https://github.com/ldhLogistica/logisticaTerrestre/blob/master/src/main/java/proyecto/Node.java"> Repositorio Github - Node</a>
  */
 
 final public class Node{
-	
+	/**
+	 * @brief variables de la clase
+	 */
 	private int nodeID_;
 	private double g_; //Representa el camino recorrido desde el nodo inicial hasta el actual
 	private double h_; //Representa el valor heur�stico
@@ -27,7 +26,7 @@ final public class Node{
 	
 	
 	/**
-	 * 
+	 * @brief Constructor de la clase Node que define el nodo
 	 * @param nodeID identificador de cada nodo
 	 */
 	Node(int nodeID){
@@ -37,12 +36,8 @@ final public class Node{
 		//System.out.println(this.nodeID_);
 	}
 	
-	public Node returnNode() {
-		return this;
-	}
-	
 	/**
-	 * 
+	 * @brief método que retorna el nodo
 	 * @return identificador del nodo
 	 */
 	public int getNodeID() {
@@ -50,30 +45,34 @@ final public class Node{
 	}
 	
 	/**
-	 * 
-	 * @return 
+	 * @brief método que retorna la heuristica (distancia en línea recta al objetivo)
+	 * @return  heuristica
 	 */
 	public double getHeuristic() {
 		return this.h_;
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * @brief método que retorna la distancia recorrida
+	 * @return distancia
 	 */
 	public double getDistance() {
 		return this.g_;
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * @brief método que devuelve el valor del nodo
+	 * @return la suma la distancia recorrida más la línea recta
 	 */
 	public double getValue() {
 		
 		return this.f_;
 	}
-	
+
+	/**
+	 * @brief método que devuelve si el nodo actual es el objetivo
+	 * @return true or false
+	 */
 	public boolean isObjetive() {
 		return this.objetive_;
 	}
@@ -87,7 +86,7 @@ final public class Node{
 	}
 	
 	/**
-	 * 
+	 * @brief método que asigna la distancia recorrida hasta el momento
 	 * @param distance
 	 */
 	public void setDistance(double distance) {
@@ -95,29 +94,40 @@ final public class Node{
 	}
 	
 	/**
-	 * 
+	 * @brief método que asigna la heuristica
 	 * @param heuristic
 	 */
 	public void setHeuristic(double heuristic) {
 		this.h_ = heuristic;
 	}
-	
+
+	/**
+	 * @brief método que asigna a este nodo como objetivo
+	 */
 	protected void setObjetive() {
 		this.objetive_ = true;
 	}
-	protected boolean getObjetive() {
-		return this.objetive_;
-	}
-	
+
+	/**
+	 * @brief método que declara el nodo actual como origen
+	 */
 	protected void setOrigin() {
 		this.origin_ = true;
 	}
-	
+
+	/**
+	 * @brief método destinado a formatear la salida por pantalla
+	 * @return
+	 */
 	public String toString() {
 		String cad = "";
 		return cad + this.getNodeID();
 	}
-	
+
+	/**
+	 * @brief método que se utiliza para clonar un nodo (Igual un nodo con otro)
+	 * @return nodo
+	 */
 	public Node clone() {
 		Node node = new Node(this.nodeID_);
 		node.analized = this.analized;
@@ -130,30 +140,47 @@ final public class Node{
 		
 		return node;
 	}
-	
+
+	/**
+	 * @brief método que asigna el nodo como padre del nodo introducido por parámetro
+	 * @param node
+	 */
 	public void setFather(Node node) {
 		this.father_node = node;
 	}
-	
+
+	/**
+	 * @brief método que devuelve el padre del nodo actual
+	 * @return padre
+	 */
 	public Node getFather() {
 		return this.father_node;
 	}
-	
+
+	/**
+	 * @brief método que añade un hijo y su distancia al nodo actual
+	 * @param node
+	 * @param distance
+	 */
 	public void addSon(Node node, double distance) {
 		this.sons_nodes.add(node);
 		this.sons_distances.add(distance);
 	}
-	
+
+	/**
+	 * @brief método que devuelve la lista de hijos del nodo actual
+	 * @return
+	 */
 	public ArrayList<Node> getSonsList(){
 		return this.sons_nodes;
 	}
+
+	/**
+	 * @brief método que devuelve la distancia a los nodos hijos
+	 * @return distancias
+	 */
 	public ArrayList<Double> getSonsDistances(){
 		return this.sons_distances;
 	}
-
-
-	
-	
-	
 
 }

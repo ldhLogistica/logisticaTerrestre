@@ -1,16 +1,19 @@
 package proyecto.vehiculos;
 
-import proyecto.AStar;
-import proyecto.Graph;
-import proyecto.Node;
-import proyecto.LogisticaGUI;
-
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
+/**
+ * Clase que define la estructura Coche que hereda de la clase Vehículo
+ * @class Coche
+ * @author Equipo 1
+ * @see <a href="https://github.com/ldhLogistica/logisticaTerrestre/blob/master/src/main/java/proyecto/vehiculos/Coche.java"> Repositorio Github - Coche</a>
+ */
 
 public class Coche extends Vehiculo implements Runnable {
+
+    /**
+     * @brief Constructor para la creación de un objeto Coche
+     * @param id
+     * @param origin
+     */
 
     public Coche(int id, int origin) {
         super(id, origin);

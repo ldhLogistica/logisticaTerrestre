@@ -3,9 +3,16 @@ package proyecto;
 import java.util.*;
 import java.io.*;
 
-
+/**
+ * Clase que define la estructura Grafo
+ * @class Graph
+ * @author Equipo 1
+ * @see <a href="https://github.com/ldhLogistica/logisticaTerrestre/blob/master/src/main/java/proyecto/Graph.java"> Repositorio Github - Graph</a>
+ */
 final public class Graph {
-	
+	/**
+	 * @brief variables de la clase
+	 */
 	private static ArrayList<Node> node_list_ = new ArrayList<Node>();
 	protected int originNodeID = 0;
 	protected int finalNodeID = 0;
@@ -16,6 +23,7 @@ final public class Graph {
 	private static final String heuristicsFile = "./resources/Grafo1Heuristica1.txt";
 	
 	/**
+	 * @brief Constructor de la clase
 	 * @param origin_node nodo de origen proporcionado en la linea de comandos
 	 * @throws NumberFormatException se asegura que se esta leyendo en el formato correcto
 	 * @throws IOException se asegura que no hay ningun error a la hora de leer los ficheros
@@ -30,7 +38,7 @@ final public class Graph {
 	}
 	
 	/**
-	 * Imprimir el grafo por pantalla (metodo para hacer pruebas, lo mas probable es que se acabe eliminando)
+	 * @brief método que imprime el grafo por pantalla (metodo para hacer pruebas, lo mas probable es que se acabe eliminando)
 	 */
 	public String toString() {
 		String res = "";
@@ -57,7 +65,7 @@ final public class Graph {
 	}
 	
 	/**
-	 * 
+	 * @brief método que retorna el número de nodos del grafo
 	 * @return numero de nodos del grafo
 	 */
 	protected int getNNodes() {
@@ -65,7 +73,7 @@ final public class Graph {
 	}
 
 	/**
-	 * 
+	 * @brief método que retorna la lista de nodos del grafo
 	 * @return devuelve una tabla Hash cuyas claves son los nodos y los valores las distancias a los vecinos
 	 */
 	protected ArrayList<Node> getNodeList(){
@@ -73,7 +81,7 @@ final public class Graph {
 	}
 	
 	/**
-	 * Almacena las distancias de cada nodo con sus vecinos
+	 * @brief método que almacena las distancias de cada nodo con sus vecinos
 	 * @param distances_file fichero que recogio el constructor por la linea de comandos
 	 * @param origin_node entero que recogio el constructor desde la linea de comandos
 	 * @throws NumberFormatException
@@ -97,7 +105,7 @@ final public class Graph {
 	}
 	
 	/**
-	 * 
+	 * @brief método que crea las distancias en la matriz a partir del grafo
 	 * @param br bufer que se comunica con el fichero de distancias
 	 * @return matriz de distancias
 	 * @throws NumberFormatException
@@ -136,7 +144,7 @@ final public class Graph {
 	}
 	
 	/**
-	 * Lee la matriz de distancias para almacenarlas en los nodos correspondientes
+	 * @brief método que lee la matriz de distancias para almacenarlas en los nodos correspondientes
 	 * @param distances_matrix matriz de distancias
 	 */
 	private void insertDistances(double[][] distances_matrix) {
@@ -161,7 +169,7 @@ final public class Graph {
 	}
 	
 	/**
-	 * Inserta a cada nodo su valor heuristico
+	 * @brief método que inserta a cada nodo su valor heuristico
 	 * @param heuristics_file fichero que recogio el constructor desde la linea de comandos
 	 * @throws NumberFormatException
 	 * @throws IOException
@@ -187,10 +195,18 @@ final public class Graph {
 		br.close();
 	}
 
+	/**
+	 * @brief método que retorna la lista de nodos
+	 * @return lista de nodos
+	 */
 	public static ArrayList<Node> getNode_list(){
 		return node_list_;
 	}
 
+	/**
+	 * @brief método que devuelve las distancias
+	 * @return distancias
+	 */
 	public HashMap<Integer,ArrayList<Double>> getDistances(){
 		return this.distances;
 	}

@@ -2,8 +2,18 @@ package proyecto;
 
 import java.util.*;
 
+/**
+ * Clase que define la estructura A estrella. Un algoritmo de inteligencia artificial que calcula el camino mínimo entre dos puntos.
+ * @class AStar
+ * @author Equipo 1
+ * @see <a href="https://github.com/ldhLogistica/logisticaTerrestre/blob/master/src/main/java/proyecto/AStar.java"> Repositorio Github - AStar</a>
+ */
+
 public class AStar {
-	
+
+	/**
+	 * @brief variables de la clase
+	 */
 	private Graph graph_;
 	public ArrayList<Node> minimun_road = new ArrayList<Node>();
 	private ArrayList<Node> not_visited_nodes = new ArrayList<Node>();
@@ -12,6 +22,10 @@ public class AStar {
 	private int generated_nodes;
 	private double distance;
 
+	/**
+	 * @brief Constructor para la creación del algoritmo.
+	 * @param graph Grafo donde se ubica los puntos a recorrer
+	 */
 	public AStar(Graph graph){
 		this.cont = 1;
 		this.graph_ = graph;
@@ -30,7 +44,12 @@ public class AStar {
 		calculateMinimunRoad(aux);
 		
 	}
-	
+
+	/**
+	 * @brief método que genera los hijos del punto actual
+	 * @param node Nodo (Punto) actual
+	 * @return listado de nodos (puntos) hijos del punto actual
+	 */
 	public ArrayList<Node> generateSons(Node node) {
 		
 		ArrayList<Node> sonsList = new ArrayList<Node>(); //Lista con los nodos vecinos que tienen distancias asignadas
@@ -62,7 +81,11 @@ public class AStar {
 			return sonsList;
 		}
 	}
-	
+
+	/**
+	 * @brief método que calcula el camino mínimo a recorrer hasta un punto destino
+	 * @param node Nodo actual
+	 */
 	public void calculateMinimunRoad(Node node) {
 		
 		cont++;
@@ -111,7 +134,11 @@ public class AStar {
 
 		}	
 	}
-	
+
+	/**
+	 * @brief método que retorna el nodo siguiente al que hay que desplazarse desde el punto actual
+	 * @return Nodo hijo destino
+	 */
 	private Node getMinimunFNode() {
 		// LOCALIZAR EL NODO CUYO VALOR F() SEA EL MINIMO
 		double min = Double.MAX_VALUE;
@@ -132,8 +159,12 @@ public class AStar {
 		
 		return nodo_min;
 	}
-	
-	//VERIFICAR SI ES VIABLE SEGUIR CON UN CAMINO
+
+	/**
+	 * @brief método que verifica si es viable seguir el camino actual
+	 * @param node
+	 * @return true or false en función del calculo
+	 */
 	private boolean isViableRoad(Node node) {
 		Iterator<Node> it = this.objetives_nodes.iterator();
 		boolean viable = true;
@@ -145,7 +176,10 @@ public class AStar {
 		
 		return viable;
 	}
-	
+
+	/**
+	 * @brief método que asigna el camino mínimo a la ruta a seguir
+	 */
 	private void setMinimunRoad(){
 		Iterator<Node> it = this.objetives_nodes.iterator();
 		Node optimal_node = null;
@@ -169,24 +203,5 @@ public class AStar {
 
 	public double  getDistance(){
 		return this.distance;
-	}
-
-	public String toString() {
-		
-		String res = "";
-		res += "\n\n########## RESULTADO FINAL ##########\n\n";
-		res += "Nodo origen: " + this.graph_.originNodeID + "\n\n" + "Nodo objetivo: " + this.graph_.finalNodeID + "\n\n";
-		res += "Camino minimo: ";
-		Iterator<Node> it = this.minimun_road.iterator();
-		while(it.hasNext()) {
-			res+=it.next().getNodeID();
-			if(it.hasNext())
-				res +="->";
-		}
-		res+= "\n\nNodos generados:  " + (this.generated_nodes);
-		res+= "\n\nNodos inspeccionados: " + this.cont;
-		res+= "\n\nCoste del camino mínimo: " + this.distance + "\n";
-		
-		return res;
 	}
 }

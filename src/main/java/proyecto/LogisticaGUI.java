@@ -12,7 +12,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Clase que define la estructura LogisticaGUI.
+ * Implementa la funcionalidad y las variaciones en la rejilla
+ * @class AgregarVehiculoGUI
+ * @author Equipo 1
+ * @see <a href="https://github.com/ldhLogistica/logisticaTerrestre/blob/master/src/main/java/proyecto/LogisticaGUI.java"> Repositorio Github - LogisticaGUI</a>
+ */
 public class LogisticaGUI extends JPanel{
+    /**
+     * @brief variables de la clase
+     */
     private JTable tablaVehículos;
     private JButton botonAgregarVehículo;
     private JPanel panelLogisticaTerrestre;
@@ -23,6 +33,9 @@ public class LogisticaGUI extends JPanel{
     private static DefaultTableModel model = new DefaultTableModel();
     public static int contID;
 
+    /**
+     * @brief Constructor para agregar funciones a la rejilla
+     */
     LogisticaGUI(){
         contID = 0;
         setHeaders();
@@ -50,6 +63,10 @@ public class LogisticaGUI extends JPanel{
             }
         });
     }
+
+    /**
+     * @brief método que asigna las cabeceras a la rejilla
+     */
     private void setHeaders() {
         this.tablaVehículos = new JTable(model);
         scrollTablaVehículos.setViewportView(tablaVehículos);
@@ -61,24 +78,35 @@ public class LogisticaGUI extends JPanel{
 
     }
 
+    /**
+     * @brief método que retorna la lista de vehiculos
+     * @return
+     */
     public static Map<Vehiculo,Thread> getListaVehiculos(){
         return listaVehiculos;
     }
 
+    /**
+     * @brief método que devuelve el modelo
+     * @return
+     */
     public static DefaultTableModel getModel(){
         return model;
     }
 
-    public static int getContId(){
-        return contID;
-    }
-
+    /**
+     * @brief método que devuelve el panel completo
+     * @return
+     */
     public JPanel getPanelLogisticaTerrestre(){
         return this.panelLogisticaTerrestre;
     }
 
 }
 
+/**
+ * @class Clase que genera la vista del formulario
+ */
 class LogisticaGUIFrame extends JFrame{
     LogisticaGUI logisticaGUI = new LogisticaGUI();
     LogisticaGUIFrame(){
