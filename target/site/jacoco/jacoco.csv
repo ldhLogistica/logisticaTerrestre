@@ -3,17 +3,16 @@ logisticaTerrestre,proyecto,InfoVehicleFrame,26,0,0,0,7,0,1,0,1,0
 logisticaTerrestre,proyecto,LogisticaGUIFrame,24,0,0,0,7,0,1,0,1,0
 logisticaTerrestre,proyecto,AstarSearch,8,0,0,0,3,0,2,0,2,0
 logisticaTerrestre,proyecto,AgregarVehiculoGUI,163,0,12,0,41,0,13,0,7,0
-logisticaTerrestre,proyecto,LogisticaGUI,64,0,0,0,19,0,6,0,6,0
-logisticaTerrestre,proyecto,LogisticaGUI.new ActionListener() {...},11,0,0,0,3,0,2,0,2,0
-logisticaTerrestre,proyecto,InfoVehicleGUI.new ActionListener() {...},48,0,4,0,8,0,4,0,2,0
+logisticaTerrestre,proyecto,LogisticaGUI,66,0,0,0,19,0,7,0,7,0
 logisticaTerrestre,proyecto,LogisticaGUI.new MouseAdapter() {...},55,0,6,0,12,0,5,0,2,0
+logisticaTerrestre,proyecto,InfoVehicleGUI.new ActionListener() {...},48,0,4,0,8,0,4,0,2,0
 logisticaTerrestre,proyecto,InfoVehicleGUI,43,0,0,0,10,0,2,0,2,0
-logisticaTerrestre,proyecto,AStar,20,320,10,34,5,92,9,20,1,6
-logisticaTerrestre,proyecto,Node,0,150,0,0,0,46,0,20,0,20
-logisticaTerrestre,proyecto,Graph,105,315,4,26,19,75,5,21,3,8
+logisticaTerrestre,proyecto,AStar,340,0,44,0,97,0,29,0,7,0
+logisticaTerrestre,proyecto,Node,150,0,0,0,46,0,20,0,20,0
+logisticaTerrestre,proyecto,Graph,320,0,26,0,77,0,23,0,10,0
 logisticaTerrestre,proyecto,AgregarVehiculoGUIFrame,24,0,0,0,7,0,1,0,1,0
 logisticaTerrestre,proyecto,AgregarVehiculoGUI.new ActionListener() {...},71,0,4,0,9,0,4,0,2,0
-logisticaTerrestre,proyecto.vehiculos,Vehiculo,188,65,8,0,32,20,10,7,6,7
+logisticaTerrestre,proyecto.vehiculos,Vehiculo,253,0,8,0,52,0,17,0,13,0
 logisticaTerrestre,proyecto.vehiculos,Camion,11,0,0,0,4,0,1,0,1,0
 logisticaTerrestre,proyecto.vehiculos,Moto,11,0,0,0,4,0,1,0,1,0
-logisticaTerrestre,proyecto.vehiculos,Coche,0,11,0,0,0,4,0,1,0,1
+logisticaTerrestre,proyecto.vehiculos,Coche,11,0,0,0,4,0,1,0,1,0

@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,12 +38,7 @@ public class LogisticaGUI extends JPanel{
     LogisticaGUI(){
         contID = 0;
         setHeaders();
-        botonAgregarVehículo.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new AgregarVehiculoGUIFrame();
-            }
-        });
+        botonAgregarVehículo.addActionListener(e -> new AgregarVehiculoGUIFrame());
         tablaVehículos.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

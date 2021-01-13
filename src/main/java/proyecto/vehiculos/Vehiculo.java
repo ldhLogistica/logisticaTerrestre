@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -160,7 +161,7 @@ public abstract class Vehiculo implements Runnable{
      */
     @Override
     public void run() {
-        HashMap<Integer,ArrayList<Double>> distances = this.map.getDistances();
+        Map<Integer,ArrayList<Double>> distances = this.map.getDistances();
         this.position = minimunRoad.get(0).getNodeID();
 
         for(int i=0 ; i<minimunRoad.size()-1 ; i++){

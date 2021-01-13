@@ -36,33 +36,7 @@ final public class Graph {
 		buildHeuristics(heuristicsFile);
 			
 	}
-	
-	/**
-	 * @brief método que imprime el grafo por pantalla (metodo para hacer pruebas, lo mas probable es que se acabe eliminando)
-	 */
-	public String toString() {
-		String res = "";
-		Iterator<Node> it_node = this.node_list_.iterator();
-		
-		Node aux = null;
-		while(it_node.hasNext()) {
-			aux = it_node.next();
-			res += "H = " + aux.getHeuristic() + "\n";
-			res += "NodoID: " + aux.getNodeID() + "\n";
-			res += "Vecinos: ";
-			Iterator<Node> it_neighbours = aux.getSonsList().iterator();
-			Iterator<Double> it_double = aux.getSonsDistances().iterator();
-			Node aux1 = null;
-			while(it_neighbours.hasNext()) {
-				aux1 = it_neighbours.next();
-				res += aux1.getNodeID() + ": " + it_double.next() + ", ";
-			}
-			res+="\n\n";
-			
-		}
-		return res;
-		
-	}
+
 	
 	/**
 	 * @brief método que retorna el número de nodos del grafo
