@@ -110,7 +110,7 @@ public class LogisticaTerrestreTest {
 
     }
 
-    @DisplayName("Testeando clase LogisticaGUI")
+   /* @DisplayName("Testeando clase LogisticaGUI")
     @Nested
     class TestLogisticaGUI{
 
@@ -169,7 +169,7 @@ public class LogisticaTerrestreTest {
             assertEquals(ventana1,ventasna2);
         }
 
-    }
+    }*/
 
 
 }
