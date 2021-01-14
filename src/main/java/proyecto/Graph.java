@@ -183,11 +183,6 @@ final public class Graph {
 			LOGGER.log(Level.SEVERE,"Error al leer de fichero " + e);
 		}
 
-
-
-		FileReader fr = new FileReader(heuristics_file);
-		BufferedReader br = new BufferedReader(fr);
-
 	}
 
 	/**
