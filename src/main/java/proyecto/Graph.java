@@ -167,7 +167,7 @@ final public class Graph {
 		Path path = Paths.get(heuristics_file);
 
 		try(BufferedReader b = Files.newBufferedReader(path, StandardCharsets.UTF_8)){
-			int n_nodos = Integer.parseInt(b.readLine());
+
 			Iterator<Node> it_node = this.node_list_.iterator();
 			Node aux = null;
 			while(it_node.hasNext()) {
@@ -179,8 +179,6 @@ final public class Graph {
 					this.finalNodeID = aux.getNodeID();
 				}
 			}
-
-			b.close();
 		}catch (Exception e){
 			LOGGER.log(Level.SEVERE,"Error al leer de fichero " + e);
 		}
