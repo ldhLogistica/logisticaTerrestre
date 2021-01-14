@@ -16,8 +16,8 @@ branches:
 notifications:
   email:
     recipients:
-      - samuelfumerohdez@gmail.com
-      - alu0101061320@ull.edu.es
+      - samuelfumerohdez@gmail.com # Samuel Fumero Hernández
+      - alu0101061320@ull.edu.es # David Ramallo Gracia
 
 # Package will be tested in every OS
 script: mvn clean verify
@@ -45,16 +45,16 @@ jobs:
       os: linaux
       jkd: openjdk11
       # Doxygen Packages
-      #addons:
-       # apt:
-        #  packages:
-         #   - doxygen
-          #  - doxygen-doc
-           # - doxygen-latex
-            #- doxygen-gui
-            #- graphviz
+      addons:
+        apt:
+          packages:
+            - doxygen
+            - doxygen-doc
+            - doxygen-latex
+            - doxygen-gui
+            - graphviz
       # generate documentation using Doxyfile config
-      #script: doxygen Doxyfile
+      script: doxygen Doxyfile
       # GitHub Pages Deployment
       deploy:
         provider: pages
@@ -62,10 +62,12 @@ jobs:
         skip_cleanup: true
         github_token: $GITHUB_TOKEN
         keep_history: true
-        #local_dir: docs/html
+        local_dir: docs/html
         on:
           branch: master
-    
+
+
+
     
     
     
