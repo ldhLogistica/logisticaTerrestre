@@ -169,7 +169,8 @@ public abstract class Vehiculo implements Runnable{
 
         for(int i=0 ; i<minimunRoad.size()-1 ; i++){
             try {
-                Thread.sleep((int)Math.round(distances.get(this.minimunRoad.get(i).getNodeID()).get(this.minimunRoad.get(i+1).getNodeID()-1)*1000*extraTime));
+                Thread.sleep((int)Math.round(distances.get(this.minimunRoad.get(i).getNodeID())
+                        .get(this.minimunRoad.get(i+1).getNodeID()-1)*1000*extraTime));
 
                 setStraightLineDistance(minimunRoad.get(i+1).getHeuristic());
                 setRoadDistance(this.tree.getDistance() - minimunRoad.get(i+1).getDistance());

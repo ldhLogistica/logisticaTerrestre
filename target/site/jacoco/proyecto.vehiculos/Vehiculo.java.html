@@ -169,28 +169,29 @@ public abstract class Vehiculo implements Runnable{
 
 <span class="nc bnc" id="L170" title="All 2 branches missed.">        for(int i=0 ; i&lt;minimunRoad.size()-1 ; i++){</span>
             try {
-<span class="nc" id="L172">                Thread.sleep((int)Math.round(distances.get(this.minimunRoad.get(i).getNodeID()).get(this.minimunRoad.get(i+1).getNodeID()-1)*1000*extraTime));</span>
+<span class="nc" id="L172">                Thread.sleep((int)Math.round(distances.get(this.minimunRoad.get(i).getNodeID())</span>
+<span class="nc" id="L173">                        .get(this.minimunRoad.get(i+1).getNodeID()-1)*1000*extraTime));</span>
 
-<span class="nc" id="L174">                setStraightLineDistance(minimunRoad.get(i+1).getHeuristic());</span>
-<span class="nc" id="L175">                setRoadDistance(this.tree.getDistance() - minimunRoad.get(i+1).getDistance());</span>
-<span class="nc" id="L176">                this.position = minimunRoad.get(i+1).getNodeID();</span>
+<span class="nc" id="L175">                setStraightLineDistance(minimunRoad.get(i+1).getHeuristic());</span>
+<span class="nc" id="L176">                setRoadDistance(this.tree.getDistance() - minimunRoad.get(i+1).getDistance());</span>
+<span class="nc" id="L177">                this.position = minimunRoad.get(i+1).getNodeID();</span>
 
-<span class="nc" id="L178">                Object[] newData = new Object[3];</span>
-<span class="nc" id="L179">                newData[0] = straightLineDistance;</span>
-<span class="nc" id="L180">                newData[1] = roadDistance;</span>
-<span class="nc bnc" id="L181" title="All 2 branches missed.">                if(!minimunRoad.get(i+1).isObjetive()){</span>
-<span class="nc" id="L182">                    newData[2] = this.position;</span>
+<span class="nc" id="L179">                Object[] newData = new Object[3];</span>
+<span class="nc" id="L180">                newData[0] = straightLineDistance;</span>
+<span class="nc" id="L181">                newData[1] = roadDistance;</span>
+<span class="nc bnc" id="L182" title="All 2 branches missed.">                if(!minimunRoad.get(i+1).isObjetive()){</span>
+<span class="nc" id="L183">                    newData[2] = this.position;</span>
                 }else{
-<span class="nc" id="L184">                    newData[2] = &quot;FINALIZADO&quot;;</span>
+<span class="nc" id="L185">                    newData[2] = &quot;FINALIZADO&quot;;</span>
                 }
 
-<span class="nc" id="L187">                updateData(newData);</span>
+<span class="nc" id="L188">                updateData(newData);</span>
 
-<span class="nc" id="L189">            } catch (InterruptedException e) {</span>
+<span class="nc" id="L190">            } catch (InterruptedException e) {</span>
                 // Restore interrupted state...
-<span class="nc" id="L191">                Thread.currentThread().interrupt();</span>
-<span class="nc" id="L192">            }</span>
+<span class="nc" id="L192">                Thread.currentThread().interrupt();</span>
+<span class="nc" id="L193">            }</span>
         }
-<span class="nc" id="L194">    }</span>
+<span class="nc" id="L195">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>
