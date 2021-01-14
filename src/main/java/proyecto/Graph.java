@@ -73,7 +73,7 @@ final public class Graph {
 	private void buildDistances(String distances_file, int origin_node) throws NumberFormatException, IOException {
 		//System.out.println(distances_file);
 		Path path = Paths.get(distances_file);
-		//FileReader f = new FileReader(distances_file);
+
 		try(BufferedReader b = Files.newBufferedReader(path, StandardCharsets.UTF_8)){
 			this.n_nodes_ = Integer.parseInt(b.readLine());
 			int index;
@@ -164,22 +164,32 @@ final public class Graph {
 	 * @throws IOException
 	 */
 	private void buildHeuristics(String heuristics_file) throws NumberFormatException, IOException {
-		FileReader fr = new FileReader(heuristics_file);
-		BufferedReader br = new BufferedReader(fr);
-		int n_nodos = Integer.parseInt(br.readLine());
-		Iterator<Node> it_node = this.node_list_.iterator();
-		Node aux = null;
-		while(it_node.hasNext()) {
-			aux = it_node.next();
-			double heuristic = Double.parseDouble(br.readLine());
-			aux.setHeuristic(heuristic);
-			if(aux.getHeuristic()==0.0) {
-				aux.setObjetive();
-				this.finalNodeID = aux.getNodeID();
+		Path path = Paths.get(heuristics_file);
+
+		try(BufferedReader b = Files.newBufferedReader(path, StandardCharsets.UTF_8)){
+			int n_nodos = Integer.parseInt(b.readLine());
+			Iterator<Node> it_node = this.node_list_.iterator();
+			Node aux = null;
+			while(it_node.hasNext()) {
+				aux = it_node.next();
+				double heuristic = Double.parseDouble(b.readLine());
+				aux.setHeuristic(heuristic);
+				if(aux.getHeuristic()==0.0) {
+					aux.setObjetive();
+					this.finalNodeID = aux.getNodeID();
+				}
 			}
+
+			b.close();
+		}catch (Exception e){
+			LOGGER.log(Level.SEVERE,"Error al leer de fichero " + e);
 		}
 
-		br.close();
+
+
+		FileReader fr = new FileReader(heuristics_file);
+		BufferedReader br = new BufferedReader(fr);
+
 	}
 
 	/**

@@ -114,7 +114,6 @@ public class AStar {
 		while(it_aux1.hasNext() && !found) {
 			aux1 = it_aux1.next();
 			if(nodo_min.getValue() == aux1.getValue()) {
-				nodo = aux1.clone();
 				found = true;
 				this.not_visited_nodes.remove(aux1);
 			}
@@ -182,7 +181,7 @@ public class AStar {
 	 */
 	private void setMinimunRoad(){
 		Iterator<Node> it = this.objetives_nodes.iterator();
-		Node optimal_node = null;
+		Node optimal_node = new Node();
 		Node aux = null;
 		double minimunF = Double.MAX_VALUE;
 		while(it.hasNext()) {
