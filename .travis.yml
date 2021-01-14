@@ -53,7 +53,7 @@ jobs:
             - doxygen-latex
             - doxygen-gui
             - graphviz
-      # generate documentation using Doxyfile config
+      # generate documentation using Doxyfile configuration
       script: doxygen Doxyfile
       # GitHub Pages Deployment
       deploy:
