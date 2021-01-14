@@ -145,7 +145,7 @@ public class AStar {
 		Iterator<Node> it = this.not_visited_nodes.iterator();
 		
 		Node aux = null;
-		Node nodo_min = null;
+		Node nodo_min = new Node();
 		while(it.hasNext()) {
 			aux = it.next();
 			

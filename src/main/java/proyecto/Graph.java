@@ -1,7 +1,15 @@
 package proyecto;
 
+import proyecto.vehiculos.Vehiculo;
+
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Clase que define la estructura Grafo
@@ -21,6 +29,8 @@ final public class Graph {
 
 	private static final String distancesFile = "./resources/Grafo1.txt";
 	private static final String heuristicsFile = "./resources/Grafo1Heuristica1.txt";
+
+	private static final Logger LOGGER = Logger.getLogger(Graph.class.getName());
 	
 	/**
 	 * @brief Constructor de la clase
@@ -62,18 +72,25 @@ final public class Graph {
 	 */
 	private void buildDistances(String distances_file, int origin_node) throws NumberFormatException, IOException {
 		//System.out.println(distances_file);
-		FileReader f = new FileReader(distances_file);
-		BufferedReader b = new BufferedReader(f);
-		this.n_nodes_ = Integer.parseInt(b.readLine());
-		int index;
-		for(index = 1 ; index <=this.n_nodes_ ; index ++) {
-			Node node = new Node(index);
-			if(index==origin_node)
-				node.setOrigin();
-			this.node_list_.add(node);	
+		Path path = Paths.get(distances_file);
+		//FileReader f = new FileReader(distances_file);
+		try(BufferedReader b = Files.newBufferedReader(path, StandardCharsets.UTF_8)){
+			this.n_nodes_ = Integer.parseInt(b.readLine());
+			int index;
+			for(index = 1 ; index <=this.n_nodes_ ; index ++) {
+				Node node = new Node(index);
+				if(index==origin_node)
+					node.setOrigin();
+				this.node_list_.add(node);
+			}
+			double[][] distances_matrix = buildDistancesMatrix(b);
+			insertDistances(distances_matrix);
+		}catch (Exception e){
+			LOGGER.log(Level.SEVERE,"Error al leer de fichero " + e);
 		}
-		double[][] distances_matrix = buildDistancesMatrix(b);
-		insertDistances(distances_matrix);
+
+
+
 		
 	}
 	
