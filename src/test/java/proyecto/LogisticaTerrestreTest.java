@@ -63,9 +63,6 @@ public class LogisticaTerrestreTest {
         void testSetRoadDistance(){
             coche.setRoadDistance(2.0);
             assertEquals(2.0,coche.getRoadDistance());
-            JFrame ventana1 = new LogisticaGUIFrame();
-            JFrame ventasna2 = ventana1;
-            assertEquals(ventana1,ventasna2);
         }
 
     }
