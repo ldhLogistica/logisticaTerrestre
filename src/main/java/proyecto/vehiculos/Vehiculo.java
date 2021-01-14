@@ -53,7 +53,6 @@ public abstract class Vehiculo implements Runnable{
             this.map = new Graph(this.origin);
             this.tree = new AStar(map);
             this.minimunRoad = tree.minimun_road;
-            System.out.println("Vehiculo creado");
 
         } catch (IOException e) {
 
