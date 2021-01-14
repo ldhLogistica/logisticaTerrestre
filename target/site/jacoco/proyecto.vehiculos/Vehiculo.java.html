@@ -34,7 +34,7 @@ public abstract class Vehiculo implements Runnable{
 
     protected AStar tree;
     protected Graph map;
-<span class="nc" id="L37">    protected ArrayList&lt;Node&gt; minimunRoad = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L37">    protected ArrayList&lt;Node&gt; minimunRoad = new ArrayList&lt;&gt;();</span>
 
     protected int extraTime;
     protected String name;
@@ -44,44 +44,44 @@ public abstract class Vehiculo implements Runnable{
      * @param id del vehículo
      * @param origin punto de origen
      */
-<span class="nc" id="L47">    public Vehiculo (int id, int origin) {</span>
-<span class="nc" id="L48">        this.id = id;</span>
-<span class="nc" id="L49">        this.origin = origin;</span>
-<span class="nc" id="L50">        create(this.id);</span>
-<span class="nc" id="L51">        setOrigin(this.origin);</span>
+<span class="fc" id="L47">    public Vehiculo (int id, int origin) {</span>
+<span class="fc" id="L48">        this.id = id;</span>
+<span class="fc" id="L49">        this.origin = origin;</span>
+<span class="fc" id="L50">        create(this.id);</span>
+<span class="fc" id="L51">        setOrigin(this.origin);</span>
         try {
-<span class="nc" id="L53">            this.map = new Graph(this.origin);</span>
-<span class="nc" id="L54">            this.tree = new AStar(map);</span>
-<span class="nc" id="L55">            this.minimunRoad = tree.minimun_road;</span>
-<span class="nc" id="L56">            System.out.println(&quot;Vehiculo creado&quot;);</span>
+<span class="fc" id="L53">            this.map = new Graph(this.origin);</span>
+<span class="fc" id="L54">            this.tree = new AStar(map);</span>
+<span class="fc" id="L55">            this.minimunRoad = tree.minimun_road;</span>
+<span class="fc" id="L56">            System.out.println(&quot;Vehiculo creado&quot;);</span>
 
 <span class="nc" id="L58">        } catch (IOException e) {</span>
 
-<span class="nc" id="L60">        }</span>
-<span class="nc" id="L61">    }</span>
+<span class="fc" id="L60">        }</span>
+<span class="fc" id="L61">    }</span>
 
     /**
      * @brief método create destinado a crear el vehículo con la id introducida por parámetro
      * @param id
      */
     public void create(int id) {
-<span class="nc" id="L68">        this.id = id;</span>
-<span class="nc" id="L69">    }</span>
+<span class="fc" id="L68">        this.id = id;</span>
+<span class="fc" id="L69">    }</span>
 
     /**
      * @brief método setOrigen encargado de asignar un punto de origen
      * @param origin
      */
     public void setOrigin(int origin) {
-<span class="nc" id="L76">        this.origin = origin;</span>
-<span class="nc" id="L77">    }</span>
+<span class="fc" id="L76">        this.origin = origin;</span>
+<span class="fc" id="L77">    }</span>
 
     /**
      * @brief método getId que devuelve la id del vehículo
      * @return id del vehículo
      */
     public int getId() {
-<span class="nc" id="L84">        return this.id;</span>
+<span class="fc" id="L84">        return this.id;</span>
     }
 
     /**
@@ -89,7 +89,7 @@ public abstract class Vehiculo implements Runnable{
      * @return origen del vehículo
      */
     public int getOrigin() {
-<span class="nc" id="L92">        return this.origin;</span>
+<span class="fc" id="L92">        return this.origin;</span>
     }
 
     /**
@@ -97,15 +97,15 @@ public abstract class Vehiculo implements Runnable{
      * @param sld
      */
     public void setStraightLineDistance(double sld){
-<span class="nc" id="L100">        this.straightLineDistance = sld;</span>
-<span class="nc" id="L101">    }</span>
+<span class="fc" id="L100">        this.straightLineDistance = sld;</span>
+<span class="fc" id="L101">    }</span>
 
     /**
      * @brief método setStraightLineDistance que retorna la distancia en línea recta
      * @return distancia en línea recta
      */
     public double getStraightLineDistance(){
-<span class="nc" id="L108">        return this.straightLineDistance;</span>
+<span class="fc" id="L108">        return this.straightLineDistance;</span>
     }
 
     /**
@@ -113,15 +113,15 @@ public abstract class Vehiculo implements Runnable{
      * @param rd
      */
     public void setRoadDistance(double rd){
-<span class="nc" id="L116">        this.roadDistance = rd;</span>
-<span class="nc" id="L117">    }</span>
+<span class="fc" id="L116">        this.roadDistance = rd;</span>
+<span class="fc" id="L117">    }</span>
 
     /**
      * @brief método getRoadDistance que retorna la distancia en carretera
      * @return distancia en carretera
      */
     public double getRoadDistance(){
-<span class="nc" id="L124">        return this.roadDistance;</span>
+<span class="fc" id="L124">        return this.roadDistance;</span>
     }
 
     /**
@@ -129,7 +129,7 @@ public abstract class Vehiculo implements Runnable{
      * @return nombre del vehículo
      */
     public String getName(){
-<span class="nc" id="L132">        return this.name;</span>
+<span class="fc" id="L132">        return this.name;</span>
     }
 
     /**
@@ -137,7 +137,7 @@ public abstract class Vehiculo implements Runnable{
      * @return valor extra de tiempo
      */
     public int getExtraTime(){
-<span class="nc" id="L140">        return this.extraTime;</span>
+<span class="fc" id="L140">        return this.extraTime;</span>
     }
 
     /**

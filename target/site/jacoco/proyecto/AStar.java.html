@@ -15,9 +15,9 @@ public class AStar {
 	 * @brief variables de la clase
 	 */
 	private Graph graph_;
-<span class="nc" id="L18">	public ArrayList&lt;Node&gt; minimun_road = new ArrayList&lt;Node&gt;();</span>
-<span class="nc" id="L19">	private ArrayList&lt;Node&gt; not_visited_nodes = new ArrayList&lt;Node&gt;();</span>
-<span class="nc" id="L20">	private ArrayList&lt;Node&gt; objetives_nodes = new ArrayList&lt;Node&gt;();</span>
+<span class="fc" id="L18">	public ArrayList&lt;Node&gt; minimun_road = new ArrayList&lt;Node&gt;();</span>
+<span class="fc" id="L19">	private ArrayList&lt;Node&gt; not_visited_nodes = new ArrayList&lt;Node&gt;();</span>
+<span class="fc" id="L20">	private ArrayList&lt;Node&gt; objetives_nodes = new ArrayList&lt;Node&gt;();</span>
 	private int cont;
 	private int generated_nodes;
 	private double distance;
@@ -26,24 +26,24 @@ public class AStar {
 	 * @brief Constructor para la creación del algoritmo.
 	 * @param graph Grafo donde se ubica los puntos a recorrer
 	 */
-<span class="nc" id="L29">	public AStar(Graph graph){</span>
-<span class="nc" id="L30">		this.cont = 1;</span>
-<span class="nc" id="L31">		this.graph_ = graph;</span>
-<span class="nc" id="L32">		Iterator&lt;Node&gt; it_node = this.graph_.getNodeList().iterator();</span>
-<span class="nc" id="L33">		Node aux = null;</span>
-<span class="nc" id="L34">		boolean found = false;</span>
-<span class="nc" id="L35">		this.generated_nodes = 0;</span>
-<span class="nc" id="L36">		distance = 0.0;</span>
-<span class="nc bnc" id="L37" title="All 4 branches missed.">		while(it_node.hasNext() &amp;&amp; !found) {</span>
-<span class="nc" id="L38">			aux = it_node.next();</span>
-<span class="nc bnc" id="L39" title="All 2 branches missed.">			if(aux.isOrigin()) {</span>
-<span class="nc" id="L40">				found = true;</span>
+<span class="fc" id="L29">	public AStar(Graph graph){</span>
+<span class="fc" id="L30">		this.cont = 1;</span>
+<span class="fc" id="L31">		this.graph_ = graph;</span>
+<span class="fc" id="L32">		Iterator&lt;Node&gt; it_node = this.graph_.getNodeList().iterator();</span>
+<span class="fc" id="L33">		Node aux = null;</span>
+<span class="fc" id="L34">		boolean found = false;</span>
+<span class="fc" id="L35">		this.generated_nodes = 0;</span>
+<span class="fc" id="L36">		distance = 0.0;</span>
+<span class="pc bpc" id="L37" title="1 of 4 branches missed.">		while(it_node.hasNext() &amp;&amp; !found) {</span>
+<span class="fc" id="L38">			aux = it_node.next();</span>
+<span class="pc bpc" id="L39" title="1 of 2 branches missed.">			if(aux.isOrigin()) {</span>
+<span class="fc" id="L40">				found = true;</span>
 			}
 		}
-<span class="nc" id="L43">		aux.setDistance(0.0);</span>
-<span class="nc" id="L44">		calculateMinimunRoad(aux);</span>
+<span class="fc" id="L43">		aux.setDistance(0.0);</span>
+<span class="fc" id="L44">		calculateMinimunRoad(aux);</span>
 		
-<span class="nc" id="L46">	}</span>
+<span class="fc" id="L46">	}</span>
 
 	/**
 	 * @brief método que genera los hijos del punto actual
@@ -52,33 +52,33 @@ public class AStar {
 	 */
 	public ArrayList&lt;Node&gt; generateSons(Node node) {
 		
-<span class="nc" id="L55">		ArrayList&lt;Node&gt; sonsList = new ArrayList&lt;Node&gt;(); //Lista con los nodos vecinos que tienen distancias asignadas</span>
-<span class="nc bnc" id="L56" title="All 2 branches missed.">		if(!isViableRoad(node)) {</span>
+<span class="fc" id="L55">		ArrayList&lt;Node&gt; sonsList = new ArrayList&lt;Node&gt;(); //Lista con los nodos vecinos que tienen distancias asignadas</span>
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">		if(!isViableRoad(node)) {</span>
 <span class="nc" id="L57">			return sonsList;</span>
 		}
 		
-<span class="nc bnc" id="L60" title="All 2 branches missed.">		if(node.isObjetive()) {</span>
+<span class="pc bpc" id="L60" title="1 of 2 branches missed.">		if(node.isObjetive()) {</span>
 <span class="nc" id="L61">			return sonsList;</span>
 		}else {
-<span class="nc" id="L63">			Node aux = null;</span>
-<span class="nc" id="L64">			Double auxd = null;</span>
-<span class="nc" id="L65">			Iterator&lt;Node&gt; it_neighbours = node.getSonsList().iterator();</span>
-<span class="nc" id="L66">			Iterator&lt;Double&gt; it_double = node.getSonsDistances().iterator();</span>
+<span class="fc" id="L63">			Node aux = null;</span>
+<span class="fc" id="L64">			Double auxd = null;</span>
+<span class="fc" id="L65">			Iterator&lt;Node&gt; it_neighbours = node.getSonsList().iterator();</span>
+<span class="fc" id="L66">			Iterator&lt;Double&gt; it_double = node.getSonsDistances().iterator();</span>
 			
-<span class="nc bnc" id="L68" title="All 2 branches missed.">			while(it_neighbours.hasNext()) {</span>
-<span class="nc" id="L69">				this.generated_nodes++;</span>
-<span class="nc" id="L70">				aux = it_neighbours.next();</span>
-<span class="nc" id="L71">				auxd = it_double.next();</span>
-<span class="nc bnc" id="L72" title="All 4 branches missed.">				if(aux.getDistance()==0 || aux.getDistance()&gt;node.getDistance()+auxd) {</span>
-<span class="nc" id="L73">					aux.setDistance(node.getDistance()+auxd);</span>
-<span class="nc" id="L74">					aux.setValue();</span>
+<span class="fc bfc" id="L68" title="All 2 branches covered.">			while(it_neighbours.hasNext()) {</span>
+<span class="fc" id="L69">				this.generated_nodes++;</span>
+<span class="fc" id="L70">				aux = it_neighbours.next();</span>
+<span class="fc" id="L71">				auxd = it_double.next();</span>
+<span class="fc bfc" id="L72" title="All 4 branches covered.">				if(aux.getDistance()==0 || aux.getDistance()&gt;node.getDistance()+auxd) {</span>
+<span class="fc" id="L73">					aux.setDistance(node.getDistance()+auxd);</span>
+<span class="fc" id="L74">					aux.setValue();</span>
 					
-<span class="nc" id="L76">					sonsList.add(aux);</span>
-<span class="nc" id="L77">					aux.setFather(node);</span>
+<span class="fc" id="L76">					sonsList.add(aux);</span>
+<span class="fc" id="L77">					aux.setFather(node);</span>
 				}
 
 			}
-<span class="nc" id="L81">			return sonsList;</span>
+<span class="fc" id="L81">			return sonsList;</span>
 		}
 	}
 
@@ -88,52 +88,52 @@ public class AStar {
 	 */
 	public void calculateMinimunRoad(Node node) {
 		
-<span class="nc" id="L91">		cont++;</span>
+<span class="fc" id="L91">		cont++;</span>
 		
 		// AÑADIR A LA LISTA DE NODOS NO VISITADOS, LOS NODOS HIJOS QUE SE ACABAN DE GENERAR
-<span class="nc" id="L94">		ArrayList&lt;Node&gt; sons = generateSons(node);</span>
-<span class="nc" id="L95">		Iterator&lt;Node&gt; it_sons = sons.iterator();</span>
+<span class="fc" id="L94">		ArrayList&lt;Node&gt; sons = generateSons(node);</span>
+<span class="fc" id="L95">		Iterator&lt;Node&gt; it_sons = sons.iterator();</span>
 		
-<span class="nc" id="L97">		Node aux = null;</span>
-<span class="nc bnc" id="L98" title="All 2 branches missed.">		while(it_sons.hasNext()) {</span>
-<span class="nc" id="L99">			aux = it_sons.next();</span>
+<span class="fc" id="L97">		Node aux = null;</span>
+<span class="fc bfc" id="L98" title="All 2 branches covered.">		while(it_sons.hasNext()) {</span>
+<span class="fc" id="L99">			aux = it_sons.next();</span>
 		}
-<span class="nc" id="L101">		Iterator&lt;Node&gt; it_aux = sons.iterator();</span>
-<span class="nc bnc" id="L102" title="All 2 branches missed.">		while(it_aux.hasNext()) {</span>
-<span class="nc" id="L103">			this.not_visited_nodes.add(it_aux.next());</span>
+<span class="fc" id="L101">		Iterator&lt;Node&gt; it_aux = sons.iterator();</span>
+<span class="fc bfc" id="L102" title="All 2 branches covered.">		while(it_aux.hasNext()) {</span>
+<span class="fc" id="L103">			this.not_visited_nodes.add(it_aux.next());</span>
 		}
 
-<span class="nc" id="L106">		Node nodo_min = getMinimunFNode();</span>
+<span class="fc" id="L106">		Node nodo_min = getMinimunFNode();</span>
 
 		// SACAR EL NODO MINIMO DE LA LISTA DE NO VISITADOS
-<span class="nc" id="L109">		Iterator&lt;Node&gt; it_aux1 = this.not_visited_nodes.iterator();</span>
-<span class="nc" id="L110">		Node aux1 = null;</span>
-<span class="nc" id="L111">		boolean found = false;</span>
-<span class="nc" id="L112">		int i = 0;</span>
-<span class="nc" id="L113">		Node nodo = null;</span>
-<span class="nc bnc" id="L114" title="All 4 branches missed.">		while(it_aux1.hasNext() &amp;&amp; !found) {</span>
-<span class="nc" id="L115">			aux1 = it_aux1.next();</span>
-<span class="nc bnc" id="L116" title="All 2 branches missed.">			if(nodo_min.getValue() == aux1.getValue()) {</span>
-<span class="nc" id="L117">				nodo = aux1.clone();</span>
-<span class="nc" id="L118">				found = true;</span>
-<span class="nc" id="L119">				this.not_visited_nodes.remove(aux1);</span>
+<span class="fc" id="L109">		Iterator&lt;Node&gt; it_aux1 = this.not_visited_nodes.iterator();</span>
+<span class="fc" id="L110">		Node aux1 = null;</span>
+<span class="fc" id="L111">		boolean found = false;</span>
+<span class="fc" id="L112">		int i = 0;</span>
+<span class="fc" id="L113">		Node nodo = null;</span>
+<span class="fc bfc" id="L114" title="All 4 branches covered.">		while(it_aux1.hasNext() &amp;&amp; !found) {</span>
+<span class="fc" id="L115">			aux1 = it_aux1.next();</span>
+<span class="fc bfc" id="L116" title="All 2 branches covered.">			if(nodo_min.getValue() == aux1.getValue()) {</span>
+<span class="fc" id="L117">				nodo = aux1.clone();</span>
+<span class="fc" id="L118">				found = true;</span>
+<span class="fc" id="L119">				this.not_visited_nodes.remove(aux1);</span>
 			}
 			
-<span class="nc" id="L122">			i++;</span>
+<span class="fc" id="L122">			i++;</span>
 		}
 		
 		
-<span class="nc bnc" id="L126" title="All 2 branches missed.">		if(nodo_min.isObjetive()) {</span>
+<span class="fc bfc" id="L126" title="All 2 branches covered.">		if(nodo_min.isObjetive()) {</span>
 			
-<span class="nc" id="L128">			this.objetives_nodes.add(nodo_min);</span>
+<span class="fc" id="L128">			this.objetives_nodes.add(nodo_min);</span>
 			
-<span class="nc" id="L130">			setMinimunRoad();</span>
+<span class="fc" id="L130">			setMinimunRoad();</span>
 		}else { 
 			
-<span class="nc" id="L133">			calculateMinimunRoad(nodo_min);</span>
+<span class="fc" id="L133">			calculateMinimunRoad(nodo_min);</span>
 
 		}	
-<span class="nc" id="L136">	}</span>
+<span class="fc" id="L136">	}</span>
 
 	/**
 	 * @brief método que retorna el nodo siguiente al que hay que desplazarse desde el punto actual
@@ -141,23 +141,23 @@ public class AStar {
 	 */
 	private Node getMinimunFNode() {
 		// LOCALIZAR EL NODO CUYO VALOR F() SEA EL MINIMO
-<span class="nc" id="L144">		double min = Double.MAX_VALUE;</span>
-<span class="nc" id="L145">		Iterator&lt;Node&gt; it = this.not_visited_nodes.iterator();</span>
+<span class="fc" id="L144">		double min = Double.MAX_VALUE;</span>
+<span class="fc" id="L145">		Iterator&lt;Node&gt; it = this.not_visited_nodes.iterator();</span>
 		
-<span class="nc" id="L147">		Node aux = null;</span>
-<span class="nc" id="L148">		Node nodo_min = null;</span>
-<span class="nc bnc" id="L149" title="All 2 branches missed.">		while(it.hasNext()) {</span>
-<span class="nc" id="L150">			aux = it.next();</span>
+<span class="fc" id="L147">		Node aux = null;</span>
+<span class="fc" id="L148">		Node nodo_min = null;</span>
+<span class="fc bfc" id="L149" title="All 2 branches covered.">		while(it.hasNext()) {</span>
+<span class="fc" id="L150">			aux = it.next();</span>
 			
-<span class="nc bnc" id="L152" title="All 2 branches missed.">			if(min&gt;aux.getValue()) {</span>
+<span class="fc bfc" id="L152" title="All 2 branches covered.">			if(min&gt;aux.getValue()) {</span>
 				
-<span class="nc" id="L154">				min = aux.getValue();</span>
-<span class="nc" id="L155">				nodo_min = aux;	</span>
+<span class="fc" id="L154">				min = aux.getValue();</span>
+<span class="fc" id="L155">				nodo_min = aux;	</span>
 				
 			}
 		}
 		
-<span class="nc" id="L160">		return nodo_min;</span>
+<span class="fc" id="L160">		return nodo_min;</span>
 	}
 
 	/**
@@ -166,40 +166,40 @@ public class AStar {
 	 * @return true or false en función del calculo
 	 */
 	private boolean isViableRoad(Node node) {
-<span class="nc" id="L169">		Iterator&lt;Node&gt; it = this.objetives_nodes.iterator();</span>
-<span class="nc" id="L170">		boolean viable = true;</span>
-<span class="nc bnc" id="L171" title="All 4 branches missed.">		while(it.hasNext() &amp;&amp; viable) {</span>
+<span class="fc" id="L169">		Iterator&lt;Node&gt; it = this.objetives_nodes.iterator();</span>
+<span class="fc" id="L170">		boolean viable = true;</span>
+<span class="pc bpc" id="L171" title="3 of 4 branches missed.">		while(it.hasNext() &amp;&amp; viable) {</span>
 <span class="nc bnc" id="L172" title="All 2 branches missed.">			if(it.next().getValue() &lt;= node.getValue()) {</span>
 <span class="nc" id="L173">				viable = false;</span>
 			}
 		}
 		
-<span class="nc" id="L177">		return viable;</span>
+<span class="fc" id="L177">		return viable;</span>
 	}
 
 	/**
 	 * @brief método que asigna el camino mínimo a la ruta a seguir
 	 */
 	private void setMinimunRoad(){
-<span class="nc" id="L184">		Iterator&lt;Node&gt; it = this.objetives_nodes.iterator();</span>
-<span class="nc" id="L185">		Node optimal_node = null;</span>
-<span class="nc" id="L186">		Node aux = null;</span>
-<span class="nc" id="L187">		double minimunF = Double.MAX_VALUE;</span>
-<span class="nc bnc" id="L188" title="All 2 branches missed.">		while(it.hasNext()) {</span>
-<span class="nc" id="L189">			aux = it.next();</span>
-<span class="nc bnc" id="L190" title="All 2 branches missed.">			if(minimunF &gt; aux.getValue()) {</span>
-<span class="nc" id="L191">				minimunF = aux.getValue();</span>
-<span class="nc" id="L192">				optimal_node = aux;</span>
+<span class="fc" id="L184">		Iterator&lt;Node&gt; it = this.objetives_nodes.iterator();</span>
+<span class="fc" id="L185">		Node optimal_node = null;</span>
+<span class="fc" id="L186">		Node aux = null;</span>
+<span class="fc" id="L187">		double minimunF = Double.MAX_VALUE;</span>
+<span class="fc bfc" id="L188" title="All 2 branches covered.">		while(it.hasNext()) {</span>
+<span class="fc" id="L189">			aux = it.next();</span>
+<span class="pc bpc" id="L190" title="1 of 2 branches missed.">			if(minimunF &gt; aux.getValue()) {</span>
+<span class="fc" id="L191">				minimunF = aux.getValue();</span>
+<span class="fc" id="L192">				optimal_node = aux;</span>
 			}
 		}
-<span class="nc" id="L195">		Node node_it = optimal_node;</span>
-<span class="nc" id="L196">		this.distance = node_it.getDistance();</span>
-<span class="nc bnc" id="L197" title="All 2 branches missed.">		while(!node_it.isOrigin()) {</span>
-<span class="nc" id="L198">			this.minimun_road.add(0, node_it);</span>
-<span class="nc" id="L199">			node_it = node_it.getFather();</span>
+<span class="fc" id="L195">		Node node_it = optimal_node;</span>
+<span class="fc" id="L196">		this.distance = node_it.getDistance();</span>
+<span class="fc bfc" id="L197" title="All 2 branches covered.">		while(!node_it.isOrigin()) {</span>
+<span class="fc" id="L198">			this.minimun_road.add(0, node_it);</span>
+<span class="fc" id="L199">			node_it = node_it.getFather();</span>
 		}	
-<span class="nc" id="L201">		this.minimun_road.add(0, node_it);</span>
-<span class="nc" id="L202">	}</span>
+<span class="fc" id="L201">		this.minimun_road.add(0, node_it);</span>
+<span class="fc" id="L202">	}</span>
 
 	public double  getDistance(){
 <span class="nc" id="L205">		return this.distance;</span>
