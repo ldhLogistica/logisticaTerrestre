@@ -2,6 +2,12 @@
 [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=ldhLogistica_logisticaTerrestre)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ldhLogistica_logisticaTerrestre&metric=alert_status)](https://sonarcloud.io/dashboard?id=ldhLogistica_logisticaTerrestre)
 [![Build Status](https://travis-ci.com/ldhLogistica/logisticaTerrestre.svg?branch=master)](https://travis-ci.com/ldhLogistica/logisticaTerrestre)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=ldhLogistica_logisticaTerrestre&metric=bugs)](https://sonarcloud.io/dashboard?id=ldhLogistica_logisticaTerrestre)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=ldhLogistica_logisticaTerrestre&metric=code_smells)](https://sonarcloud.io/dashboard?id=ldhLogistica_logisticaTerrestre)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=ldhLogistica_logisticaTerrestre&metric=coverage)](https://sonarcloud.io/dashboard?id=ldhLogistica_logisticaTerrestre)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=ldhLogistica_logisticaTerrestre&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=ldhLogistica_logisticaTerrestre)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=ldhLogistica_logisticaTerrestre&metric=security_rating)](https://sonarcloud.io/dashboard?id=ldhLogistica_logisticaTerrestre)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=ldhLogistica_logisticaTerrestre&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=ldhLogistica_logisticaTerrestre)
 
 # Logística Terrestre
 
