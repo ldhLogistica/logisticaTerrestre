@@ -1,5 +1,5 @@
 <map id="proyecto.vehiculos.Moto" name="proyecto.vehiculos.Moto">
-<area shape="rect" id="node2" href="$classproyecto_1_1vehiculos_1_1_vehiculo.html" title="proyecto.vehiculos.Vehiculo" alt="" coords="109,305,294,332"/>
+<area shape="rect" id="node2" href="$classproyecto_1_1vehiculos_1_1_vehiculo.html" title="proyecto.vehiculos.Vehiculo" alt="" coords="97,305,282,332"/>
 <area shape="rect" id="node5" href="$classproyecto_1_1_a_star.html" title="proyecto.AStar" alt="" coords="171,216,280,243"/>
-<area shape="rect" id="node6" href="$classproyecto_1_1_graph.html" title="proyecto.Graph" alt="" coords="355,118,466,145"/>
+<area shape="rect" id="node6" href="$classproyecto_1_1_graph.html" title="proyecto.Graph" alt="" coords="314,118,425,145"/>
 </map>
