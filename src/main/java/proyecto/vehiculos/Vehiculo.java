@@ -5,11 +5,13 @@ import proyecto.Graph;
 import proyecto.LogisticaGUI;
 import proyecto.Node;
 
-import javax.swing.*;
+
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -31,6 +33,8 @@ public abstract class Vehiculo implements Runnable{
     protected int position;
     protected double straightLineDistance;
     protected double roadDistance;
+
+    private static final Logger LOGGER = Logger.getLogger(Vehiculo.class.getName());
 
     protected AStar tree;
     protected Graph map;
@@ -55,13 +59,13 @@ public abstract class Vehiculo implements Runnable{
             this.minimunRoad = tree.minimun_road;
 
         } catch (IOException e) {
-
+            LOGGER.log(Level.SEVERE,"Error al crear coche " + e);
         }
     }
 
     /**
      * @brief método create destinado a crear el vehículo con la id introducida por parámetro
-     * @param id
+     * @param id identificador de vehiculo
      */
     public void create(int id) {
         this.id = id;
