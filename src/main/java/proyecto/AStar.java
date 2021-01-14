@@ -30,7 +30,7 @@ public class AStar {
 		this.cont = 1;
 		this.graph_ = graph;
 		Iterator<Node> it_node = this.graph_.getNodeList().iterator();
-		Node aux = null;
+		Node aux = new Node();
 		boolean found = false;
 		this.generated_nodes = 0;
 		distance = 0.0;

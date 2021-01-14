@@ -35,6 +35,14 @@ final public class Node{
 		n_nodos++;
 
 	}
+
+	/**
+	 * @brief Constructor por defecto de la clase Node que define el nodo
+	 */
+	Node(){
+		this.nodeID_ = 0;
+
+	}
 	
 	/**
 	 * @brief método que retorna el nodo
