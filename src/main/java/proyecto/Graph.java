@@ -30,7 +30,6 @@ final public class Graph {
 	 */
 	public Graph(int origin_node) throws NumberFormatException, IOException{
 		node_list_.clear();
-		System.out.println("Origen: " + origin_node);
 		this.originNodeID = origin_node;
 		buildDistances(distancesFile,origin_node);
 		buildHeuristics(heuristicsFile);
@@ -112,7 +111,6 @@ final public class Graph {
 			this.distances.put(i+1,new ArrayList<>(distancesAux));
 		}
 
-		System.out.println(distances);
 
 		return distances_matrix;
 	}
@@ -156,9 +154,7 @@ final public class Graph {
 		Node aux = null;
 		while(it_node.hasNext()) {
 			aux = it_node.next();
-			System.out.println(aux);
 			double heuristic = Double.parseDouble(br.readLine());
-			System.out.println(heuristic);
 			aux.setHeuristic(heuristic);
 			if(aux.getHeuristic()==0.0) {
 				aux.setObjetive();

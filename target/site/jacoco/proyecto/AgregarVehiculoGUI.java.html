@@ -74,46 +74,45 @@ public class AgregarVehiculoGUI extends JPanel{
 
 <span class="nc" id="L75">        fillOptTypeList();</span>
 <span class="nc" id="L76">        fillOptOriginsList();</span>
-<span class="nc" id="L77">        System.out.println(optOriginsList);</span>
-<span class="nc bnc" id="L78" title="All 2 branches missed.">        for(String type : optTypesList){</span>
-<span class="nc" id="L79">            this.cbType.addItem(type);</span>
-<span class="nc" id="L80">        }</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">        for(String type : optTypesList){</span>
+<span class="nc" id="L78">            this.cbType.addItem(type);</span>
+<span class="nc" id="L79">        }</span>
 
-<span class="nc bnc" id="L82" title="All 2 branches missed.">        for(int id : optOriginsList){</span>
-<span class="nc" id="L83">            cbInicio.addItem(id);</span>
-<span class="nc" id="L84">        }</span>
+<span class="nc bnc" id="L81" title="All 2 branches missed.">        for(int id : optOriginsList){</span>
+<span class="nc" id="L82">            cbInicio.addItem(id);</span>
+<span class="nc" id="L83">        }</span>
 
-<span class="nc" id="L86">    }</span>
+<span class="nc" id="L85">    }</span>
 
     /**
      * @brief método que rellena los tipos de vehículos a elegir
      */
     private void fillOptTypeList(){
-<span class="nc" id="L92">        optTypesList.clear();</span>
-<span class="nc" id="L93">        optTypesList.add(&quot;Coche&quot;);</span>
-<span class="nc" id="L94">        optTypesList.add(&quot;Camión&quot;);</span>
-<span class="nc" id="L95">        optTypesList.add(&quot;Moto&quot;);</span>
-<span class="nc" id="L96">    }</span>
+<span class="nc" id="L91">        optTypesList.clear();</span>
+<span class="nc" id="L92">        optTypesList.add(&quot;Coche&quot;);</span>
+<span class="nc" id="L93">        optTypesList.add(&quot;Camión&quot;);</span>
+<span class="nc" id="L94">        optTypesList.add(&quot;Moto&quot;);</span>
+<span class="nc" id="L95">    }</span>
 
     /**
      * @brief método que rellena la lista de nodos
      */
     private void fillOptOriginsList(){
-<span class="nc" id="L102">        optOriginsList.clear();</span>
-<span class="nc bnc" id="L103" title="All 2 branches missed.">        if(Graph.getNode_list().size() == 0 ){</span>
-<span class="nc bnc" id="L104" title="All 2 branches missed.">            for (int node = 1 ; node &lt;= 15 ; node++) {</span>
-<span class="nc bnc" id="L105" title="All 2 branches missed.">                if (node != 8) {</span>
-<span class="nc" id="L106">                    optOriginsList.add(node);</span>
+<span class="nc" id="L101">        optOriginsList.clear();</span>
+<span class="nc bnc" id="L102" title="All 2 branches missed.">        if(Graph.getNode_list().size() == 0 ){</span>
+<span class="nc bnc" id="L103" title="All 2 branches missed.">            for (int node = 1 ; node &lt;= 15 ; node++) {</span>
+<span class="nc bnc" id="L104" title="All 2 branches missed.">                if (node != 8) {</span>
+<span class="nc" id="L105">                    optOriginsList.add(node);</span>
                 }
             }
         }
-<span class="nc bnc" id="L110" title="All 2 branches missed.">        for(int i=0 ; i&lt; Graph.getNode_list().size() ; i++){</span>
-<span class="nc" id="L111">            optOriginsList.add(Graph.getNode_list().get(i).getNodeID());</span>
+<span class="nc bnc" id="L109" title="All 2 branches missed.">        for(int i=0 ; i&lt; Graph.getNode_list().size() ; i++){</span>
+<span class="nc" id="L110">            optOriginsList.add(Graph.getNode_list().get(i).getNodeID());</span>
         }
-<span class="nc" id="L113">    }</span>
+<span class="nc" id="L112">    }</span>
 
     public JPanel getPanelAgregarVehiculo(){
-<span class="nc" id="L116">        return this.panelAgregarVehiculo;</span>
+<span class="nc" id="L115">        return this.panelAgregarVehiculo;</span>
     }
 }
 
@@ -121,13 +120,13 @@ public class AgregarVehiculoGUI extends JPanel{
  * @class Clase que da forma a la vista del formulario
  */
 class AgregarVehiculoGUIFrame extends JFrame{
-<span class="nc" id="L124">    AgregarVehiculoGUI agregarVehiculoGUI = new AgregarVehiculoGUI();</span>
+<span class="nc" id="L123">    AgregarVehiculoGUI agregarVehiculoGUI = new AgregarVehiculoGUI();</span>
     AgregarVehiculoGUIFrame(){
-<span class="nc" id="L126">        super(&quot;Agregar Vehículo&quot;);</span>
-<span class="nc" id="L127">        setContentPane(agregarVehiculoGUI.getPanelAgregarVehiculo());</span>
-<span class="nc" id="L128">        setSize(450,250);</span>
-<span class="nc" id="L129">        setVisible(true);</span>
-<span class="nc" id="L130">        setDefaultCloseOperation(DISPOSE_ON_CLOSE);</span>
-<span class="nc" id="L131">    }</span>
+<span class="nc" id="L125">        super(&quot;Agregar Vehículo&quot;);</span>
+<span class="nc" id="L126">        setContentPane(agregarVehiculoGUI.getPanelAgregarVehiculo());</span>
+<span class="nc" id="L127">        setSize(450,250);</span>
+<span class="nc" id="L128">        setVisible(true);</span>
+<span class="nc" id="L129">        setDefaultCloseOperation(DISPOSE_ON_CLOSE);</span>
+<span class="nc" id="L130">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span></div></body></html>

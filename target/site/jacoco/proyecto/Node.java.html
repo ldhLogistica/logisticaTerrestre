@@ -14,7 +14,7 @@ final public class Node{
 	 */
 	private int nodeID_;
 	private double g_; //Representa el camino recorrido desde el nodo inicial hasta el actual
-	private double h_; //Representa el valor heur�stico
+	private double h_; //Representa el valor heuristico
 	private double f_; //Representa la suma de h + g
 <span class="fc" id="L19">	private ArrayList&lt;Node&gt; sons_nodes = new ArrayList&lt;Node&gt;();</span>
 <span class="fc" id="L20">	private ArrayList&lt;Double&gt; sons_distances = new ArrayList&lt;Double&gt;();</span>
@@ -33,7 +33,7 @@ final public class Node{
 <span class="fc" id="L33">		this.nodeID_ = nodeID;</span>
 <span class="fc" id="L34">		this.g_ = 0.0;</span>
 <span class="fc" id="L35">		n_nodos++;</span>
-		//System.out.println(this.nodeID_);
+
 <span class="fc" id="L37">	}</span>
 	
 	/**
@@ -120,8 +120,8 @@ final public class Node{
 	 * @return
 	 */
 	public String toString() {
-<span class="fc" id="L123">		String cad = &quot;&quot;;</span>
-<span class="fc" id="L124">		return cad + this.getNodeID();</span>
+<span class="nc" id="L123">		String cad = &quot;&quot;;</span>
+<span class="nc" id="L124">		return cad + this.getNodeID();</span>
 	}
 
 	/**

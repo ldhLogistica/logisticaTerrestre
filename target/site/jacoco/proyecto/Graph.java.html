@@ -30,12 +30,11 @@ final public class Graph {
 	 */
 <span class="fc" id="L31">	public Graph(int origin_node) throws NumberFormatException, IOException{</span>
 <span class="fc" id="L32">		node_list_.clear();</span>
-<span class="fc" id="L33">		System.out.println(&quot;Origen: &quot; + origin_node);</span>
-<span class="fc" id="L34">		this.originNodeID = origin_node;</span>
-<span class="fc" id="L35">		buildDistances(distancesFile,origin_node);</span>
-<span class="fc" id="L36">		buildHeuristics(heuristicsFile);</span>
+<span class="fc" id="L33">		this.originNodeID = origin_node;</span>
+<span class="fc" id="L34">		buildDistances(distancesFile,origin_node);</span>
+<span class="fc" id="L35">		buildHeuristics(heuristicsFile);</span>
 			
-<span class="fc" id="L38">	}</span>
+<span class="fc" id="L37">	}</span>
 
 	
 	/**
@@ -43,7 +42,7 @@ final public class Graph {
 	 * @return numero de nodos del grafo
 	 */
 	protected int getNNodes() {
-<span class="fc" id="L46">		return this.n_nodes_;</span>
+<span class="fc" id="L45">		return this.n_nodes_;</span>
 	}
 
 	/**
@@ -51,7 +50,7 @@ final public class Graph {
 	 * @return devuelve una tabla Hash cuyas claves son los nodos y los valores las distancias a los vecinos
 	 */
 	protected ArrayList&lt;Node&gt; getNodeList(){
-<span class="fc" id="L54">		return this.node_list_;</span>
+<span class="fc" id="L53">		return this.node_list_;</span>
 	}
 	
 	/**
@@ -63,20 +62,20 @@ final public class Graph {
 	 */
 	private void buildDistances(String distances_file, int origin_node) throws NumberFormatException, IOException {
 		//System.out.println(distances_file);
-<span class="fc" id="L66">		FileReader f = new FileReader(distances_file);</span>
-<span class="fc" id="L67">		BufferedReader b = new BufferedReader(f);</span>
-<span class="fc" id="L68">		this.n_nodes_ = Integer.parseInt(b.readLine());</span>
+<span class="fc" id="L65">		FileReader f = new FileReader(distances_file);</span>
+<span class="fc" id="L66">		BufferedReader b = new BufferedReader(f);</span>
+<span class="fc" id="L67">		this.n_nodes_ = Integer.parseInt(b.readLine());</span>
 		int index;
-<span class="fc bfc" id="L70" title="All 2 branches covered.">		for(index = 1 ; index &lt;=this.n_nodes_ ; index ++) {</span>
-<span class="fc" id="L71">			Node node = new Node(index);</span>
-<span class="fc bfc" id="L72" title="All 2 branches covered.">			if(index==origin_node)</span>
-<span class="fc" id="L73">				node.setOrigin();</span>
-<span class="fc" id="L74">			this.node_list_.add(node);	</span>
+<span class="fc bfc" id="L69" title="All 2 branches covered.">		for(index = 1 ; index &lt;=this.n_nodes_ ; index ++) {</span>
+<span class="fc" id="L70">			Node node = new Node(index);</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">			if(index==origin_node)</span>
+<span class="fc" id="L72">				node.setOrigin();</span>
+<span class="fc" id="L73">			this.node_list_.add(node);	</span>
 		}
-<span class="fc" id="L76">		double[][] distances_matrix = buildDistancesMatrix(b);</span>
-<span class="fc" id="L77">		insertDistances(distances_matrix);</span>
+<span class="fc" id="L75">		double[][] distances_matrix = buildDistancesMatrix(b);</span>
+<span class="fc" id="L76">		insertDistances(distances_matrix);</span>
 		
-<span class="fc" id="L79">	}</span>
+<span class="fc" id="L78">	}</span>
 	
 	/**
 	 * @brief método que crea las distancias en la matriz a partir del grafo
@@ -86,35 +85,34 @@ final public class Graph {
 	 * @throws IOException
 	 */
 	private double[][] buildDistancesMatrix(BufferedReader br) throws NumberFormatException, IOException{
-<span class="fc" id="L89">		double[][] distances_matrix = new double[getNNodes()][getNNodes()];</span>
+<span class="fc" id="L88">		double[][] distances_matrix = new double[getNNodes()][getNNodes()];</span>
 		
-<span class="fc bfc" id="L91" title="All 2 branches covered.">		for(int i=0 ; i&lt;getNNodes() ; i++) {</span>
-<span class="fc bfc" id="L92" title="All 2 branches covered.">			for(int j=0 ; j&lt;getNNodes() ; j++) {</span>
-<span class="fc bfc" id="L93" title="All 2 branches covered.">				if(i==j) {</span>
-<span class="fc" id="L94">					distances_matrix[i][j] = 0.0;</span>
-<span class="fc bfc" id="L95" title="All 2 branches covered.">				}else if(i&gt;j) {</span>
-<span class="fc" id="L96">					distances_matrix[i][j] = distances_matrix[j][i];</span>
+<span class="fc bfc" id="L90" title="All 2 branches covered.">		for(int i=0 ; i&lt;getNNodes() ; i++) {</span>
+<span class="fc bfc" id="L91" title="All 2 branches covered.">			for(int j=0 ; j&lt;getNNodes() ; j++) {</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">				if(i==j) {</span>
+<span class="fc" id="L93">					distances_matrix[i][j] = 0.0;</span>
+<span class="fc bfc" id="L94" title="All 2 branches covered.">				}else if(i&gt;j) {</span>
+<span class="fc" id="L95">					distances_matrix[i][j] = distances_matrix[j][i];</span>
 				}else {
-<span class="fc" id="L98">					distances_matrix[i][j] = Double.parseDouble(br.readLine());</span>
+<span class="fc" id="L97">					distances_matrix[i][j] = Double.parseDouble(br.readLine());</span>
 				}
 
 			}
 
 		}
-<span class="fc" id="L104">		br.close();</span>
+<span class="fc" id="L103">		br.close();</span>
 
-<span class="fc" id="L106">		ArrayList&lt;Double&gt; distancesAux = new ArrayList&lt;&gt;();</span>
-<span class="fc bfc" id="L107" title="All 2 branches covered.">		for(int i=0 ; i&lt;getNNodes() ; i++){</span>
-<span class="fc" id="L108">			distancesAux.clear();</span>
-<span class="fc bfc" id="L109" title="All 2 branches covered.">			for(int j=0 ; j&lt;getNNodes() ; j++){</span>
-<span class="fc" id="L110">				distancesAux.add(distances_matrix[i][j]);</span>
+<span class="fc" id="L105">		ArrayList&lt;Double&gt; distancesAux = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L106" title="All 2 branches covered.">		for(int i=0 ; i&lt;getNNodes() ; i++){</span>
+<span class="fc" id="L107">			distancesAux.clear();</span>
+<span class="fc bfc" id="L108" title="All 2 branches covered.">			for(int j=0 ; j&lt;getNNodes() ; j++){</span>
+<span class="fc" id="L109">				distancesAux.add(distances_matrix[i][j]);</span>
 			}
-<span class="fc" id="L112">			this.distances.put(i+1,new ArrayList&lt;&gt;(distancesAux));</span>
+<span class="fc" id="L111">			this.distances.put(i+1,new ArrayList&lt;&gt;(distancesAux));</span>
 		}
 
-<span class="fc" id="L115">		System.out.println(distances);</span>
 
-<span class="fc" id="L117">		return distances_matrix;</span>
+<span class="fc" id="L115">		return distances_matrix;</span>
 	}
 	
 	/**
@@ -122,25 +120,25 @@ final public class Graph {
 	 * @param distances_matrix matriz de distancias
 	 */
 	private void insertDistances(double[][] distances_matrix) {
-<span class="fc" id="L125">		Iterator&lt;Node&gt; it_nodes = this.node_list_.iterator();</span>
-<span class="fc" id="L126">		Node aux = null;</span>
-<span class="fc" id="L127">		Node aux1 = null;</span>
+<span class="fc" id="L123">		Iterator&lt;Node&gt; it_nodes = this.node_list_.iterator();</span>
+<span class="fc" id="L124">		Node aux = null;</span>
+<span class="fc" id="L125">		Node aux1 = null;</span>
 		
-<span class="fc bfc" id="L129" title="All 2 branches covered.">		while(it_nodes.hasNext()) {</span>
-<span class="fc" id="L130">			aux = it_nodes.next();</span>
-<span class="fc" id="L131">			int i = aux.getNodeID()-1;</span>
-<span class="fc" id="L132">			Iterator&lt;Node&gt; it_nodes_aux = this.node_list_.iterator();</span>
-<span class="fc bfc" id="L133" title="All 2 branches covered.">			while(it_nodes_aux.hasNext()) {</span>
-<span class="fc" id="L134">				aux1 = it_nodes_aux.next();</span>
-<span class="fc" id="L135">				int j= aux1.getNodeID()-1;</span>
-<span class="fc bfc" id="L136" title="All 2 branches covered.">				if(distances_matrix[i][j] &gt; 0.0) {</span>
-<span class="fc" id="L137">					aux.addSon(aux1,distances_matrix[i][j]);</span>
+<span class="fc bfc" id="L127" title="All 2 branches covered.">		while(it_nodes.hasNext()) {</span>
+<span class="fc" id="L128">			aux = it_nodes.next();</span>
+<span class="fc" id="L129">			int i = aux.getNodeID()-1;</span>
+<span class="fc" id="L130">			Iterator&lt;Node&gt; it_nodes_aux = this.node_list_.iterator();</span>
+<span class="fc bfc" id="L131" title="All 2 branches covered.">			while(it_nodes_aux.hasNext()) {</span>
+<span class="fc" id="L132">				aux1 = it_nodes_aux.next();</span>
+<span class="fc" id="L133">				int j= aux1.getNodeID()-1;</span>
+<span class="fc bfc" id="L134" title="All 2 branches covered.">				if(distances_matrix[i][j] &gt; 0.0) {</span>
+<span class="fc" id="L135">					aux.addSon(aux1,distances_matrix[i][j]);</span>
 				}
-<span class="fc" id="L139">				j++;</span>
-<span class="fc" id="L140">			}</span>
-<span class="fc" id="L141">			i++;</span>
-<span class="fc" id="L142">		}</span>
-<span class="fc" id="L143">	}</span>
+<span class="fc" id="L137">				j++;</span>
+<span class="fc" id="L138">			}</span>
+<span class="fc" id="L139">			i++;</span>
+<span class="fc" id="L140">		}</span>
+<span class="fc" id="L141">	}</span>
 	
 	/**
 	 * @brief método que inserta a cada nodo su valor heuristico
@@ -149,32 +147,30 @@ final public class Graph {
 	 * @throws IOException
 	 */
 	private void buildHeuristics(String heuristics_file) throws NumberFormatException, IOException {
-<span class="fc" id="L152">		FileReader fr = new FileReader(heuristics_file);</span>
-<span class="fc" id="L153">		BufferedReader br = new BufferedReader(fr);</span>
-<span class="fc" id="L154">		int n_nodos = Integer.parseInt(br.readLine());</span>
-<span class="fc" id="L155">		Iterator&lt;Node&gt; it_node = this.node_list_.iterator();</span>
-<span class="fc" id="L156">		Node aux = null;</span>
-<span class="fc bfc" id="L157" title="All 2 branches covered.">		while(it_node.hasNext()) {</span>
-<span class="fc" id="L158">			aux = it_node.next();</span>
-<span class="fc" id="L159">			System.out.println(aux);</span>
-<span class="fc" id="L160">			double heuristic = Double.parseDouble(br.readLine());</span>
-<span class="fc" id="L161">			System.out.println(heuristic);</span>
-<span class="fc" id="L162">			aux.setHeuristic(heuristic);</span>
-<span class="fc bfc" id="L163" title="All 2 branches covered.">			if(aux.getHeuristic()==0.0) {</span>
-<span class="fc" id="L164">				aux.setObjetive();</span>
-<span class="fc" id="L165">				this.finalNodeID = aux.getNodeID();</span>
+<span class="fc" id="L150">		FileReader fr = new FileReader(heuristics_file);</span>
+<span class="fc" id="L151">		BufferedReader br = new BufferedReader(fr);</span>
+<span class="fc" id="L152">		int n_nodos = Integer.parseInt(br.readLine());</span>
+<span class="fc" id="L153">		Iterator&lt;Node&gt; it_node = this.node_list_.iterator();</span>
+<span class="fc" id="L154">		Node aux = null;</span>
+<span class="fc bfc" id="L155" title="All 2 branches covered.">		while(it_node.hasNext()) {</span>
+<span class="fc" id="L156">			aux = it_node.next();</span>
+<span class="fc" id="L157">			double heuristic = Double.parseDouble(br.readLine());</span>
+<span class="fc" id="L158">			aux.setHeuristic(heuristic);</span>
+<span class="fc bfc" id="L159" title="All 2 branches covered.">			if(aux.getHeuristic()==0.0) {</span>
+<span class="fc" id="L160">				aux.setObjetive();</span>
+<span class="fc" id="L161">				this.finalNodeID = aux.getNodeID();</span>
 			}
-<span class="fc" id="L167">		}</span>
+<span class="fc" id="L163">		}</span>
 
-<span class="fc" id="L169">		br.close();</span>
-<span class="fc" id="L170">	}</span>
+<span class="fc" id="L165">		br.close();</span>
+<span class="fc" id="L166">	}</span>
 
 	/**
 	 * @brief método que retorna la lista de nodos
 	 * @return lista de nodos
 	 */
 	public static ArrayList&lt;Node&gt; getNode_list(){
-<span class="fc" id="L177">		return node_list_;</span>
+<span class="fc" id="L173">		return node_list_;</span>
 	}
 
 	/**
@@ -182,7 +178,7 @@ final public class Graph {
 	 * @return distancias
 	 */
 	public HashMap&lt;Integer,ArrayList&lt;Double&gt;&gt; getDistances(){
-<span class="nc" id="L185">		return this.distances;</span>
+<span class="nc" id="L181">		return this.distances;</span>
 	}
 	
 	

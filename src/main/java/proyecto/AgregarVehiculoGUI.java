@@ -74,7 +74,6 @@ public class AgregarVehiculoGUI extends JPanel{
 
         fillOptTypeList();
         fillOptOriginsList();
-        System.out.println(optOriginsList);
         for(String type : optTypesList){
             this.cbType.addItem(type);
         }

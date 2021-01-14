@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="proyecto.LogisticaTerrestreTest" time="0.413" tests="8" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="proyecto.LogisticaTerrestreTest" time="0.166" tests="8" errors="0" skipped="0" failures="0">
   <properties>
     <property name="awt.toolkit" value="sun.awt.X11.XToolkit"/>
     <property name="java.specification.version" value="11"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="/usr/local/lib/jvm/openjdk11/lib"/>
-    <property name="sun.java.command" value="/home/travis/build/ldhLogistica/logisticaTerrestre/target/surefire/surefirebooter4740204432295096173.jar /home/travis/build/ldhLogistica/logisticaTerrestre/target/surefire 2021-01-14T11-01-40_512-jvmRun1 surefire9063606765988441365tmp surefire_09014535742617519601tmp"/>
+    <property name="sun.java.command" value="/home/travis/build/ldhLogistica/logisticaTerrestre/target/surefire/surefirebooter12933726765195345168.jar /home/travis/build/ldhLogistica/logisticaTerrestre/target/surefire 2021-01-14T11-18-47_153-jvmRun1 surefire9684458057642681865tmp surefire_010923214612168786136tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/home/travis/build/ldhLogistica/logisticaTerrestre/target/test-classes:/home/travis/build/ldhLogistica/logisticaTerrestre/target/classes:/home/travis/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.6.0/junit-jupiter-api-5.6.0.jar:/home/travis/.m2/repository/org/apiguardian/apiguardian-api/1.1.0/apiguardian-api-1.1.0.jar:/home/travis/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/home/travis/.m2/repository/org/junit/platform/junit-platform-commons/1.6.0/junit-platform-commons-1.6.0.jar:/home/travis/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.6.0/junit-jupiter-engine-5.6.0.jar:/home/travis/.m2/repository/org/junit/platform/junit-platform-engine/1.6.0/junit-platform-engine-1.6.0.jar:"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -31,7 +31,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="/home/travis/build/ldhLogistica/logisticaTerrestre/target/surefire/surefirebooter4740204432295096173.jar"/>
+    <property name="surefire.real.class.path" value="/home/travis/build/ldhLogistica/logisticaTerrestre/target/surefire/surefirebooter12933726765195345168.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="11.0.2+9"/>
     <property name="user.name" value="travis"/>
@@ -57,12 +57,12 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="55.0"/>
   </properties>
-  <testcase name="testGetNodeList" classname="proyecto.LogisticaTerrestreTest$GraphTest" time="0.134"/>
-  <testcase name="testGetNode_list" classname="proyecto.LogisticaTerrestreTest$GraphTest" time="0.023"/>
-  <testcase name="testGetId" classname="proyecto.LogisticaTerrestreTest$VehiculoTest" time="0.035"/>
-  <testcase name="testGetName" classname="proyecto.LogisticaTerrestreTest$VehiculoTest" time="0.037"/>
-  <testcase name="testSetStraightLineDistance" classname="proyecto.LogisticaTerrestreTest$VehiculoTest" time="0.025"/>
-  <testcase name="testSetRoadDistance" classname="proyecto.LogisticaTerrestreTest$VehiculoTest" time="0.022"/>
-  <testcase name="testGetExtraTime" classname="proyecto.LogisticaTerrestreTest$VehiculoTest" time="0.022"/>
-  <testcase name="testGetOrigen" classname="proyecto.LogisticaTerrestreTest$VehiculoTest" time="0.021"/>
+  <testcase name="testGetNodeList" classname="proyecto.LogisticaTerrestreTest$GraphTest" time="0.054"/>
+  <testcase name="testGetNode_list" classname="proyecto.LogisticaTerrestreTest$GraphTest" time="0"/>
+  <testcase name="testGetId" classname="proyecto.LogisticaTerrestreTest$VehiculoTest" time="0.005"/>
+  <testcase name="testGetName" classname="proyecto.LogisticaTerrestreTest$VehiculoTest" time="0.015"/>
+  <testcase name="testSetStraightLineDistance" classname="proyecto.LogisticaTerrestreTest$VehiculoTest" time="0.002"/>
+  <testcase name="testSetRoadDistance" classname="proyecto.LogisticaTerrestreTest$VehiculoTest" time="0.001"/>
+  <testcase name="testGetExtraTime" classname="proyecto.LogisticaTerrestreTest$VehiculoTest" time="0.001"/>
+  <testcase name="testGetOrigen" classname="proyecto.LogisticaTerrestreTest$VehiculoTest" time="0.002"/>
 </testsuite>
