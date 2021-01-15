@@ -1,14 +1,11 @@
 # Virtual Machine Configuration
 os:
   - linux
-  - osx
-  - windows
 
 # Project JDK
 language: java
 jdk:
   - openjdk11
-  - oraclejdk11
 
 branches:
   only:
