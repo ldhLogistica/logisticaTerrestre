@@ -22,6 +22,8 @@ notifications:
 
 # Package will be tested in every OS
 script: mvn clean verify
+script: mvn package
+
 
 # Using Build Stages to avoid generation documentation and deployment multiple times
 stages:
@@ -40,6 +42,7 @@ jobs:
           organization: "ldhlogistica"
       # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
       script: mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
+      
 
     # Deploying documentation only once
     - stage: deploy
