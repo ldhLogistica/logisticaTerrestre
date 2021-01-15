@@ -2,6 +2,7 @@
 os:
   - linux
   - osx
+  - windows
 
 # Project JDK
 language: java
